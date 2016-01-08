@@ -1,0 +1,14 @@
+/**
+*
+* Headlines
+*
+**/
+
+.headline {
+    margin: 0 0 0.25em 0;
+
+    &--1 {
+        font-size: 3em;
+        font-weight: 600;
+    }
+}

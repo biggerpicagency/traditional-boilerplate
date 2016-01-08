@@ -1,0 +1,10 @@
+/node_modules
+/vendor
+.DS_Store
+Thumbs.db
+/.sass-cache
+/.idea
+/build/
+/public/css/
+/public/js/
+/public/img/
