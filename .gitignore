@@ -5,6 +5,4 @@ Thumbs.db
 /.sass-cache
 /.idea
 /build/
-/public/css/
-/public/img/
-/public/js/
+/public/*.html

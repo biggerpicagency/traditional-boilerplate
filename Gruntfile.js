@@ -60,7 +60,8 @@
         // Helper function that check if the public/ directory exists
         // it says if the Laravel app is installed or not.
         function isFrameworkInstalled() {
-            return grunt.file.exists('./public/index.php') ? true : false;
+            //return grunt.file.exists('./public/index.php') ? true : false;
+            return false;
         }
 
         // Helper funtion which generates list of JS scripts
@@ -571,6 +572,8 @@
             grunt.log.subhead('#############################################################################');
 
             if(grunt.config.get('envId') === 'dev') {
+                grunt.file.write('./build.status.json', JSON.stringify({"build": false}));
+
                 tasks = [
                     'jshint', // initial validation
                     'clean:all', // Deleting old content in dest directory
@@ -594,6 +597,8 @@
                 tasks.push('watch');
             }
             else if(grunt.config.get('envId') === 'local' || grunt.config.get('envId') === 'staging' || grunt.config.get('envId') === 'production') {
+                grunt.file.write('./build.status.json', JSON.stringify({"build": true}));
+
                 tasks = [
                     'jshint', // initial validation
                     'clean:all', // Deleting old content in dest directory
