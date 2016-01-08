@@ -3,16 +3,16 @@
     "tempDir": "temp",
     "envs": {
         "dev": {
-            "destDir": "build",
+            "destDir": "build"
         },
         "local": {
-            "destDir": "build",
+            "destDir": "build"
         },
         "staging": {
-            "destDir": "build",
+            "destDir": "build"
         },
         "production": {
-            "destDir": "build",
+            "destDir": "build"
         }
     },
     "scriptsConfigPath": "./javascripts.config.json",
