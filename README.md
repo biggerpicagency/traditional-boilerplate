@@ -34,6 +34,9 @@ Please edit frontend files only in the src/ folder. All images also should be up
 
 Because of our needs and Laravel application structure, as a default we keep build files in the repository. Of course you don't have to do it the same way and you have ability to ignore the files in the repository.
 
+### This boilerplate and Alfred
+If frontend code of website is ready and backend developer is ready to start implementing HTML layouts into Alfred system, important file that should be placed in ./resources/cmsassets is file called [Gruntfile.alfred.js](https://bitbucket.org/snippets/snowflakers/78kk5). It allows frontend developer to edit source frontend files of Alfred in resources/cmassets/ directory.
+
 ### Directory Structure: the most important elements
 
 ```
