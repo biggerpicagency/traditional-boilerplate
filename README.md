@@ -35,7 +35,7 @@ Because of our needs and Laravel applications structure, as a default we keep bu
 ### Directory Structure: the most important elements
 
 ```
-boilerplate-spa/
+boilerplate-traditional/
   |- src/ (all application sources such as images, JS, Sass files & HTML)
   |  |- img/
   |  |- js/
