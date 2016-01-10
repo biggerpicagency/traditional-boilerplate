@@ -24,13 +24,15 @@ It has been prepared especially for first step of creating HTML templates that w
 * ```bower install```
 * ```grunt``` (remember that your vhost should have document root set to ```public/``` directory)
 
-#### Develop
+### Develop
 * ```grunt```
 
-#### Build production ready code
+Please edit frontend files only in the src/ folder. All images also should be uploaded there.
+
+### Build production ready code
 * ```grunt build``` - creates build application for production purposes
 
-Because of our needs and Laravel applications structure, as a default we keep build files in the repository. Of course you don't have to do it the same way and you have ability to ignore the files in the repository.
+Because of our needs and Laravel application structure, as a default we keep build files in the repository. Of course you don't have to do it the same way and you have ability to ignore the files in the repository.
 
 ### Directory Structure: the most important elements
 
