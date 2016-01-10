@@ -1,5 +1,5 @@
-# SPA Boilerplate: HTML5/Angular/Grunt
-An opinionated starting point for awesome Single Page Applications. Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
+# Traditional Boilerplate: HTML5/Sass/Grunt
+An opinionated starting point for awesome Multi Page Applications (traditional websites). Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
 
 ## What is this SPA Boilerplate for?
 This SPA Boilerplate is your first step to start building a killer Single Page Application based on Angular. It contains necessary build processes, basic styles and files that every website will contain.

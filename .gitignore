@@ -4,5 +4,4 @@
 Thumbs.db
 /.sass-cache
 /.idea
-/build/
-/public/*.html
+build.status.json

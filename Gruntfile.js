@@ -16,12 +16,11 @@
 
             // Environment choice is passed through CLI (`grunt --env=production`).
             // Default environment is 'dev', which should be the first of definied environments
-            grunt.config.set('envId', grunt.option('env') || Object.keys(grunt.config.get('projectConfig').envs)[0]);
+            grunt.config.set('envId', (grunt.cli.tasks[0] === 'build' || grunt.cli.tasks[0] === 'prod') ? 'production' : (grunt.option('env') || Object.keys(grunt.config.get('projectConfig').envs)[0]));
             grunt.log.writeln('Environment id: ', grunt.config.get('envId'));
 
             // 'currEnvConfig' - helper var for better readibility in tasks
             grunt.config.set('currEnvConfig', grunt.config.get('projectConfig').envs[grunt.config.get('envId')]);
-            grunt.config.set('frameworkRoot', './public');
 
             (function generateJsMarkup() {
                 var JSheadOutputList = [],
@@ -52,17 +51,9 @@
                 
                 grunt.config.set('JSheadMarkup', generateListOfJS(JSheadOutputList, {returnAsMarkup: true}));
                 grunt.config.set('JSbodyMarkup', generateListOfJS(JSbodyOutputList, {returnAsMarkup: true}));
-                grunt.config.set('isFramework', isFrameworkInstalled());
             })();
 
         })();
-
-        // Helper function that check if the public/ directory exists
-        // it says if the Laravel app is installed or not.
-        function isFrameworkInstalled() {
-            //return grunt.file.exists('./public/index.php') ? true : false;
-            return false;
-        }
 
         // Helper funtion which generates list of JS scripts
         // based on javascripts.config.json and blocks of inline code defined inside this function.
@@ -238,19 +229,12 @@
         // https://www.npmjs.com/package/grunt-contrib-clean
         grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.config('clean', {
-            all: (function() {
-                var paths = ['<%= currEnvConfig.destDir %>/**/*'];
-
-                if (isFrameworkInstalled()) {
-                    paths = paths.concat([
-                        '<%= frameworkRoot %>/css/*',
-                        '<%= frameworkRoot %>/js/**/*',
-                        '<%= frameworkRoot %>/img/**/*'
-                    ]);
-                }
-
-                return paths;
-            })(),
+            all: [
+                '<%= currEnvConfig.destDir %>/*.html',
+                '<%= currEnvConfig.destDir %>/img/',
+                '<%= currEnvConfig.destDir %>/js/',
+                '<%= currEnvConfig.destDir %>/css/'
+            ],
             js: [
                 '<%= currEnvConfig.destDir %>/js'
             ],
@@ -373,30 +357,6 @@
                     src: ['scss/**/*', 'js/**/*'],
                     dest: '<%= currEnvConfig.destDir %>/src'
                 }]
-            },
-            cssToPublic: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= currEnvConfig.destDir %>/css',
-                    src: ['**'],
-                    dest: '<%= frameworkRoot %>/css'
-                }]
-            },
-            jsToPublic: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= currEnvConfig.destDir %>/js',
-                    src: ['**/*'],
-                    dest: '<%= frameworkRoot %>/js'
-                }]
-            },
-            imgToPublic: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= currEnvConfig.destDir %>/img',
-                    src: ['**/*'],
-                    dest: '<%= frameworkRoot %>/img'
-                }]
             }
         });
 
@@ -421,17 +381,11 @@
                 files:  ['<%= projectConfig.srcDir %>/scss/**/*.scss'],
                 tasks:  (function(){
                     if(grunt.config.get('envId') === 'dev') {
-                        var tasks = [
+                        return [
                             'sass:dev',
                             'autoprefixer',
                             'copy:srcForMaps'
                         ];
-
-                        if (isFrameworkInstalled()) {
-                            tasks.push('copy:cssToPublic');
-                        }
-
-                        return tasks;
                     }
                     else {
                         return [
@@ -452,16 +406,10 @@
                 files: ['<%= projectConfig.srcDir %>/js/**/*.js'],
                 tasks: (function(){
                     if(grunt.config.get('envId') === 'dev'){
-                        var tasks = [
+                        return [
                             'newer:jshint:app',
                             'copy:js'
                         ];
-
-                        if (isFrameworkInstalled()) {
-                            tasks.push('copy:jsToPublic');
-                        }
-
-                        return tasks;
                     }
                     else {
                         return [
@@ -477,15 +425,7 @@
             },
             img: {
                 files: ['<%= projectConfig.srcDir %>/img/**/*'],
-                tasks: (function() {
-                    var tasks = ['newer:copy:img'];
-
-                    if (isFrameworkInstalled()) {
-                        tasks.push('newer:copy:imgToPublic');
-                    }
-
-                    return tasks;
-                })(),
+                tasks: ['newer:copy:img'],
                 options: {
                     event: ['changed', 'added']
                 }
@@ -527,7 +467,7 @@
             server: {
                 options: {
                     port: 9001,
-                    base: 'build'
+                    base: '<%= currEnvConfig.destDir %>'
                 }
             }
         });
@@ -553,6 +493,10 @@
             grunt.log.warn('#############################################################################');
         });
 
+        if (grunt.file.exists('./resources/cmsassets/Gruntfile.alfred.js')) {
+            grunt.task.loadTasks('./resources/cmsassets');
+        }
+
         // Just prettyfying console output
         grunt.event.on('watch', function(action, filepath, target) {
             grunt.log.subhead('===============================================================================\nRunning watch:' + target);
@@ -560,6 +504,10 @@
 
         // When no CLI options are passed, the 'build' action is called
         grunt.registerTask('default', function () {
+            grunt.task.run('build');
+        });
+
+        grunt.registerTask('dev', function () {
             grunt.task.run('build');
         });
 
@@ -583,18 +531,9 @@
                     'copy:img', 'copy:fonts', 'copy:other', // copying assets files "as is"
                     'copy:srcForMaps', // to enable preview of source JS and SCSS files in Chrome
                     'clean:destTemp',
-                    'connect'
+                    'connect',
+                    'watch'
                 ];
-
-                if (grunt.config.get('isFramework')) {
-                    tasks = tasks.concat([
-                        'copy:cssToPublic',
-                        'copy:jsToPublic',
-                        'copy:imgToPublic'
-                    ]);
-                }
-
-                tasks.push('watch');
             }
             else if(grunt.config.get('envId') === 'local' || grunt.config.get('envId') === 'staging' || grunt.config.get('envId') === 'production') {
                 grunt.file.write('./build.status.json', JSON.stringify({"build": true}));
