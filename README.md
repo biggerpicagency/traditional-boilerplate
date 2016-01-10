@@ -1,22 +1,20 @@
 # Traditional Boilerplate: HTML5/Sass/Grunt
-An opinionated starting point for awesome Multi Page Applications (traditional websites). Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
+An opinionated starting point for awesome Multi-Page Applications (traditional websites). Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
 
-## What is this SPA Boilerplate for?
-This SPA Boilerplate is your first step to start building a killer Single Page Application based on Angular. It contains necessary build processes, basic styles and files that every website will contain.
-With such a stress (and rightly so) on application performance, we've developed this SPA Boilerplate with speed at its core. You'll get a [Page Speed Insights score](https://developers.google.com/speed/pagespeed/insights/) to be proud of with our minification and compression processes.   
+## What is this Traditional Boilerplate for?
+This boilerplate is your first step to start building a killer websites. It contains necessary build processes, basic styles and files that every website will contain.
+With such a stress (and rightly so) on application performance, we've developed this traditional boilerplate with speed at its core. You'll get a [Page Speed Insights score](https://developers.google.com/speed/pagespeed/insights/) to be proud of with our minification and compression processes.   
 
-Our SPA Boilerplate is inspired from [Google's Web Starter Kit](https://developers.google.com/web/tools/starter-kit/), [ngBoilerplate](https://github.com/ngbp/ngbp) and [HTML5 boilerplate](https://html5boilerplate.com). Using all their best bits and removing what's weak, this SPA Boilerplate does the job you need.
+Our boilerplate is inspired from [Google's Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) and [HTML5 boilerplate](https://html5boilerplate.com). Using all their best bits and removing what's weak, this boilerplate does the job you need.
+It has been prepared especially for first step of creating HTML templates that will be implemented into our brilliant Laravel-based product called Alfred CMS.
 
 ## Features
 * **Sass** (SCSS syntax) compilation to pure, minified CSS (by node-sass)
-* based on **Angular.js** framework
 * JS files concatenation and minification
 * images optimisation
-* minified HTML templates compilation to JS
 * **live browser reloading**
 * ability to build ready application in different environments such as local, staging & production
 * based on **Grunt** and **Bower**
-* integration with **Karma** and **Jasmine**
 * works best with continuous integration/continuous delivery application such as **Jenkins**
 
 ## Discover
@@ -24,19 +22,15 @@ Our SPA Boilerplate is inspired from [Google's Web Starter Kit](https://develope
 ### Installation
 * ```npm install```
 * ```bower install```
-* ```grunt``` (remember that your vhost should have document root set to ```build/``` directory)
+* ```grunt``` (remember that your vhost should have document root set to ```public/``` directory)
 
 #### Develop
 * ```grunt```
 
-If you want to preview production ready application on your local environment, use command:
-* ```grunt build --env=local```
-
 #### Build production ready code
-* ```grunt build --env=staging``` - creates build application for staging purposes
-* ```grunt build --env=production``` - creates build application for production purposes
+* ```grunt build``` - creates build application for production purposes
 
-Every build contains concatenated environment's variables set in ```app.config.js``` file.
+Because of our needs and Laravel applications structure, as a default we keep build files in the repository. Of course you don't have to do it the same way and you have ability to ignore the files in the repository.
 
 ### Directory Structure: the most important elements
 
@@ -46,22 +40,17 @@ boilerplate-spa/
   |  |- img/
   |  |- js/
   |  |- scss/
-  |  |- templates/
-  |  |- test/
-  |   - index.html
+  |   - homepage.html
   |- vendor/ (Third-party libraries, installed by Bower)
-  |- app.config.js (contains a JSON object with settings about directories & custom environment variables)
   |- javascripts.config.js (contains a JSON object with a list of all JS files used in app (needs to be edited manually))
 ```
 
-## The Bigger Picture SPA Boilerplate Rules!
-* it's the quickest thing around for saving your HTML & JS: whilst your developing we load real HTML templates and we do not use compiled HTML views by html2js every time - this is done only while ```grunt build --env=ENV``` command)
+## The Bigger Picture Traditional Boilerplate Rules!
 * Sass support - sorry is you are a Less fan, but we think Sass is the way right now
-* new files created in newly created directories are not being watched by Grunt task runner in ngBoilerplate - we have elliminated this issue
-* our boilerplate imposes [John Papa's styleguide](https://github.com/johnpapa/angular-styleguide) in Angular code - it allows you to create consistent code, especially handy when multiple developers are working on the same project
+* new files created in newly created directories are not being watched by Grunt task runner in many other boilerplates based on Grunt task runner - we have elliminated this issue here
 * you can easily inject JS files not only to ```body``` area, but also into ```head``` by **javascripts.config.js**
 * you can build production ready app in different environments
 
 By default we've added necessary files like robots.txt, basic icons (thanks to Web Starter Kit), and Web Server Config in .htaccess to reach the highest performance (gzip, caching etc.).
 
-Enjoy coding using Bigger Picture SPA Boilerplate!
+Enjoy coding using Bigger Picture Traditional Boilerplate!
