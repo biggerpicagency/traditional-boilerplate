@@ -1,0 +1,14 @@
+/**
+*
+* Section
+*
+**/
+
+.section {
+    width: 100%;
+    padding: 20px 0;
+    clear:both;
+    overflow: hidden;
+
+    // Instead of doing .section--no-p-bottom/section--nopad-bottom - loot at _helper.scss file - there are ready classes like .pb-0, .pt-0 etc.
+}

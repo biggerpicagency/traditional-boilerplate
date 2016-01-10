@@ -13,9 +13,20 @@
 @import '_layout/_main';
 
 // Components (you can replace the below ones to bootstrap or other framework's files just with components)
+@import '_components/_blockquote';
+@import '_components/_breadcrumbs';
+@import '_components/_btn';
+@import '_components/_content';
+@import '_components/_form';
+@import '_components/_grids';
 @import '_components/_headline';
+@import '_components/_list';
+@import '_components/_media';
+@import '_components/_pagination';
+@import '_components/_table';
 
 // Modules
+// @import '_modules/_section';
 // @import '_modules/_some-module';
 
 // Make sure this is last to override anything else :)
