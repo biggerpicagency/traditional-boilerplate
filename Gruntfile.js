@@ -349,14 +349,6 @@
                     src: '<%= projectConfig.customAssetsToCopy %>',
                     dest: '<%= currEnvConfig.destDir %>'
                 }]
-            },
-            srcForMaps: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= projectConfig.srcDir %>',
-                    src: ['scss/**/*', 'js/**/*'],
-                    dest: '<%= currEnvConfig.destDir %>/src'
-                }]
             }
         });
 
@@ -383,8 +375,7 @@
                     if(grunt.config.get('envId') === 'dev') {
                         return [
                             'sass:dev',
-                            'autoprefixer',
-                            'copy:srcForMaps'
+                            'autoprefixer'
                         ];
                     }
                     else {
@@ -529,7 +520,6 @@
                     'replace', // Replacing @@ tags in .html files (embedding JS scripts etc.)
                     'copy:vendor', 'copy:js', // copying JS files "as is"
                     'copy:img', 'copy:fonts', 'copy:other', // copying assets files "as is"
-                    'copy:srcForMaps', // to enable preview of source JS and SCSS files in Chrome
                     'clean:destTemp',
                     'connect',
                     'watch'
