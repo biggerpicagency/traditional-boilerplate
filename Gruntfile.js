@@ -84,10 +84,10 @@
             })();
 
             // JS code in head section
-            scriptsCategorized.head = getScripts(scriptsConfig.head);
+            scriptsCategorized.head = getScripts(scriptsConfig.head, false, true);
 
             // JS code in body section
-            scriptsCategorized.body = getScripts(scriptsConfig.body);
+            scriptsCategorized.body = getScripts(scriptsConfig.body, false, true);
 
             // Generate inline code blocks
             inlineCodeBlocks.liveReload = {type: 'code', value: '<script src="<%= projectConfig.liveReloadPath %>"></script>'};
@@ -156,7 +156,7 @@
                     files.map(function(filePath) {
                         output.push({
                             type: 'path', 
-                            value: filePath
+                            value: options.srcPath ? filePath : '/' + filePath.replace('src/', '')
                         });
                     });
                 }
@@ -198,7 +198,7 @@
         grunt.loadNpmTasks('grunt-sass');
         grunt.config('sass', {
             options: {
-                precision: 2,
+                precision: 6,
                 sourceMap: true,
                 outFile: '<%= currEnvConfig.destDir %>/css'
             },
@@ -257,6 +257,12 @@
             css: [
                 '<%= currEnvConfig.destDir %>/css'
             ],
+            src: [
+                '<%= currEnvConfig.destDir %>/src'
+            ],
+            vendor: [
+                '<%= currEnvConfig.destDir %>/vendor'
+            ],
             destTemp: [
                 '<%= currEnvConfig.destDir %>/<%= projectConfig.tempDir %>'
             ],
@@ -297,7 +303,7 @@
                     expand: true,
                     flatten: true,
                     src: ['<%= projectConfig.srcDir %>/*.html'],
-                    dest: '<%= currEnvConfig.destDir %>'
+                    dest: 'public/'
                 }]
             }
         });
@@ -314,12 +320,27 @@
                 sourceMap: true
             },
             jsHead: {
-                src: generateListOfJS(['head'], {globalBasePath: 'src'}),
+                src: generateListOfJS(['head'], {globalBasePath: 'src', srcPath: true}),
                 dest: '<%= currEnvConfig.destDir %>/js/initial.min.js'
             },
             jsBody: {
-                src: generateListOfJS(['body'], {globalBasePath: 'src'}),
+                src: generateListOfJS(['body'], {globalBasePath: 'src', srcPath: true}),
                 dest: '<%= currEnvConfig.destDir %>/js/main.min.js'
+            }
+        });
+
+        // Remove 'use strict' from min main js
+        // https://www.npmjs.com/package/grunt-remove-usestrict
+        grunt.loadNpmTasks('grunt-remove-usestrict');
+        grunt.config('remove_usestrict', {
+            dist: {
+                files: [
+                    {
+                        expand: false,
+                        dest: '<%= currEnvConfig.destDir %>/js/main.min.js',
+                        src: '<%= currEnvConfig.destDir %>/js/main.min.js'
+                    }
+                ]
             }
         });
 
@@ -358,12 +379,28 @@
                     dest: '<%= currEnvConfig.destDir %>/fonts'
                 }]
             },
-            other: {
+            customSrc: {
                 files: [{
                     expand: true,
                     cwd: '<%= projectConfig.srcDir %>',
-                    src: '<%= projectConfig.customAssetsToCopy %>',
+                    src: '<%= projectConfig.customAssetsToCopy.src %>',
                     dest: '<%= currEnvConfig.destDir %>'
+                }]
+            },
+            customVendor: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= projectConfig.vendorDir %>',
+                    src: '<%= projectConfig.customAssetsToCopy.vendor %>',
+                    dest: '<%= currEnvConfig.destDir %>/<%= projectConfig.vendorDir %>'
+                }]
+            },
+            srcForMaps: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= projectConfig.srcDir %>',
+                    src: ['scss/**/*', 'js/**/*'],
+                    dest: '<%= currEnvConfig.destDir %>/src'
                 }]
             }
         });
@@ -432,7 +469,7 @@
             },
             img: {
                 files: ['<%= projectConfig.srcDir %>/img/**/*'],
-                tasks: ['newer:copy:img'],
+                tasks: ['svgstore', 'newer:copy:img'],
                 options: {
                     event: ['changed', 'added']
                 }
@@ -444,11 +481,20 @@
                     event: ['changed', 'added']
                 }
             },
-            other: {
-                files: grunt.config.get('projectConfig').customAssetsToCopy.map(function(item){
-                    return grunt.config.get('projectConfig').srcDir + '/' + item;
+            customSrc: {
+                files: grunt.config.get('projectConfig').customAssetsToCopy.src.map(function(item){
+                    return item;
                 }),
-                tasks: ['newer:copy:other'],
+                tasks: ['newer:copy:customSrc'],
+                options: {
+                    event: ['changed', 'added']
+                }
+            },
+            customVendor: {
+                files: grunt.config.get('projectConfig').customAssetsToCopy.vendor.map(function(item){
+                    return item;
+                }),
+                tasks: ['newer:copy:customVendor'],
                 options: {
                     event: ['changed', 'added']
                 }
@@ -466,6 +512,18 @@
                 tasks: ['jshint:gruntfile', 'askForRestart']
             }
         });
+
+        grunt.loadNpmTasks('grunt-svgstore');
+        grunt.config('svgstore', {
+            options: {
+                prefix: 'icon-' // This will prefix each <g> ID
+            },
+            'default' : {
+                files: {
+                    '<%= projectConfig.srcDir %>/img/svg-defs.svg': ['<%= projectConfig.srcDir %>/img/icons/*.svg']
+                }
+            }
+        }),
 
         // Static web server only for frontend purposes
         // 
@@ -534,8 +592,10 @@
                     'clean:all', // Deleting old content in dest directory
                     'sass:dev', 'autoprefixer', // CSS processing
                     'replace', // Replacing @@ tags in .html files (embedding JS scripts etc.)
+                    //'svgstore',
                     'copy:vendor', 'copy:js', // copying JS files "as is"
-                    'copy:img', 'copy:fonts', 'copy:other', // copying assets files "as is"
+                    'copy:img', 'copy:fonts', 'copy:customSrc', 'copy:customVendor', // copying assets files "as is"
+                    'copy:srcForMaps',
                     'clean:destTemp',
                     'connect',
                     'watch'
@@ -549,9 +609,11 @@
                     'clean:all', // Deleting old content in dest directory
                     'sass:nondev', 'autoprefixer', // CSS processing
                     'replace', // Replacing @@ tags in .html files
+                    //'svgstore',
                     'uglify', // concatenating, minifying, mangling all JS files
-                    'copy:img', 'copy:fonts', 'copy:other', // copying assets "as is"
-                    'clean:destTemp' // deleting temporary files required for build process only
+                    'remove_usestrict',
+                    'copy:img', 'copy:fonts', 'copy:customSrc', 'copy:customVendor', // copying assets "as is"
+                    'clean:destTemp', 'clean:src', 'clean:vendor' // deleting temporary files required for build process only
                 ];
             }
 

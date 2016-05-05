@@ -1,5 +1,6 @@
 {
     "srcDir": "src",
+    "vendorDir": "vendor",
     "tempDir": "temp",
     "envs": {
         "dev": {
@@ -17,5 +18,12 @@
     },
     "scriptsConfigPath": "./javascripts.config.json",
     "liveReloadPath": "//localhost:35729/livereload.js",
-    "customAssetsToCopy": [".htaccess", "humans.txt", "robots.txt"]
+    "customAssetsToCopy": {
+        "src": [
+            ".htaccess", 
+            "humans.txt", 
+            "robots.txt"
+        ],
+        "vendor": []
+    }
 }

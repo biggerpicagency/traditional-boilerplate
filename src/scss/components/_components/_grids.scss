@@ -12,7 +12,7 @@ $tmp: '';
 $gutters: 0, 10, 20, 30, 40, 50;
 
 $main_container_max_width: 1280;
-$narrow_container_max_width: 835;
+$narrow_container_max_width: 850;
 $large_container_max_width: 1500;
 
 .container {
@@ -21,6 +21,10 @@ $large_container_max_width: 1500;
 
   width: 92%;
   max-width: ($main_container_max_width)+px;
+
+  &--rel {
+    position: relative;
+  }
 }
 
 .container-narrow {
@@ -44,6 +48,18 @@ $large_container_max_width: 1500;
   padding-right: 40px;
 }
 
+.container-850 {
+  max-width: ($narrow_container_max_width)+px;
+  
+  &--center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+}
+
 // Row with default 15px gutter
 $gutter: 15px;
 .row {
@@ -60,7 +76,10 @@ $gutter: 15px;
         margin-left: (-$gutter)+px;
         margin-right: (-$gutter)+px;
 
-        @media (max-width: 768px) {
+        //depends on styleguide
+        //padding-bottom: ($gutter)+px;
+
+        @media (max-width: 767px) {
             margin-left: 0;
             margin-right: 0;
         }
@@ -68,12 +87,21 @@ $gutter: 15px;
         > [class*="col-"] {
           padding-left: ($gutter)+px;
           padding-right: ($gutter)+px;
+          padding-bottom: 20px;
           //padding-bottom: ($gutter)+px;
 
-          @media (max-width: 768px) {
+          .pos-center-v--right {
+            padding-right: ($gutter)+px;
+          }
+
+          @media (max-width: 767px) {
               padding-left: 0;
               padding-right: 0;
               padding-bottom: ($gutter)+px;
+
+              .pos-center-v--right {
+                padding-right: 0;
+              }
           }
 
           @media screen and (min-width: 200px) and (max-width: 767px) {
@@ -83,6 +111,16 @@ $gutter: 15px;
           }
 
         }
+
+        + .row-g-#{$gutter;} {
+          margin-top: ($gutter * 2)+px;
+
+          @media (max-width: 767px) {
+            margin-top: ($gutter)+px;
+          }
+
+        }
+
         $tmp: '+ '+(4*$gutter)+px;
 
         &.table-view {
@@ -90,10 +128,19 @@ $gutter: 15px;
           margin-left: (-$gutter)+px;
           margin-right: (-$gutter)+px;
 
-          @media all and (max-width: 768px) {
+          @media all and (max-width: 767px) {
             width: 100%;
             margin-left: 0;
             margin-right: 0;
+          }
+        }
+
+
+        + .row-g-#{$gutter;} {
+          padding-top: ($gutter * 2)+px;
+
+          @media screen and (min-width: 200px) and (max-width: 767px) {
+            padding-top: ($gutter)+px;
           }
         }
     }
@@ -125,7 +172,6 @@ $gutter: 15px;
     }
   }
 }
-
 
 .row--5cols {
   > [class$="-7"] {
@@ -276,21 +322,21 @@ $gutter: 15px;
 // /////////////////
 //  COL SM STYLE  //
 // /////////////////
+@mixin col-sm-float-list {
+  @for $i from 1 through length($columns_numbers) {
+    .col-sm-#{$i} { float: left; }
+  }
+  .col-sm-five { float: left; }
+}
 
 @media (min-width: 768px) {
-
-  @mixin col-sm-float-list {
-    @for $i from 1 through length($columns_numbers) {
-      .col-sm-#{$i} { float: left; }
-    }
-    .col-sm-five { float: left; }
-  }
 
   @include col-sm-float-list;
 
   @each $number in $columns_numbers {
     .col-sm-#{$number} {
-        width: percentage($iteration * $number);
+        //width: percentage($iteration * $number);
+        width: percentage($number/12);
     }
 
     .col-sm-pull-#{$number} {
@@ -339,14 +385,14 @@ $gutter: 15px;
 //  COL MD STYLE  //
 // /////////////////
 
-@media (min-width: 992px) {
-
-  @mixin col-md-float-list {
-    @for $i from 1 through length($columns_numbers) {
-      .col-md-#{$i} { float: left; }
-    }
-    .col-md-five { float: left; }
+@mixin col-md-float-list {
+  @for $i from 1 through length($columns_numbers) {
+    .col-md-#{$i} { float: left; }
   }
+  .col-md-five { float: left; }
+}
+
+@media (min-width: 992px) {
   @include col-md-float-list;
 
   @each $number in $columns_numbers {
@@ -400,13 +446,14 @@ $gutter: 15px;
 //  COL LG STYLE  //
 // /////////////////
 
-@media (min-width: 1200px) {
-  @mixin col-lg-float-list {
-    @for $i from 1 through length($columns_numbers) {
-      .col-lg-#{$i} { float: left; }
-    }
-    .col-lg-five { float: left; }
+@mixin col-lg-float-list {
+  @for $i from 1 through length($columns_numbers) {
+    .col-lg-#{$i} { float: left; }
   }
+  .col-lg-five { float: left; }
+}
+
+@media (min-width: 1200px) {
   @include col-lg-float-list;
 
   @each $number in $columns_numbers {
@@ -500,13 +547,7 @@ $gutter: 15px;
 .pull-left {
     float: left !important;
 }
-/*
-.hide {
-    display: none !important;
-}
-.show {
-    display: block !important;
-}*/
+
 .invisible {
     visibility: hidden;
 }
@@ -757,7 +798,6 @@ $gutter: 15px;
     }
 }
 
-
 .col-xs-15,
 .col-sm-15,
 .col-md-15,
@@ -767,7 +807,6 @@ $gutter: 15px;
   padding-right: 10px;
   padding-left: 10px;
 }
-
 
 .col-xs-15 {
   width: 20%;
@@ -791,4 +830,11 @@ $gutter: 15px;
     width: 20%;
     float: left;
   }
+}
+
+
+.col-xs-12.text-right {
+    @media (max-width: 767px) {
+        text-align: left;
+    }
 }

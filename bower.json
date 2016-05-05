@@ -1,8 +1,7 @@
 {
-    "name": "biggerpicture-boilerplate-traditional",
-    "version": "0.0.1",
-    "dependencies": {
-    },
-    "devDependencies": {},
-    "appPath": "build"
+  "name": "biggerpicture-boilerplate-traditional",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {},
+  "appPath": "public"
 }
