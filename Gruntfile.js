@@ -592,7 +592,7 @@
                     'clean:all', // Deleting old content in dest directory
                     'sass:dev', 'autoprefixer', // CSS processing
                     'replace', // Replacing @@ tags in .html files (embedding JS scripts etc.)
-                    //'svgstore',
+                    'svgstore',
                     'copy:vendor', 'copy:js', // copying JS files "as is"
                     'copy:img', 'copy:fonts', 'copy:customSrc', 'copy:customVendor', // copying assets files "as is"
                     'copy:srcForMaps',
@@ -609,7 +609,7 @@
                     'clean:all', // Deleting old content in dest directory
                     'sass:nondev', 'autoprefixer', // CSS processing
                     'replace', // Replacing @@ tags in .html files
-                    //'svgstore',
+                    'svgstore',
                     'uglify', // concatenating, minifying, mangling all JS files
                     'remove_usestrict',
                     'copy:img', 'copy:fonts', 'copy:customSrc', 'copy:customVendor', // copying assets "as is"

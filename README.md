@@ -12,9 +12,10 @@ It has been prepared especially for first step of creating HTML templates that w
 * **Sass** (SCSS syntax) compilation to pure, minified CSS (by node-sass)
 * JS files concatenation and minification
 * images optimisation
+* SVG concatenation for files with ```icon-``` prefix
 * **live browser reloading**
-* ability to build ready application in different environments such as local, staging & production
 * based on **Grunt** and **Bower**
+* friendly for Laravel-based applications
 
 ## Discover
 
@@ -53,7 +54,7 @@ boilerplate-traditional/
 * Sass support - sorry is you are a Less fan, but we think Sass is the way right now
 * new files created in newly created directories are not being watched by Grunt task runner in many other boilerplates based on Grunt task runner - we have elliminated this issue here
 * you can easily inject JS files not only to ```body``` area, but also into ```head``` by **javascripts.config.json**
-* you can build production ready app in different environments e.g.: ```grunt build --env=staging```, ```grunt build --env=production```
+* after successfull developing just go with ```grunt build``` and deploy!
 
 By default we've added necessary files like robots.txt, basic icons (thanks to Web Starter Kit), and Web Server Config in .htaccess to reach the highest performance (gzip, caching etc.).
 
