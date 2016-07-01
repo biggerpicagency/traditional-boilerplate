@@ -233,7 +233,7 @@
         grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.config('autoprefixer', {
             options: {
-                browsers: ['last 2 versions'],
+                browsers: ['last 5 versions'],
                 map: true
             },
             dist: {
