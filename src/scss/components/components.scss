@@ -19,15 +19,12 @@
 @import '_components/_content';
 @import '_components/_form';
 @import '_components/_grids';
+@import '_components/_flex';
 @import '_components/_headline';
 @import '_components/_list';
 @import '_components/_media';
 @import '_components/_pagination';
 @import '_components/_table';
-
-// Modules
-// @import '_modules/_section';
-// @import '_modules/_some-module';
 
 // Make sure this is last to override anything else :)
 @import '_helper';

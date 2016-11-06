@@ -107,3 +107,29 @@ $anim_duration1: 600ms;
 	}
 
 }
+
+// Clearfix (recommended to use)
+.clear,
+%clearfix {
+    &::before,
+    &::after {
+        content: '';
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+// Inline block with vertical middle alignment
+%verticalMiddleInlineBlock {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+%verticalAlignment {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

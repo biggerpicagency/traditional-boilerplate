@@ -2,18 +2,6 @@
 // Color helper classes are next to color definitions in _utils.scss
 
 /*==========  GENERIC  ==========*/
-.clear {
-    &::before,
-    &::after {
-        content: '';
-        display: table;
-    }
-
-    &::after {
-        clear: both;
-    }
-}
-
 .text-center {text-align: center;}
 .text-left {text-align: left;}
 .text-right {text-align: right;}
