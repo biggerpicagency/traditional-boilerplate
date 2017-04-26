@@ -1,7 +1,9 @@
-/node_modules
+node_modules
+dist/
+.tmp
+app.yaml
 /vendor
 .DS_Store
 Thumbs.db
 /.sass-cache
 /.idea
-build.status.json

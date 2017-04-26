@@ -1,0 +1,135 @@
+//==========  VARIABLES  ==========
+
+// Colors
+$colorMain: #222;
+.color-main {color: $colorMain;}
+
+// Breakepoints
+$breakpointMobile: 768px;
+$breakpointTablet: 1024px;
+$breakpointHDready: 1366px;
+$breakpointFullHD: 1920px;
+
+// Animations
+$anim_duration1: 600ms;
+
+//==========  MIXINS  ==========
+
+// Inline-block
+@mixin inline-block() {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+// Clearfix
+@mixin clearfix() {
+    &:before, &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both
+    }
+}
+
+// Hide-text
+@mixin hidetext() {
+    text-indent: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@mixin mediaquery($query){
+
+    /////////////////////////////////////
+    // NOTE:
+    // To prevent overlapping closed ranges
+    // all 'min' values should be 'breakepoint + 1' (odd)
+    // and all 'max' values should be at 'breakepoint' (even).
+    // Examples of correct ranges: 1025-1920, 1025-1366, 769-1366 (where 'breakepoints' are 768, 1024, 1366, 1920)
+    // Incorrect ranges: 1024 - 1920, 1024-1919, 1025-1919
+
+    ////////////////////// Closed ranges
+
+    // 0 - 767 (exception from the rule above)
+	@if $query == mobile {
+		@media only screen and(max-width: #{$breakpointMobile - 1px}) { @content; }
+	}
+
+	// 768 - 1024
+	@else if $query == tablet {
+		@media only screen and(min-width: #{$breakpointMobile}) and(max-width: #{$breakpointTablet}) { @content; }
+	}
+
+    // 1025 - 1366
+    @else if $query == hdready {
+        @media only screen and(min-width: #{$breakpointTablet + 1px}) and(max-width: #{$breakpointHDready}) { @content; }
+	}
+
+    // 1367 - 1920
+    @else if $query == fullhd {
+        @media only screen and(min-width: #{$breakpointHDready + 1px}) and(max-width: #{$breakpointFullHD}) { @content; }
+	}
+
+
+    ////////////////////// Open ranges
+
+    // 768 - *
+	@else if $query == gt_mobile {
+		@media only screen and(min-width: #{$breakpointMobile}) { @content; }
+	}
+
+    // 1025 - *
+	@else if $query == gt_tablet {
+		@media only screen and(min-width: #{$breakpointTablet + 1px}) { @content; }
+	}
+
+    // 1367 - *
+	@else if $query == gt_hdready {
+		@media only screen and(min-width: #{$breakpointHDready + 1px}) { @content; }
+	}
+
+    // 1921 - *
+    @else if $query == cinema {
+        @media only screen and(min-width: #{$breakpointFullHD + 1px}) { @content; }
+    }
+
+    ////////////////////// Other
+
+    // Retina
+    @else if $query == retina {
+		@media only screen and (-moz-min-device-pixel-ratio: 1.5),
+		       only screen and (-o-min-device-pixel-ratio: 3/2),
+		       only screen and (-webkit-min-device-pixel-ratio: 1.5),
+		       only screen and (min-device-pixel-ratio: 1.5)
+		       { @content; }
+	}
+
+}
+
+// Clearfix (recommended to use)
+.clear,
+%clearfix {
+    &::before,
+    &::after {
+        content: '';
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+// Inline block with vertical middle alignment
+%verticalMiddleInlineBlock {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+%verticalAlignment {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
