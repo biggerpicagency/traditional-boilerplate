@@ -31,7 +31,7 @@ select,
     
 .form__select, 
 select {
-    background: white url(../img/formelements-select.png) no-repeat center right;
+    background: white url(../images/formelements-select.png) no-repeat center right;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -80,7 +80,7 @@ select {
     content:''; 
     width: 25px; 
     height: 23px;
-    background: url(../img/formelements.png) top left no-repeat; 
+    background: url(../images/formelements.png) top left no-repeat; 
 }
 
 .form__checkbox + .form__checkbox-label:before {
