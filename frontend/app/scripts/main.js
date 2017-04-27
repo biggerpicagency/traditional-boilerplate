@@ -74,6 +74,6 @@
 
   console.log('reload');
   console.log($('body'));
-  console.info(1);
+
   // Your custom JavaScript goes here
 })();
