@@ -2,7 +2,7 @@
     "curly": true,
     "debug": true,
     "eqeqeq": true,
-    "es3": true,
+    "es5": true,
     "forin": true,
     "immed": true,
     "latedef": false,
@@ -20,6 +20,7 @@
     "jquery": true,
     "browser": true,
     "jasmine": true,
+    "esversion": 6,
     "globals": {
         "require": false,
         "define": true,

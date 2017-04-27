@@ -33,30 +33,52 @@ import swPrecache from 'sw-precache';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import {output as pagespeed} from 'psi';
 import pkg from './package.json';
+import jsVendorConfig from './javascripts.config.json';
 import svgstore from 'gulp-svgstore';
 import svgmin from 'gulp-svgmin';
 import rename from 'gulp-rename';
+import jshint from 'gulp-jshint';
+import replace from 'gulp-replace';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+var scriptHtml = '';
+
+if (jsVendorConfig.body.length) {
+  for (var i = 0; i < jsVendorConfig.body.length; i++) {
+    scriptHtml += '<script src="' + jsVendorConfig.body[i] + '"></script>';
+  }
+}
+
+console.log(scriptHtml);
+
 // Lint JavaScript
-gulp.task('lint', () =>
-  gulp.src(['app/scripts/**/*.js','!node_modules/**'])
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
-);
+// gulp.task('lint', () =>
+//   gulp.src(['app/scripts/**/*.js','!node_modules/**'])
+//     .pipe($.eslint())
+//     .pipe($.eslint.format())
+//     .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
+// );
+
+// gulp.task('templates', function(){
+//   gulp.src('app/*.html')
+//     .pipe(replace('@BodyJS', scriptHtml))
+//     .pipe(gulp.dest('dist/'));
+// });
+
+
+gulp.task('lint', function() {
+  return gulp.src(['app/scripts/**/*.js','!node_modules/**'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+});
 
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true
-    })))
     .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}))
+    // .pipe($.size({title: 'images'}))
 );
 
 // Copy all files at the root level (app)
@@ -109,14 +131,17 @@ gulp.task('styles', () => {
 // to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
 // `.babelrc` file.
 gulp.task('scripts', () =>
-    gulp.src([
+    gulp.src(
+      // [
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
-      './app/scripts/main.js'
+      // './app/scripts/main.js'
       // Other scripts
-    ])
-      .pipe($.newer('.tmp/scripts'))
+      // ]
+      jsVendorConfig.body
+    )
+      //.pipe($.newer('.tmp/scripts'))
       .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.sourcemaps.write())
@@ -220,7 +245,9 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'svgstore', 'scripts', 'images', 'copy'],
+    ['lint', 'html', 'svgstore', 'scripts'],
+    'images', 
+    'copy',
     'generate-service-worker',
     cb
   )

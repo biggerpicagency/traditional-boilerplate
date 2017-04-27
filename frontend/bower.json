@@ -2,6 +2,8 @@
   "name": "biggerpicture-boilerplate-traditional",
   "version": "0.0.2",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  },
   "appPath": "dist"
 }

@@ -1,0 +1,6 @@
+{
+    "body": [
+        "./vendor/jquery/dist/jquery.js",
+        "./app/scripts/main.js"
+    ]
+}
