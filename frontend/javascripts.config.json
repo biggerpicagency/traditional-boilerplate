@@ -1,6 +1,19 @@
 {
-    "body": [
-        "./vendor/jquery/dist/jquery.js",
+
+    "vendor": [
+        "./vendor/jquery/dist/jquery.min.js"
+    ],
+
+    "ownJs": [
         "./app/scripts/main.js"
+    ],
+
+    "serve": [
+        "scripts/jquery.min.js",
+        "scripts/main.js"
+    ],
+
+    "jsHint": [
+        "scripts/main.js"
     ]
 }

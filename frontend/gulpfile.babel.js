@@ -45,9 +45,9 @@ const reload = browserSync.reload;
 
 var scriptHtml = '';
 
-if (jsVendorConfig.body.length) {
-  for (var i = 0; i < jsVendorConfig.body.length; i++) {
-    scriptHtml += '<script src="' + jsVendorConfig.body[i] + '"></script>';
+if (jsVendorConfig.serve.length) {
+  for (var i = 0; i < jsVendorConfig.serve.length; i++) {
+    scriptHtml += '<script src="' + jsVendorConfig.serve[i] + '"></script>';
   }
 }
 
@@ -61,15 +61,17 @@ console.log(scriptHtml);
 //     .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
 // );
 
-// gulp.task('templates', function(){
-//   gulp.src('app/*.html')
-//     .pipe(replace('@BodyJS', scriptHtml))
-//     .pipe(gulp.dest('dist/'));
-// });
+gulp.task('templates', function(){
+  gulp.src('app/*.html')
+    .pipe(replace('@BodyJS', scriptHtml))
+    .pipe(gulp.dest('.tmp/'));
+});
 
 
 gulp.task('lint', function() {
-  return gulp.src(['app/scripts/**/*.js','!node_modules/**'])
+  return 
+    // gulp.src(['app/scripts/**/*.js','!node_modules/**'])
+    gulp.src(jsVendorConfig.jsHint)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
 });
@@ -78,7 +80,7 @@ gulp.task('lint', function() {
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
     .pipe(gulp.dest('dist/images'))
-    // .pipe($.size({title: 'images'}))
+    .pipe($.size({title: 'images'}))
 );
 
 // Copy all files at the root level (app)
@@ -139,7 +141,7 @@ gulp.task('scripts', () =>
       // './app/scripts/main.js'
       // Other scripts
       // ]
-      jsVendorConfig.body
+      jsVendorConfig.vendor.concat(jsVendorConfig.ownJs)
     )
       //.pipe($.newer('.tmp/scripts'))
       .pipe($.sourcemaps.init())
@@ -154,6 +156,40 @@ gulp.task('scripts', () =>
       .pipe(gulp.dest('dist/scripts'))
       .pipe(gulp.dest('.tmp/scripts'))
 );
+
+// scripts just for develop - without minification and concatenation
+gulp.task('scripts:serve', () =>
+    gulp.src(
+      jsVendorConfig.vendor.concat(jsVendorConfig.ownJs),
+    )
+      //.pipe($.newer('.tmp/scripts'))
+      // .pipe($.sourcemaps.init())
+      .pipe($.babel())
+      // .pipe($.sourcemaps.write())
+      // .pipe(gulp.dest('.tmp/scripts'))
+      // .pipe($.concat('main.min.js'))
+      // .pipe($.uglify({preserveComments: 'some'}))
+      // Output files
+      .pipe($.size({title: 'scripts'}))
+      // .pipe($.sourcemaps.write('.'))
+      // .pipe(gulp.dest('dist/scripts'))
+      .pipe(gulp.dest('.tmp/scripts'))
+);
+
+gulp.task('scripts:serve-watch', () =>
+    gulp.src(
+      jsVendorConfig.ownJs,
+    )
+      .pipe($.sourcemaps.init())
+      .pipe($.babel())
+      .pipe($.sourcemaps.write())
+      // Output files
+      .pipe($.size({title: 'scripts'}))
+      .pipe($.sourcemaps.write('.'))
+      .pipe(gulp.dest('.tmp/scripts'))
+);
+
+
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', () => {
@@ -204,7 +240,7 @@ gulp.task('svgstore', function () {
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles', 'svgstore'], () => {
+gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -221,7 +257,7 @@ gulp.task('serve', ['scripts', 'styles', 'svgstore'], () => {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
+  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts:serve-watch', reload]);
   gulp.watch(['app/images/**/*'], reload);
 });
 
