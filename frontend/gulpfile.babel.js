@@ -117,7 +117,7 @@ gulp.task('styles', () => {
     .pipe($.newer('.tmp/styles'))
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      precision: 10
+      precision: 6
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/styles'))
@@ -324,7 +324,3 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
     stripPrefix: rootDir + '/'
   });
 });
-
-// Load custom tasks from the `tasks` directory
-// Run: `npm install --save-dev require-dir` from the command-line
-// try { require('require-dir')('tasks'); } catch (err) { console.error(err); }
