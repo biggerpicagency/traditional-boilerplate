@@ -1,4 +1,4 @@
-# Traditional Boilerplate: HTML5/Sass/Grunt
+# Traditional Boilerplate: HTML5/Sass/Gulp/Yarn/PWA
 An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
 
 ## What is this Traditional Boilerplate for?
@@ -14,25 +14,71 @@ It has been prepared especially for creating HTML templates that will be impleme
 * image optimisation
 * SVG concatenation for files with ```icon-``` prefix
 * **live browser reloading**
-* based on **Grunt** and **Bower**
+* based on **Gulp**, **Yarn** and **Bower**
 * friendly for Laravel-based applications
 
 ## Discover
 
 ### Installation
+
+
+#### [Gulp](http://gulpjs.com)
+
+Bring up a terminal and type `gulp --version`.
+If Gulp is installed it should return a version number at or above 3.9.x.
+If you need to install/upgrade Gulp, open up a terminal and type in the following:
+
+```sh
+$ npm install --global gulp
+```
+
+*This will install Gulp globally. Depending on your user account, you may need to [configure your system](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md) to install packages globally without administrative privileges.*
+
+Next, install the local dependencies:
+
 * ```npm install```
+
+Note: if you have the [Yarn](https://yarnpkg.com/) package manager installed, you can just run `yarn`.
+Web Starter Kit includes a yarn.lock file that will be used here.
+
 * ```bower install```
-* ```grunt``` (remember that your vhost should have document root set to ```public/``` directory)
 
-### Develop
-* ```grunt```
 
-Please edit frontend files only in the src/ folder. All images also should be uploaded there.
 
-### Build production ready code
-* ```grunt build``` - creates build application for production purposes
 
-Because of our needs and Laravel application structure, as a default we keep build files in the repository. Of course you don't have to do it the same way and you have ability to ignore the files in the repository.
+## Watch For Changes & Automatically Refresh Across Devices
+
+```sh
+$ gulp serve
+```
+
+This outputs an IP address you can use to locally test and another that can be used on devices
+connected to your network.
+`serve` does not use [service worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
+caching, so your site will stop being available when the web server stops running.
+
+## Build & Optimize
+
+```sh
+$ gulp
+```
+
+Build and optimize the current project, ready for deployment.
+This includes linting as well as image, script, stylesheet and HTML optimization and minification.
+Also, a [service worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
+script will be automatically generated, which will take care of precaching your sites' resources.
+On browsers that [support](https://jakearchibald.github.io/isserviceworkerready/) service
+workers, the site will be loaded directly from the service worker cache, bypassing the server.
+This means that this version of the site will work when the server isn't running or when there is
+no network connectivity.
+
+## Performance Insights
+
+```sh
+$ gulp pagespeed
+```
+
+Runs the deployed (public) version of your site against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to help you stay on top of where you can improve.
 
 ### This boilerplate and Alfred
 If frontend code of website is ready and backend development is ready to start implementing HTML layouts into Alfred, an important file that should be placed in ./resources/cmsassets is a file called [Gruntfile.alfred.js](https://bitbucket.org/snippets/snowflakers/78kk5). It allows frontend developers to edit source frontend files of Alfred in resources/cmassets/ directory.
@@ -41,20 +87,19 @@ If frontend code of website is ready and backend development is ready to start i
 
 ```
 boilerplate-traditional/
-  |- src/ (all application sources such as images, JS, Sass files & HTML)
-  |  |- img/
-  |  |- js/
-  |  |- scss/
-  |   - homepage.html
+  |- app/ (all application sources such as images, JS, Sass files & HTML)
+  |  |- images/
+  |  |- scripts/
+  |  |- styles/
+  |   - index.html
   |- vendor/ (Third-party libraries, installed by Bower)
   |- javascripts.config.json (contains a JSON object with a list of all JS files used in app (needs to be edited manually))
 ```
 
 ## The Bigger Picture Traditional Boilerplate Rules!
 * Sass support - sorry is you are a Less fan, but we think Sass is the way right now
-* new files created in newly created directories are not being watched by Grunt task runner in many other boilerplates based on Grunt task runner - we have elliminated this issue here
-* you can easily inject JS files not only to ```body``` area, but also into ```head``` by **javascripts.config.json**
-* after successfull developing just go with ```grunt build``` and deploy!
+* you can easily inject JS files by **javascripts.config.json**
+* after successfull developing just go with ```gulp``` and deploy!
 
 By default we've added necessary files like robots.txt, basic icons (thanks to Google's Web Starter Kit), and Web Server Config in .htaccess to reach the highest performance (gzip, caching etc.).
 
