@@ -39,6 +39,9 @@ import svgmin from 'gulp-svgmin';
 import rename from 'gulp-rename';
 import jshint from 'gulp-jshint';
 import replace from 'gulp-replace';
+import mocha from 'gulp-mocha';
+import mochaPhantomJS from 'gulp-mocha-phantomjs';
+
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -50,8 +53,6 @@ if (jsVendorConfig.serve.length) {
     scriptHtml += '<script src="' + jsVendorConfig.serve[i] + '"></script>';
   }
 }
-
-console.log(scriptHtml);
 
 // Lint JavaScript
 // gulp.task('lint', () =>
@@ -67,7 +68,7 @@ gulp.task('templates', function(){
     .pipe(gulp.dest('.tmp/'));
 });
 
-
+// Lint JavaScript
 gulp.task('lint', function() {
   return 
     // gulp.src(['app/scripts/**/*.js','!node_modules/**'])
@@ -163,15 +164,15 @@ gulp.task('scripts:serve', () =>
       jsVendorConfig.vendor.concat(jsVendorConfig.ownJs),
     )
       //.pipe($.newer('.tmp/scripts'))
-      // .pipe($.sourcemaps.init())
+      .pipe($.sourcemaps.init())
       .pipe($.babel())
-      // .pipe($.sourcemaps.write())
+      .pipe($.sourcemaps.write())
       // .pipe(gulp.dest('.tmp/scripts'))
       // .pipe($.concat('main.min.js'))
       // .pipe($.uglify({preserveComments: 'some'}))
       // Output files
       .pipe($.size({title: 'scripts'}))
-      // .pipe($.sourcemaps.write('.'))
+      .pipe($.sourcemaps.write('.'))
       // .pipe(gulp.dest('dist/scripts'))
       .pipe(gulp.dest('.tmp/scripts'))
 );
@@ -190,7 +191,6 @@ gulp.task('scripts:serve-watch', () =>
 );
 
 
-
 // Scan your HTML for assets & optimize them
 gulp.task('html', () => {
   return gulp.src('app/**/*.html')
@@ -204,6 +204,7 @@ gulp.task('html', () => {
     .pipe(gulp.dest('dist'));
 });
 
+// all images/icons/*.svg files into one file
 gulp.task('svgstore', function () {
     return gulp
         .src('app/images/icons/*.svg')
@@ -224,15 +225,47 @@ gulp.task('svgstore', function () {
         .pipe(gulp.dest('dist/images'));
 });
 
-// Clean output directory
-gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
+// 
+// TESTS
+// 
+
+gulp.task('scripts:tests', () =>
+    gulp.src(
+      jsVendorConfig.vendor.concat(jsVendorConfig.ownJs),
+    )
+      .pipe($.babel())
+      .pipe($.size({title: 'scripts'}))
+      .pipe(gulp.dest('test/scripts'))
+);
+
+gulp.task('test', ['scripts:tests'], function () {
+  
+    return gulp
+    .src('test/tests.html')
+    .pipe(mochaPhantomJS(
+      {
+        reporter: 'spec',
+				phantomjs: {
+					useColors: true
+				}
+      })
+    ).on('end', function() {
+        del('test/scripts/*.js', {dot: true})
+    });
+    
+    ;
+});
+
+
+// Clean output directory + remove test own js files
+gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git', 'test/scripts/*.js'], {dot: true}));
 
 // Watch files for changes & reload
 gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
-    logPrefix: 'WSK',
+    logPrefix: 'BP',
     // Allow scroll syncing across breakpoints
     scrollElementMapping: ['main', '.mdl-layout'],
     // Run as an https by uncommenting 'https: true'
@@ -243,7 +276,7 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
     port: 3000
   });
 
-  gulp.watch(['app/**/*.html'], reload);
+  gulp.watch(['app/**/*.html'], ['templates', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts:serve-watch', reload]);
   gulp.watch(['app/images/**/*'], reload);
@@ -253,7 +286,7 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
 gulp.task('serve:dist', ['default'], () =>
   browserSync({
     notify: false,
-    logPrefix: 'WSK',
+    logPrefix: 'BP',
     // Allow scroll syncing across breakpoints
     scrollElementMapping: ['main', '.mdl-layout'],
     // Run as an https by uncommenting 'https: true'
@@ -268,6 +301,7 @@ gulp.task('serve:dist', ['default'], () =>
 // Build production files, the default task
 gulp.task('default', ['clean'], cb =>
   runSequence(
+    'test',
     'styles',
     ['lint', 'html', 'svgstore', 'scripts'],
     'images', 

@@ -5,15 +5,18 @@
     ],
 
     "ownJs": [
-        "./app/scripts/main.js"
+        "./app/scripts/main.js",
+        "./app/scripts/app.js"
     ],
 
     "serve": [
         "scripts/jquery.min.js",
-        "scripts/main.js"
+        "scripts/main.js",
+        "scripts/app.js"
     ],
 
     "jsHint": [
-        "scripts/main.js"
+        "scripts/main.js",
+        "scripts/app.js"
     ]
 }
