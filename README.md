@@ -1,4 +1,4 @@
-# Traditional Boilerplate: HTML5/Sass/Gulp/Yarn/PWA
+# Traditional Boilerplate: HTML5/Sass/Gulp/Yarn/PWA/Tests
 An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
 
 ## What is this Traditional Boilerplate for?
@@ -71,6 +71,15 @@ On browsers that [support](https://jakearchibald.github.io/isserviceworkerready/
 workers, the site will be loaded directly from the service worker cache, bypassing the server.
 This means that this version of the site will work when the server isn't running or when there is
 no network connectivity.
+
+## Tests
+
+```sh
+$ gulp test
+```
+
+Testing javascript.
+
 
 ## Performance Insights
 
