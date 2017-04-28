@@ -101,7 +101,7 @@ boilerplate-traditional/
   |  |- scripts/
   |  |- styles/
   |   - index.html
-  |- test/ (javascripts tests)
+  |- test/ (javascript tests)
   |- vendor/ (Third-party libraries, installed by Bower)
   |- javascripts.config.json (contains a JSON object with a list of all JS files used in app (needs to be edited manually))
 ```
