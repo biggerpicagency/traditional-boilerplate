@@ -4,13 +4,16 @@
 *
 **/
 
+@import '_variables';
 @import '_utils';
 @import '_base/_normalize';
 @import '_base/_global';
 
 // Layout
 @import '_layout/_navbar';
+@import '_layout/_header';
 @import '_layout/_main';
+@import '_layout/_footer';
 
 // Components (you can replace the below ones to bootstrap or other framework's files just with components)
 @import '_components/_blockquote';
