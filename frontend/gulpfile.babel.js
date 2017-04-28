@@ -257,8 +257,8 @@ gulp.task('test', ['scripts:tests'], function () {
 });
 
 
-// Clean output directory + remove test own js files
-gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git', 'test/scripts/*.js'], {dot: true}));
+// Clean output directory
+gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
 gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
