@@ -280,7 +280,7 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
   gulp.watch(['app/**/*.html'], ['templates', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts:serve-watch', reload]);
-  gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/images/**/*'], ['svgstore', reload]);
 });
 
 // Build and serve the output from the dist build
