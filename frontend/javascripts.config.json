@@ -1,7 +1,6 @@
 {
-
     "vendor": [
-        "./vendor/jquery/dist/jquery.min.js"
+        "./node_modules/jquery/dist/jquery.min.js"
     ],
 
     "ownJs": [
@@ -9,7 +8,9 @@
         "./app/scripts/app.es6"
     ],
 
-    "serve": [
+    "head": [],
+
+    "body": [
         "scripts/jquery.min.js",
         "scripts/main.js",
         "scripts/app.js"

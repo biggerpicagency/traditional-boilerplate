@@ -74,7 +74,6 @@
 
   // Your custom JavaScript goes here
 
-
   let a = 111+112;
   console.log('reload');
   console.log(a);

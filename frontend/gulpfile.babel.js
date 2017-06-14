@@ -46,11 +46,18 @@ import mochaPhantomJS from 'gulp-mocha-phantomjs';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-var scriptHtml = '';
+var scriptHtmlHead = '',
+  scriptHtmlBody = '';
 
-if (jsVendorConfig.serve.length) {
-  for (var i = 0; i < jsVendorConfig.serve.length; i++) {
-    scriptHtml += '<script src="' + jsVendorConfig.serve[i] + '"></script>';
+if (jsVendorConfig.head.length) {
+  for (var i = 0; i < jsVendorConfig.head.length; i++) {
+    scriptHtmlHead += '<script src="' + jsVendorConfig.head[i] + '"></script>';
+  }
+}
+
+if (jsVendorConfig.body.length) {
+  for (var i = 0; i < jsVendorConfig.body.length; i++) {
+    scriptHtmlBody += '<script src="' + jsVendorConfig.body[i] + '"></script>';
   }
 }
 
@@ -64,7 +71,8 @@ if (jsVendorConfig.serve.length) {
 
 gulp.task('templates', function(){
   gulp.src('app/*.html')
-    .pipe(replace('@BodyJS', scriptHtml))
+    .pipe(replace('@HeadJS', scriptHtmlHead))
+    .pipe(replace('@BodyJS', scriptHtmlBody))
     .pipe(gulp.dest('.tmp/'));
 });
 
@@ -289,7 +297,7 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fo
 
   gulp.watch(['app/**/*.html'], ['templates', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts:serve-watch', reload]);
+  gulp.watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], ['lint', 'scripts:serve-watch', reload]);
   gulp.watch(['app/images/**/*'], ['svgstore', reload]);
 });
 
