@@ -96,6 +96,16 @@ gulp.task('copy', () =>
     .pipe($.size({title: 'copy'}))
 );
 
+// Copy fonts
+gulp.task('copy-fonts', () =>
+  gulp.src([
+    'app/fonts/**/*'
+  ], {
+    dot: true
+  }).pipe(gulp.dest('dist/fonts'))
+    .pipe($.size({title: 'copy fonts'}))
+);
+
 // Compile and automatically prefix stylesheets
 gulp.task('styles', () => {
   const AUTOPREFIXER_BROWSERS = [
@@ -262,7 +272,7 @@ gulp.task('test', ['scripts:tests'], function () {
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates'], () => {
+gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fonts'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -307,6 +317,7 @@ gulp.task('default', ['clean'], cb =>
     ['lint', 'html', 'svgstore', 'scripts'],
     'images', 
     'copy',
+    'copy-fonts',
     'generate-service-worker',
     cb
   )

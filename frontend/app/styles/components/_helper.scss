@@ -10,48 +10,28 @@
 .right {float: right;}
 .left {float: left;}
 .nowrap {white-space: nowrap;}
+.single-word {word-spacing: 9999px; }
+.underline {text-decoration: underline; }
 
-/*==========  MARGINS  ==========*/
-.mt--5em  {margin-top: .5em;}
-.mt--10em {margin-top: 1em;}
-.mt--15em {margin-top: 1.5em;}
-.mt--20em {margin-top: 2em;}
-.mt--25em {margin-top: 2.5em;}
-.mt--30em {margin-top: 3em;}
-.ml--5em {margin-left: .5em;}
-.ml--10em {margin-left: 1em;}
-.ml--15em {margin-left: 1.5em;}
-.ml--20em {margin-left: 2em;}
-.ml--25em {margin-left: 2.5em;}
-.ml--30em {margin-left: 3em;}
+$gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4);
 
-/*==========  PADDING  ==========*/
-.pt--0 {padding-top: .5em;}
-.pt--5em {padding-top: .5em;}
-.pt--10em {padding-top: 1em;}
-.pt--20em {padding-top: 2em;}
-.pt--30em {padding-top: 3em;}
-.pt--30em {padding-top: 4em;}
-.pt--30em {padding-top: 5em;}
-.pr--5em {padding-right: .5em;}
-.pr--10em {padding-right: 1em;}
-.pr--20em {padding-right: 2em;}
-.pr--30em {padding-right: 3em;}
-.pr--40em {padding-right: 4em;}
-.pr--50em {padding-right: 5em;}
-.pb--0 {padding-bottom: 0;}
-.pb--5em {padding-bottom: .5em;}
-.pb--10em {padding-bottom: 1em;}
-.pb--20em {padding-bottom: 2em;}
-.pb--30em {padding-bottom: 3em;}
-.pb--30em {padding-bottom: 4em;}
-.pb--30em {padding-bottom: 5em;}
-.pl--5em {padding-left: .5em;}
-.pl--10em {padding-left: 1em;}
-.pl--20em {padding-left: 2em;}
-.pl--30em {padding-left: 3em;}
-.pl--30em {padding-left: 4em;}
-.pl--30em {padding-left: 5em;}
+@each $var, $size in $gapSizes {
+    $value: #{$size}em;
+
+    /*==========  MARGINS  ==========*/
+    .mt--#{$var}em {margin-top: $value}
+    .mb--#{$var}em {margin-bottom: $value}
+    .ml--#{$var}em {margin-left: $value}
+    .mr--#{$var}em {margin-right: $value}
+
+    /*==========  PADDING  ==========*/
+    .pt--#{$var}em {padding-top: $value}
+    .pb--#{$var}em {padding-bottom: $value}
+    .pl--#{$var}em {padding-left: $value}
+    .pr--#{$var}em {padding-right: $value}
+
+    .pall--#{$var}em {padding: $value}
+}
 
 /*========= RWD HELPERS =========*/
 @media screen and (min-width: 200px) and (max-width: 568px) {
