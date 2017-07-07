@@ -1,15 +1,18 @@
 'use strict';
 
-let BP_OBJECT = {
-    utils: {}
+let BP_BOILERPLATE = BP_BOILERPLATE || {};
+let UTILS = UTILS || {};
+
+BP_BOILERPLATE.utils = UTILS || {};
+
+
+UTILS.sum = function sum(a, b) {
+    return a + b;
 }
 
-BP_OBJECT.utils = {
-    sum: (a, b) => a + b,
-    multi: (a, b) => a * b,
-};
+console.log(BP_BOILERPLATE.utils);
+console.log(BP_BOILERPLATE.utils.sum(2,4));
+console.log(BP_BOILERPLATE.utils._screenSize());
 
-function aaa(param) {
-    return true;
-}
-
+BP_BOILERPLATE.utils.sum(2,4)
+BP_BOILERPLATE.utils.hashAnchorClick();

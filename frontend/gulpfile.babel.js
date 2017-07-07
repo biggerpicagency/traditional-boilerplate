@@ -92,6 +92,26 @@ gulp.task('images', () =>
     .pipe($.size({title: 'images'}))
 );
 
+// 
+// DEV TASKS
+// 
+
+
+// Copy images to .temp folder while developing
+gulp.task('copy-images-dev', () =>
+  gulp.src('app/images/**/*')
+    .pipe(gulp.dest('.tmp/images'))
+);
+
+// Copy fonts to .temp folder while developing
+gulp.task('copy-fonts-dev', () =>
+  gulp.src('app/fonts/**/*')
+    .pipe(gulp.dest('.tmp/fonts'))
+);
+
+
+
+
 // Copy all files at the root level (app)
 gulp.task('copy', () =>
   gulp.src([
@@ -142,7 +162,9 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/styles'))
     // Concatenate and minify styles
-    .pipe($.if('*.css', $.cssnano()))
+    .pipe($.if('*.css', $.cssnano({
+      autoprefixer: {browsers: AUTOPREFIXER_BROWSERS, add: true}
+    })))
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('dist/styles'))
@@ -241,6 +263,7 @@ gulp.task('svgstore', function () {
         .pipe(rename({prefix: 'icon-'}))
         .pipe(svgstore())
         .pipe(gulp.dest('app/images'))
+        // .pipe(gulp.dest('.tmp/images'))
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -280,7 +303,7 @@ gulp.task('test', ['scripts:tests'], function () {
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fonts'], () => {
+gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fonts-dev', 'copy-images-dev'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -291,14 +314,16 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fo
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    server: ['.tmp', 'app'],
+    // server: ['.tmp', 'app'],
+    server: ['.tmp'],
     port: 3000
   });
 
   gulp.watch(['app/**/*.html'], ['templates', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], ['lint', 'scripts:serve-watch', reload]);
-  gulp.watch(['app/images/**/*'], ['svgstore', reload]);
+  gulp.watch(['app/images/**/*'], ['svgstore', 'copy-images-dev', reload]);
+  gulp.watch(['app/fonts/**/*'], ['copy-fonts-dev', reload]);
 });
 
 // Build and serve the output from the dist build
@@ -320,7 +345,7 @@ gulp.task('serve:dist', ['default'], () =>
 // Build production files, the default task
 gulp.task('default', ['clean'], cb =>
   runSequence(
-    'test',
+    // 'test',
     'styles',
     ['lint', 'html', 'svgstore', 'scripts'],
     'images', 
