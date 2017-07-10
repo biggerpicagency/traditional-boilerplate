@@ -2,7 +2,7 @@
 
 /**
  * 
- * Universla function for animation sections while scrolling
+ * Universal function for animation sections while scrolling
  * Waypoints dependency needed
  * 
  */
@@ -12,7 +12,6 @@ var UTILS = UTILS || {};
 UTILS._animationedSections = function _animationedSections() {
     var animation = {
             runAnimation: function(section, animClassName) {
-                console.log(animClassName);
                 const splittedAnimClassName = animClassName.split('-');
 
                 setTimeout(function() {
