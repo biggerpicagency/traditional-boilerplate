@@ -1,6 +1,7 @@
 {
     "vendor": [
-        "./node_modules/jquery/dist/jquery.min.js"
+        "./node_modules/jquery/dist/jquery.min.js",
+        "./node_modules/waypoints/lib/noframework.waypoints.min.js"
     ],
 
     "ownJs": [
@@ -8,6 +9,7 @@
         "./app/scripts/utils/_screenSize.es6",
         "./app/scripts/utils/_scrollToId.es6",
         "./app/scripts/utils/_infiniteScroll.es6",
+        "./app/scripts/utils/_animationedSections.es6",
         "./app/scripts/app.es6"
     ],
 
@@ -15,10 +17,12 @@
 
     "body": [
         "scripts/jquery.min.js",
+        "scripts/noframework.waypoints.min.js",
         "scripts/main.js",
         "scripts/_screenSize.js",
         "scripts/_scrollToId.js",
         "scripts/_infiniteScroll.js",
+        "scripts/_animationedSections.js",
         "scripts/app.js"
     ],
 
@@ -27,6 +31,7 @@
         "scripts/_screenSize.js",
         "scripts/_scrollToId.js",
         "scripts/_infiniteScroll.js",
+        "scripts/_animationedSections.js",
         "scripts/app.js"
     ]
 }
