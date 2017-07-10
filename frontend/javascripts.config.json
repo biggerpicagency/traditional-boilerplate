@@ -12,6 +12,7 @@
         "./app/scripts/utils/_infiniteScroll.es6",
         "./app/scripts/utils/_animationedSections.es6",
         "./app/scripts/utils/_popup.es6",
+        "./app/scripts/utils/_trackEvent.es6",
         "./app/scripts/app.es6"
     ],
 
@@ -27,6 +28,7 @@
         "scripts/_infiniteScroll.js",
         "scripts/_animationedSections.js",
         "scripts/_popup.js",
+        "scripts/_trackEvent.js",
         "scripts/app.js"
     ],
 
@@ -37,6 +39,7 @@
         "scripts/_infiniteScroll.js",
         "scripts/_animationedSections.js",
         "scripts/_popup.js",
+        "scripts/_trackEvent.js",
         "scripts/app.js"
     ]
 }
