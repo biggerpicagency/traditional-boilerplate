@@ -3,6 +3,7 @@
 /**
  * 
  * Event tracking
+ * Waypoints dependency needed
  * 
  */
 
