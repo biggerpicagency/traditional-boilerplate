@@ -11,55 +11,6 @@ $tmp: '';
 
 $gutters: 0, 10, 20, 30, 40, 50;
 
-$main_container_max_width: 1280;
-$narrow_container_max_width: 850;
-$large_container_max_width: 1500;
-
-.container {
-  margin-right: auto;
-  margin-left: auto;
-
-  width: 92%;
-  max-width: ($main_container_max_width)+px;
-
-  &--rel {
-    position: relative;
-  }
-}
-
-.container-narrow {
-  @extend .container;
-  max-width: ($narrow_container_max_width)+px;
-}
-
-.container-large {
-  @extend .container;
-  max-width: ($large_container_max_width)+px;
-}
-
-.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-  overflow-x: hidden;
-}
-
-.container-fluid-40 {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.container-850 {
-  max-width: ($narrow_container_max_width)+px;
-  
-  &--center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  &:not(:last-child) {
-    margin-bottom: 40px;
-  }
-}
-
 // Row with default 15px gutter
 $gutter: 15px;
 .row {

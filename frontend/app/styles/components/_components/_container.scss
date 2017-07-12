@@ -1,0 +1,29 @@
+
+
+$main_container_max_width: 1280;
+$narrow_container_max_width: 850;
+$large_container_max_width: 1500;
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+
+  width: 92%;
+  max-width: ($main_container_max_width)+px;
+
+  &-narrow {
+    @extend .container;
+    max-width: ($narrow_container_max_width)+px;
+  }
+
+  &-large {
+    @extend .container;
+    max-width: ($large_container_max_width)+px;
+  }
+
+  &-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden;
+  }
+}
