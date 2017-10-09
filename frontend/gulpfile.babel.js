@@ -46,8 +46,8 @@ import mochaPhantomJS from 'gulp-mocha-phantomjs';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-var scriptHtmlHead = '',
-  scriptHtmlBody = '';
+var scriptHtmlHead = ' ',
+  scriptHtmlBody = ' ';
 
 if (jsVendorConfig.head.length) {
   for (var i = 0; i < jsVendorConfig.head.length; i++) {
@@ -76,9 +76,16 @@ gulp.task('templates', function(){
     .pipe(gulp.dest('.tmp/'));
 });
 
+gulp.task('templates-build', function(){
+  gulp.src('dist/*.html')
+    .pipe(replace('@HeadJS', scriptHtmlHead))
+    .pipe(replace('@BodyJS', scriptHtmlBody))
+    .pipe(gulp.dest('dist/'));
+});
+
 // Lint JavaScript
 gulp.task('lint', function() {
-  return 
+  return
     // gulp.src(['app/scripts/**/*.js','!node_modules/**'])
     gulp.src(jsVendorConfig.jsHint)
     .pipe(jshint())
@@ -92,9 +99,9 @@ gulp.task('images', () =>
     .pipe($.size({title: 'images'}))
 );
 
-// 
+//
 // DEV TASKS
-// 
+//
 
 
 // Copy images to .temp folder while developing
@@ -263,13 +270,13 @@ gulp.task('svgstore', function () {
         .pipe(rename({prefix: 'icon-'}))
         .pipe(svgstore())
         .pipe(gulp.dest('app/images'))
-        // .pipe(gulp.dest('.tmp/images'))
+        .pipe(gulp.dest('.tmp/images'))
         .pipe(gulp.dest('dist/images'));
 });
 
-// 
+//
 // TESTS
-// 
+//
 
 gulp.task('scripts:tests', () =>
     gulp.src(
@@ -281,7 +288,7 @@ gulp.task('scripts:tests', () =>
 );
 
 gulp.task('test', ['scripts:tests'], function () {
-  
+
     return gulp
     .src('test/tests.html')
     .pipe(mochaPhantomJS(
@@ -294,7 +301,7 @@ gulp.task('test', ['scripts:tests'], function () {
     ).on('end', function() {
         del('test/scripts/*.js', {dot: true})
     });
-    
+
     ;
 });
 
@@ -303,7 +310,7 @@ gulp.task('test', ['scripts:tests'], function () {
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fonts-dev', 'copy-images-dev'], () => {
+gulp.task('serve', ['scripts:serve', 'styles', 'templates', 'copy-fonts-dev', 'copy-images-dev', 'svgstore'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -322,7 +329,8 @@ gulp.task('serve', ['scripts:serve', 'styles', 'svgstore', 'templates', 'copy-fo
   gulp.watch(['app/**/*.html'], ['templates', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], ['lint', 'scripts:serve-watch', reload]);
-  gulp.watch(['app/images/**/*'], ['svgstore', 'copy-images-dev', reload]);
+  gulp.watch(['app/images/**/*', '!app/images/**/*.svg'], ['copy-images-dev', reload]);
+  gulp.watch(['app/images/icons/**/*'], ['svgstore', reload]);
   gulp.watch(['app/fonts/**/*'], ['copy-fonts-dev', reload]);
 });
 
@@ -347,10 +355,12 @@ gulp.task('default', ['clean'], cb =>
   runSequence(
     // 'test',
     'styles',
-    ['lint', 'html', 'svgstore', 'scripts'],
-    'images', 
+    ['lint', 'html', 'scripts'],
+    'images',
+    'svgstore',
     'copy',
     'copy-fonts',
+    'templates-build',
     'generate-service-worker',
     cb
   )

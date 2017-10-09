@@ -115,6 +115,29 @@ $base-font-size: 16px;
 
 }
 
+//
+// example of use:
+// @include dynamicFontSize(16, 28, 480, 1600);
+//
+
+@mixin dynamicFontSize($minFontSize, $maxFontSize, $minWidth, $maxWidth) {
+    // font-size: calc(ZZ + ((1vw - XX) * YY));
+    $font_Size_Difference: $maxFontSize - $minFontSize;
+    $viewport_Width_Difference: $maxWidth - $minWidth;
+    $YY: 100 * $font_Size_Difference/$viewport_Width_Difference;
+    $XX: #{$minWidth / 100};
+
+    font-size: #{$minFontSize}px;
+
+    @media screen and (min-width: #{$minWidth}px) {
+        font-size: calc(#{$minFontSize}px + ( (1vw - #{$XX}px) * #{$YY}) );
+    }
+
+    @media screen and (min-width: #{$maxWidth}px) {
+        font-size: #{$maxFontSize}px;
+    }
+}
+
 // Clearfix (recommended to use)
 .clear,
 %clearfix {
