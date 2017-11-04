@@ -80,7 +80,8 @@ gulp.task('templates-build', function(){
   gulp.src('dist/*.html')
     .pipe(replace('@HeadJS', scriptHtmlHead))
     .pipe(replace('@BodyJS', scriptHtmlBody))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist/'))
+    .pipe(reload({stream: true}));
 });
 
 // Lint JavaScript
