@@ -8,7 +8,7 @@
 
 var UTILS = UTILS || {};
 
-UTILS.infiniteScroll = function infiniteScroll() {
+UTILS.infiniteScroll = function infiniteScroll(callback) {
     let infinite,
         infiniteWrapper = '#js-infinity-wrapper';
 
@@ -16,8 +16,11 @@ UTILS.infiniteScroll = function infiniteScroll() {
 
         infinite = new Waypoint.Infinite({
             element: $(infiniteWrapper)[0],
-            // context is used when we have scroll not on body
-            // context: document.querySelector('.l-main')
+            onAfterPageLoad: function() {
+                if (callback) {
+                    callback();
+                }
+            }
         });
     }
 };
