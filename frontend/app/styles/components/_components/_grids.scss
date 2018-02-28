@@ -4,12 +4,12 @@
 *
 **/
 
-$columns_numbers: (1,2,3,4,5,6,7,8,9,10,11,12);
-$columns_names: xs, sm, md, lg;
+$columnsNumbers: (1,2,3,4,5,6,7,8,9,10,11,12);
+$columnsNames: xs, sm, md, lg;
 $iteration: (1/12);
 $tmp: '';
 
-$gutters: 0, 10, 20, 30, 40, 50;
+$gutters: 10, 20, 30, 40, 50, 60, 70, 80;
 
 // Row with default 15px gutter
 $gutter: 15px;
@@ -27,6 +27,14 @@ $gutter: 15px;
         margin-left: (-$gutter)+px;
         margin-right: (-$gutter)+px;
 
+        @if $gutter > 50 {
+          @media all and (max-width: 1180px) {
+            margin-left: (-$gutter/3)+px;
+            margin-right: (-$gutter/3)+px;
+          }
+        }
+
+
         //depends on styleguide
         //padding-bottom: ($gutter)+px;
 
@@ -40,6 +48,13 @@ $gutter: 15px;
           padding-right: ($gutter)+px;
           padding-bottom: 20px;
           //padding-bottom: ($gutter)+px;
+
+          @if $gutter > 50 {
+            @media all and (max-width: 1180px) {
+              padding-left: ($gutter/3)+px;
+              padding-right: ($gutter/3)+px;
+            }
+          }
 
           .pos-center-v--right {
             padding-right: ($gutter)+px;
@@ -97,6 +112,95 @@ $gutter: 15px;
     }
 }
 
+
+
+.row-vertical-middle,
+.row-vertical-top,
+.row-vertical-bottom {
+    @media all and (min-width: 992px) {
+        display: flex;
+        flex-flow: nowrap row;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        > [class*="col-"] {
+            flex-direction: column;
+            flex-flow: wrap column;
+            float: none;
+        }
+    }
+}
+
+.row-equal-col-height {
+    @media all and (min-width: 768px) {
+        display: flex;
+        flex-flow: wrap row;
+        // justify-content: center;
+        align-items: stretch;
+
+        > [class*="col-"] {
+            flex-direction: column;
+            flex-flow: wrap column;
+            float: none;
+
+            @supports (-moz-appearance:none) and (text-emphasis:none) {
+                margin-bottom: 2.5vw;
+            }
+        }
+    }
+}
+
+
+.row-vertical-middle {
+    // justify-content: center;
+
+    > [class*="col-"] {
+        align-self: center;
+        //padding-bottom: 0;
+
+        @media all and (max-width: 768px) {
+            //padding-bottom: 3rem;
+        }
+
+        &:last-child {
+            @media all and (max-width: 768px) {
+                padding-bottom: 0;
+            }
+        }
+
+    }
+}
+
+.row-vertical-top {
+    justify-content: flex-start;
+
+    > [class*="col-"] {
+        align-self: flex-start;
+    }
+}
+
+.row-vertical-bottom {
+    justify-content: flex-end;
+
+    > [class*="col-"] {
+        align-self: flex-end;
+    }
+}
+
+.row-auto-width {
+    display: flex;
+
+    > [class*="col-"] {
+        flex: 0 0 auto;
+    }
+}
+
+
+
+
+
+
+
 // border on a row (:after fix is used because when whole website is in one container)
 // border style to change of course or to comment when it is not needed
 
@@ -111,6 +215,7 @@ $gutter: 15px;
   }
 }
 
+/*
 @each $gutter in $gutters {
   .container,
   .container--narrow {
@@ -123,6 +228,7 @@ $gutter: 15px;
     }
   }
 }
+*/
 
 .row--5cols {
   > [class$="-7"] {
@@ -183,8 +289,8 @@ $gutter: 15px;
 
 //generate class list comma separated with default settings - example: .class-1, .class-2 etc...
 @mixin col-name-number-list {
-  @each $name in $columns_names {
-    @for $i from 1 through length($columns_numbers) {
+  @each $name in $columnsNames {
+    @for $i from 1 through length($columnsNumbers) {
       .col-#{$name}-#{$i} { @extend %default-col-style; }
     }
     .col-#{$name}-five { @extend %default-col-style; }
@@ -200,7 +306,7 @@ $gutter: 15px;
 
 @media (max-width: 400px) {
 
-  @for $j from 1 through length($columns_numbers) {
+  @for $j from 1 through length($columnsNumbers) {
     .col-vxs-#{$j} { width: 100% !important; }
   }
 }
@@ -216,7 +322,7 @@ $gutter: 15px;
 }
 
 @mixin col-xs-float-list {
-  @for $j from 1 through length($columns_numbers) {
+  @for $j from 1 through length($columnsNumbers) {
     .col-xs-#{$j} { float: left; }
   }
   .col-xs-five { float: left; }
@@ -224,7 +330,7 @@ $gutter: 15px;
 @include col-xs-float-list;
 
 
-@each $number in $columns_numbers {
+@each $number in $columnsNumbers {
   .col-xs-#{$number} {
       width: percentage($iteration * $number);
   }
@@ -274,7 +380,7 @@ $gutter: 15px;
 //  COL SM STYLE  //
 // /////////////////
 @mixin col-sm-float-list {
-  @for $i from 1 through length($columns_numbers) {
+  @for $i from 1 through length($columnsNumbers) {
     .col-sm-#{$i} { float: left; }
   }
   .col-sm-five { float: left; }
@@ -284,7 +390,7 @@ $gutter: 15px;
 
   @include col-sm-float-list;
 
-  @each $number in $columns_numbers {
+  @each $number in $columnsNumbers {
     .col-sm-#{$number} {
         //width: percentage($iteration * $number);
         width: percentage($number/12);
@@ -337,7 +443,7 @@ $gutter: 15px;
 // /////////////////
 
 @mixin col-md-float-list {
-  @for $i from 1 through length($columns_numbers) {
+  @for $i from 1 through length($columnsNumbers) {
     .col-md-#{$i} { float: left; }
   }
   .col-md-five { float: left; }
@@ -346,7 +452,7 @@ $gutter: 15px;
 @media (min-width: 992px) {
   @include col-md-float-list;
 
-  @each $number in $columns_numbers {
+  @each $number in $columnsNumbers {
     .col-md-#{$number} {
         width: percentage($iteration * $number);
     }
@@ -398,7 +504,7 @@ $gutter: 15px;
 // /////////////////
 
 @mixin col-lg-float-list {
-  @for $i from 1 through length($columns_numbers) {
+  @for $i from 1 through length($columnsNumbers) {
     .col-lg-#{$i} { float: left; }
   }
   .col-lg-five { float: left; }
@@ -407,7 +513,7 @@ $gutter: 15px;
 @media (min-width: 1200px) {
   @include col-lg-float-list;
 
-  @each $number in $columns_numbers {
+  @each $number in $columnsNumbers {
     .col-lg-#{$number} {
         width: percentage($iteration * $number);
     }
@@ -788,4 +894,12 @@ $gutter: 15px;
     @media (max-width: 767px) {
         text-align: left;
     }
+}
+
+
+
+.col-pad {
+    padding: calc(100% / 12) !important;
+    // padding-top: ($gutter/2)+vw !important;
+    // padding-bottom: ($gutter/2)+vw !important;
 }

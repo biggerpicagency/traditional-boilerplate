@@ -1,5 +1,5 @@
 
-@each $width in $columns_width_set {
+@each $width in $columnsWidthSet {
     .col-#{$width} {
         width: $width * 1%;
 

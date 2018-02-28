@@ -73,15 +73,15 @@ gulp.task('templates', function(){
   gulp.src('app/*.html')
     .pipe(replace('@HeadJS', scriptHtmlHead))
     .pipe(replace('@BodyJS', scriptHtmlBody))
-    .pipe(gulp.dest('.tmp/'));
+    .pipe(gulp.dest('.tmp/'))
+    .pipe(reload({stream: true}));
 });
 
 gulp.task('templates-build', function(){
   gulp.src('dist/*.html')
     .pipe(replace('@HeadJS', scriptHtmlHead))
     .pipe(replace('@BodyJS', scriptHtmlBody))
-    .pipe(gulp.dest('dist/'))
-    .pipe(reload({stream: true}));
+    .pipe(gulp.dest('dist/'));
 });
 
 // Lint JavaScript
@@ -167,7 +167,8 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('.tmp/styles'))
     // Concatenate and minify styles
     .pipe($.if('*.css', $.cssnano({
-      autoprefixer: {browsers: AUTOPREFIXER_BROWSERS, add: true}
+      autoprefixer: {browsers: AUTOPREFIXER_BROWSERS, add: true},
+      reduceIdents: false
     })))
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
@@ -195,7 +196,7 @@ gulp.task('scripts', () =>
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe($.concat('main.min.js'))
-      .pipe($.uglify({preserveComments: 'some'}))
+      .pipe($.uglify({preserveComments: false}))
       // Output files
       .pipe($.size({title: 'scripts'}))
       .pipe($.sourcemaps.write('.'))
@@ -254,7 +255,7 @@ gulp.task('svgstore', function () {
     return gulp
         .src('app/images/icons/*.svg')
         .pipe(svgmin(function (file) {
-            var prefix = 'icon';
+            var prefix = path.basename(file.relative, path.extname(file.relative));
             return {
                 plugins: [{
                     cleanupIDs: {
@@ -291,9 +292,9 @@ gulp.task('test', ['scripts:tests'], function () {
     .pipe(mochaPhantomJS(
       {
         reporter: 'spec',
-				phantomjs: {
-					useColors: true
-				}
+        phantomjs: {
+          useColors: true
+        }
       })
     ).on('end', function() {
         del('test/scripts/*.js', {dot: true})
@@ -309,6 +310,7 @@ gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 // Watch files for changes & reload
 gulp.task('serve', ['scripts:serve', 'styles', 'templates', 'copy-fonts-dev', 'copy-images-dev', 'svgstore'], () => {
   browserSync({
+    open: false,
     notify: false,
     // Customize the Browsersync console logging prefix
     logPrefix: 'BP',
@@ -334,6 +336,7 @@ gulp.task('serve', ['scripts:serve', 'styles', 'templates', 'copy-fonts-dev', 'c
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], () =>
   browserSync({
+    open: false,
     notify: false,
     logPrefix: 'BP',
     // Allow scroll syncing across breakpoints
@@ -401,8 +404,7 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
       // Add/remove glob patterns to match your directory setup.
       `${rootDir}/images/**/*`,
       `${rootDir}/scripts/**/*.js`,
-      `${rootDir}/styles/**/*.css`,
-      `${rootDir}/*.{html,json}`
+      `${rootDir}/styles/**/*.css`
     ],
     // Translates a static file path to the relative URL that it's served from.
     // This is '/' rather than path.sep because the paths returned from
