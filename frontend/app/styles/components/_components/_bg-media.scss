@@ -1,0 +1,29 @@
+.bg-media {
+    &--video {
+        @extend %fullscreenLayer;
+        overflow: hidden;
+
+        video {
+            object-fit: cover;
+            min-height: 100%;
+            min-width: 100%;
+            width: 100%;
+        }
+    }
+
+    &--image {
+        @extend %fullscreenLayer;
+        background-size: cover;
+        background-position: center center;
+    }
+    
+    &--edge-margin {
+        top: 5em;
+        bottom: 5em;
+        height: auto;
+    }
+
+    &--center-right {
+        background-position: center right;
+    }
+}
