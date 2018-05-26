@@ -17,14 +17,14 @@ $gutters: (20, 30, 40, 50);
     @each $gutter in $gutters {
       &--g-#{$gutter} {
           margin: {
-              left: -($gutter)px;
-              right: -($gutter)px;
+              left: -$gutter * 1px;
+              right: -$gutter * 1px;
           }
 
           [class*="col-"] {
               padding: {
-                left: -($gutter)px;
-                right: -($gutter)px;
+                left: $gutter * 1px;
+                right: $gutter * 1px;
               }
           }
       }
