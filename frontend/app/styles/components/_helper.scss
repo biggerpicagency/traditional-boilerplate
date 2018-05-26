@@ -19,18 +19,18 @@ $gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4)
     $value: #{$size}em;
 
     /*==========  MARGINS  ==========*/
-    .mt--#{$var}em {margin-top: $value}
-    .mb--#{$var}em {margin-bottom: $value}
-    .ml--#{$var}em {margin-left: $value}
-    .mr--#{$var}em {margin-right: $value}
+    .mt-#{$var}em {margin-top: $value}
+    .mb-#{$var}em {margin-bottom: $value}
+    .ml-#{$var}em {margin-left: $value}
+    .mr-#{$var}em {margin-right: $value}
 
     /*==========  PADDING  ==========*/
-    .pt--#{$var}em {padding-top: $value}
-    .pb--#{$var}em {padding-bottom: $value}
-    .pl--#{$var}em {padding-left: $value}
-    .pr--#{$var}em {padding-right: $value}
+    .pt-#{$var}em {padding-top: $value}
+    .pb-#{$var}em {padding-bottom: $value}
+    .pl-#{$var}em {padding-left: $value}
+    .pr-#{$var}em {padding-right: $value}
 
-    .pall--#{$var}em {padding: $value}
+    .pall-#{$var}em {padding: $value}
 }
 
 /*========= RWD HELPERS =========*/

@@ -4,6 +4,8 @@
 *
 **/
 
+$gutters: (20, 30, 40, 50);
+
   .row {
     display: -ms-flexbox;
     display: flex;
@@ -11,6 +13,22 @@
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+
+    @each $gutter in $gutters {
+      &--g-#{$gutter} {
+          margin: {
+              left: -($gutter)px;
+              right: -($gutter)px;
+          }
+
+          [class*="col-"] {
+              padding: {
+                left: -($gutter)px;
+                right: -($gutter)px;
+              }
+          }
+      }
+    }
   }
   
   .no-gutters {
