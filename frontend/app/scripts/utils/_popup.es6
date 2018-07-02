@@ -9,7 +9,7 @@
 
 var UTILS = UTILS || {};
 
-UTILS._magnific = function magnific() {
+UTILS.magnific = function magnific() {
     $('a.js-popup, a.popup, a.js-video').on('click', function() {
         var href = $(this).attr('href'),
             type = href.substring(href.length-4, href.length),
@@ -67,7 +67,7 @@ UTILS._magnific = function magnific() {
     });
 };
 
-UTILS._ajaxPopup = function ajaxPopup() {
+UTILS.ajaxPopup = function ajaxPopup() {
     $('.js-ajax-popup').on('click', function (e) {
         var self = this;
 
@@ -82,7 +82,7 @@ UTILS._ajaxPopup = function ajaxPopup() {
     });
 };
 
-UTILS._openPopupOnClick = function openPopupOnClick() {
+UTILS.openPopupOnClick = function openPopupOnClick() {
     if ( document.querySelector('.js-open-popup') ) {
         var popupButtons = document.querySelectorAll('.js-open-popup');
 

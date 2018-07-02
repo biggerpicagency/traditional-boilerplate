@@ -10,14 +10,17 @@
         font-size: 1.25rem;
         line-height: 1.4;
         font-weight: 300;
-
     }
-
-    .content__small-text {
+    
+    .content__small-text,
+    &--small-text p,
+    &--small-text li {
         font-size: .852em;
     }
 
-    .content__large-text {
+    .content__large-text,
+    &--large-text p,
+    &--large-text li {
         font-size: 1.4em;
     }
 

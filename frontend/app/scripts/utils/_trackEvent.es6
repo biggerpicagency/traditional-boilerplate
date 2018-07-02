@@ -9,7 +9,7 @@
 
 var UTILS = UTILS || {};
 
-UTILS._trackEvent = function _trackEvent() {
+UTILS.trackEvent = function trackEvent() {
     $('a[data-type="trackEvent"]').on('click', function() {
         let ga = window.ga || null;
 

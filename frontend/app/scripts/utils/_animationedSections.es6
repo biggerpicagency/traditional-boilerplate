@@ -9,7 +9,7 @@
 
 var UTILS = UTILS || {};
 
-UTILS._animationedSections = function _animationedSections() {
+UTILS.animationedSections = function animationedSections() {
     var animation = {
             runAnimation: function(section, animClassName) {
                 const splittedAnimClassName = animClassName.split('-');

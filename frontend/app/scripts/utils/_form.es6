@@ -9,11 +9,9 @@
 
 var UTILS = UTILS || {};
 
-UTILS._form = function _form(form, url) {
+UTILS.form = function form(form, url) {
     let data = $(form).serialize(),
         loading = true;
-
-    // url = '/ajax/contact';
 
     $(form).find('.loading').fadeIn();
     $(form).find('button[type="submit"]').text('Sending...');

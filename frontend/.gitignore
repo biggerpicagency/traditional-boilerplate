@@ -6,3 +6,13 @@ app.yaml
 Thumbs.db
 /.sass-cache
 /.idea
+.DS_Store
+
+cms-backend/.env
+cms-backend/bootstrap/
+cms-backend/storage/framework
+cms-backend/storage/logs
+cms-backend/vendor
+cms-backend/composer.lock
+cms-backend/node_modules
+.vscode

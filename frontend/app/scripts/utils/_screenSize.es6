@@ -8,7 +8,7 @@
 
 var UTILS = UTILS || {};
 
-UTILS._screenSize = function _screenSize() {
+UTILS.screenSize = function screenSize() {
     let w = window,
         d = document,
         e = d.documentElement,

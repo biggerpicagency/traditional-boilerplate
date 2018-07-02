@@ -42,7 +42,7 @@ a {
         color: inherit;
     }
 
-    &:not(.btn, .social-media__link) {
+    &:not(.btn) {
         transition: all 0.2s ease;
     }
 }

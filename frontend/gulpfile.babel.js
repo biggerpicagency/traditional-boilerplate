@@ -73,6 +73,7 @@ gulp.task('templates', function(){
   gulp.src('app/*.html')
     .pipe(replace('@HeadJS', scriptHtmlHead))
     .pipe(replace('@BodyJS', scriptHtmlBody))
+    .pipe(replace('@Timestamp', Date.now() ))
     .pipe(gulp.dest('.tmp/'))
     .pipe(reload({stream: true}));
 });
@@ -81,6 +82,7 @@ gulp.task('templates-build', function(){
   gulp.src('dist/*.html')
     .pipe(replace('@HeadJS', scriptHtmlHead))
     .pipe(replace('@BodyJS', scriptHtmlBody))
+    .pipe(replace('@Timestamp', Date.now() ))
     .pipe(gulp.dest('dist/'));
 });
 
