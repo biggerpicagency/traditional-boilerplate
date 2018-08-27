@@ -33,7 +33,6 @@
     <style>
     .theme-container {
         width: 90%;
-        max-width: 1380px;
         margin: 50px auto;
 
         color: #444;
@@ -571,21 +570,34 @@
         <span class="theme-headline">12. Column Sections</span>
 
         <!--
-            after "content" class, you can add padding options - for example section--p-small-top, section--p-none-bottom etc.;
-            you can add bg classes too;
-            you can modify content size by adding content class modifier - content--small-text, content--large-text etc.
+            after "section" class, you can add padding options - for example section--p-small-top, section--p-none-bottom etc.;
+            you can add bg classes too (solid color) - if you want an image/video background, please use bg-media component below;
         -->
-        <section class="section content">
+        <section class="section">
+
+            <div 
+                class="bg-media bg-media--image bg-media--cover overlay overlay--red" 
+                style="background-image: url('https://www.biggerpicture.agency/storage/uploads/blog/2018-trends/current-and-future-trends-in-web-design_lead.jpg')">
+            </div>
+
+            <!-- example of video background
+
+            <div class="bg-media bg-media--video overlay overlay--white">
+                <video poster="" loop muted preload="metadata" autoplay playsinline>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4">
+                </video>
+            </div>
+            -->
 
             <!-- "container-narrow" class can be changed to other container size classes -->
-            <div class="section__header container-narrow">
+            <div class="section__header container-narrow content content--small-text color-white">
                 <h2 class="headline-1">Section 100%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content color-white">
                 <p>
                     Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. 
                 </p>
@@ -594,25 +606,28 @@
                 </p>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
+                </p>
+                <p>
+                    <a class="btn btn--black" href="">Some button here</a>
                 </p>
             </div>
         </section>
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 50/50%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-30">
                     <div class="col-sm-6">
                         <p>
@@ -628,13 +643,13 @@
                             Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. 
                         </p>
                         <p>
-                            Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non, consectetuer lobortis quis, varius in, purus.
+                            Phasellus fermentum in, dolor.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -644,15 +659,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 3x33%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-md-4">
                         <p>
@@ -674,7 +689,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -684,15 +699,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 4x25%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-sm-6 col-lg-3">
                         <p>
@@ -720,7 +735,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -730,15 +745,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 5x20%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-sm-6 col-lg-five">
                         <p>
@@ -772,7 +787,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -782,15 +797,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 70/30</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-md-9">
                         <p>
@@ -806,7 +821,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -816,15 +831,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 30/70 (based on 70/30 with changed flex order, keeping the same mobile order)</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-md-9 order-md-2">
                         <p>
@@ -840,7 +855,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -850,15 +865,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 60/40</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-md-7">
                         <p>
@@ -874,7 +889,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 
@@ -884,15 +899,15 @@
 
         <hr>
 
-        <section class="section content">
-            <div class="section__header container-narrow">
+        <section class="section">
+            <div class="section__header container-narrow content">
                 <h2 class="headline-1">Section 40/60 (based on 60/40 with changed flex order, keeping the same mobile order)</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container">
+            <div class="section__content container content">
                 <div class="row row--g-20">
                     <div class="col-md-7 order-md-2">
                         <p>
@@ -908,7 +923,7 @@
                 </div>
             </div>
 
-            <div class="section__footer container-narrow">
+            <div class="section__footer container-narrow content">
                 <h3 class="headline-2">Section footer here</h3>
                 <p>
                     Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. 

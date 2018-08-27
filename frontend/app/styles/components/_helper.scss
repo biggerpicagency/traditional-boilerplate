@@ -1,5 +1,10 @@
 /*==========  COLORS  ==========*/
 // Color helper classes are next to color definitions in _utils.scss
+@each $colorName, $color in $colors {
+    .color-#{$colorName} {
+        color: $color;
+    }
+}
 
 /*==========  GENERIC  ==========*/
 .text-center {text-align: center;}
