@@ -21,7 +21,7 @@ $gutters: (20, 30, 40, 50);
               right: -$gutter * 1px;
           }
 
-          [class*="col-"] {
+          > [class*="col-"] {
               padding: {
                 left: $gutter * 1px;
                 right: $gutter * 1px;
