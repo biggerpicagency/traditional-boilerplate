@@ -13,8 +13,7 @@
 
     &--image {
         @extend %fullscreenLayer;
-        background-size: cover;
-        background-position: center center;
+        background-repeat: no-repeat;
     }
     
     &--edge-margin {
@@ -23,7 +22,56 @@
         height: auto;
     }
 
+    &--cover {
+        background-size: cover;
+    }
+
+    &--contain {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    &--top-left {
+        background-position: top left;
+    }
+
+    &--center-left {
+        background-position: center left;
+    }
+
+    &--bottom-left {
+        background-position: bottom left;
+    }
+
+    &--top-right {
+        background-position: top right;
+    }
+
     &--center-right {
         background-position: center right;
+    }
+
+    &--bottom-right {
+        background-position: bottom right;
+    }
+
+    &--top-left,
+    &--center-left,
+    &--bottom-left,
+    &--top-right,
+    &--center-right,
+    &--bottom-right {
+        @media (max-width: 1023px) {
+            opacity: 0.3;
+        }
+
+        @media (min-width: 1024px) and (max-width: 1439px) {
+            background-size: 40% auto;
+        }
+
+        @media (max-width: 1023px) {
+            background-size: 80% auto;
+        }
     }
 }
