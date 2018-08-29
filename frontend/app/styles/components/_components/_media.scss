@@ -8,5 +8,8 @@ img,
 video,
 object {
     max-width: 100%;
+}
+
+img:not([src$=".svg"]) {
     height: auto;
 }
