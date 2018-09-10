@@ -5,5 +5,8 @@
     ["transform-es2015-modules-commonjs", {
       "allowTopLevelThis": true
     }]
+  ],
+  "ignore": [
+    "./app/scripts/vendor/svgxuse.js"
   ]
 }

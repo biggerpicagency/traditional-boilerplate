@@ -2,7 +2,8 @@
     "vendor": [
         "./node_modules/jquery/dist/jquery.min.js",
         "./node_modules/waypoints/lib/noframework.waypoints.min.js",
-        "./node_modules/magnific-popup/dist/jquery.magnific-popup.js"
+        "./node_modules/magnific-popup/dist/jquery.magnific-popup.js",
+        "./app/scripts/vendor/svgxuse.js"
     ],
 
     "ownJs": [
@@ -23,6 +24,7 @@
         "scripts/jquery.min.js",
         "scripts/noframework.waypoints.min.js",
         "scripts/jquery.magnific-popup.js",
+        "scripts/svgxuse.js",
         "scripts/main.js",
         "scripts/_screenSize.js",
         "scripts/_scrollToId.js",
