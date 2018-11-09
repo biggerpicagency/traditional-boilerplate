@@ -23,7 +23,7 @@ UTILS.scrollToID = function scrollToID(id, context = 'html,body') {
 };
 
 UTILS.hashAnchorClick = function hashAnchorClick() {
-    $('a[href*="#"]:not(.js-scroll-to)').on('click', function (e) {
+    $('a[href^="#"]:not(.js-scroll-to)').on('click', function (e) {
 
         var target = this.hash,
             hashValue = target.substr(target.indexOf("#"));
