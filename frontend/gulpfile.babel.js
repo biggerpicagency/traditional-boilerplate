@@ -206,6 +206,16 @@ gulp.task('scripts', () =>
       .pipe(gulp.dest('.tmp/scripts'))
 );
 
+// Concatenate minified Barba.js with uglified and minified scripts from dist/main.min.js (created via `scripts` task)
+// to fix some of the IE11 issues (minified Barba.js cannot be uglified with the rest of the scripts).
+// If you use Barba.js in your project, please run this task in `gulp` build task after the lint, html and scripts tasks
+gulp.task('scripts-merge-with-barba', () => 
+  gulp.src(['./node_modules/barba.js/dist/barba.min.js', './dist/scripts/main.min.js'])
+    .pipe($.concat('main.min.js'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('.tmp/scripts'))
+);
+
 // scripts just for develop - without minification and concatenation
 gulp.task('scripts:serve', () =>
     gulp.src(
@@ -358,6 +368,7 @@ gulp.task('default', ['clean'], cb =>
     // 'test',
     'styles',
     ['lint', 'html', 'scripts'],
+    //'scripts-merge-with-barba',
     'images',
     'svgstore',
     'copy',
