@@ -1,15 +1,9 @@
 'use strict';
 
-/**
- * 
- * Universal function for popups
- * MagnificPopup and jQuery dependency needed
- * 
- */
+import 'magnific-popup';
+import $ from 'jquery';
 
-var UTILS = UTILS || {};
-
-UTILS.magnific = function magnific() {
+export default () => {
     $('a.js-popup, a.popup, a.js-video').on('click', function() {
         var href = $(this).attr('href'),
             type = href.substring(href.length-4, href.length),
@@ -65,40 +59,6 @@ UTILS.magnific = function magnific() {
 
         return false;
     });
-};
 
-UTILS.ajaxPopup = function ajaxPopup() {
-    $('.js-ajax-popup').on('click', function (e) {
-        var self = this;
-
-        $.magnificPopup.open({
-            type: 'ajax',
-            items: {
-                src: self.getAttribute('data-href')
-            }
-        }, 0);
-
-        return false;
-    });
-};
-
-UTILS.openPopupOnClick = function openPopupOnClick() {
-    if ( document.querySelector('.js-open-popup') ) {
-        var popupButtons = document.querySelectorAll('.js-open-popup');
-
-        [].forEach.call(popupButtons, function(popupButton) {
-            popupButton.addEventListener("click", function( event ) {
-                event.preventDefault();
-
-                if (event.currentTarget.href) {
-                    window.open(
-                        event.currentTarget.href,
-                        '_blank',
-                        'toolbar=no, scrollbars=yes, resizable=yes, width=500, height=400'
-                    );
-                }
-
-            }, false);
-        });
-    }
+    return;
 };

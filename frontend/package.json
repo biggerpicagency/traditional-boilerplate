@@ -33,7 +33,11 @@
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "sw-precache": "^5.0.0",
-    "sw-toolbox": "^3.2.1"
+    "sw-toolbox": "^3.2.1",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-stream": "^5.2.1"
   },
   "engines": {
     "node": ">=8.11.0"

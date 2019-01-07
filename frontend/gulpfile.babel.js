@@ -25,19 +25,22 @@
 // You can read more about the new JavaScript features here:
 // https://babeljs.io/docs/learn-es2015/
 
-const { watch, series, parallel, task, src, dest } = require('gulp');
-import path from 'path';
-import del from 'del';
-import browserSync from 'browser-sync';
-import swPrecache from 'sw-precache';
-import gulpLoadPlugins from 'gulp-load-plugins';
 import pkg from './package.json';
-import scriptsConfig from './javascripts.config.json';
-import svgstore from 'gulp-svgstore';
-import svgmin from 'gulp-svgmin';
-import rename from 'gulp-rename';
-import jshint from 'gulp-jshint';
-import replace from 'gulp-replace';
+
+const { watch, series, parallel, task, src, dest } = require('gulp');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const path = require('path');
+const del = require('del');
+const browserSync = require('browser-sync');
+const swPrecache = require('sw-precache');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const svgstore = require('gulp-svgstore');
+const svgmin = require('gulp-svgmin');
+const rename = require('gulp-rename');
+const jshint = require('gulp-jshint');
+const replace = require('gulp-replace');
+const vinylNamed = require('vinyl-named');
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 11',
@@ -77,28 +80,78 @@ function reload(done) {
   server.reload();
   done();
 }
+/*
+// Build Scripts Task
+const buildScripts = (mode) => (done) => {
+  let streamMode;
+  if (mode === 'development') streamMode = require('./webpack/config.development.js');
+  else if (mode === 'production') streamMode = require('./webpack/config.production.js');
+  else streamMode = undefined;
 
-let scriptHtmlBody = '';
+  ['development', 'production'].includes(mode) ? pump([
+    gulp.src(srcPath('js')),
+    vinylNamed(),
+    webpackStream(streamMode, webpack),
+    gulpSourcemaps.init({ loadMaps: true }),
+    through2.obj(function (file, enc, cb) {
+      const isSourceMap = /\.map$/.test(file.path);
+      if (!isSourceMap) this.push(file);
+      cb();
+    }),
+    gulpBabel({ presets: [['env', babelConfig]] }),
+    ...((mode === 'production') ? [gulpUglify()] : []),
+    gulpSourcemaps.write('./'),
+    gulp.dest(distPath('js')),
+    browserSync.stream(),
+  ], done) : undefined;
+};
+*/
 
-if (scriptsConfig.body.length) {
-  for (var i = 0; i < scriptsConfig.body.length; i++) {
-    scriptHtmlBody += `<script src="${scriptsConfig.body[i]}"></script>`;
-  }
-}
+task('scripts:dev', (cb) => {
+  let streamMode = require('./webpack/config.development.js');
+
+  src(['./app/scripts/**/*.js'])
+    .pipe(vinylNamed())
+    .pipe(webpackStream(streamMode, webpack))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(dest('.tmp/scripts'));
+
+  cb();
+});
+
+task('scripts:build', (cb) => {
+  let streamMode = require('./webpack/config.production.js');
+
+  src(['./app/scripts/**/*.js'])
+    .pipe(vinylNamed())
+    .pipe(webpackStream(streamMode, webpack))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(dest('.tmp/scripts'))
+    .pipe($.uglify({preserveComments: false}))
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(dest('dist/scripts'))
+    .pipe(dest('.tmp/scripts'));
+  cb();
+});
 
 // templates - variables replacement
 task('templates', (cb) => {
   src('app/*.html')
-    .pipe(replace('@BodyJS', scriptHtmlBody))
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(dest('.tmp/'));
   cb();
 });
 
 // templates build
-task('templates-build', (cb) => {
+task('templates:build', (cb) => {
   src('dist/*.html')
-    .pipe(replace('@BodyJS', scriptHtmlBody))
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(dest('dist/'));
   cb();
@@ -147,7 +200,7 @@ task('copy', (cb) =>
 );
 
 // Copy fonts
-task('copy-fonts', (cb) => {
+task('copy:fonts', (cb) => {
   src([
     'app/fonts/**/*'
   ], {
@@ -201,7 +254,7 @@ task('styles:dev', (cb) => {
 // Concatenate and minify JavaScript. Optionally transpiles ES2015 code to ES5.
 // to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
 // `.babelrc` file.
-task('scripts', (cb) => {
+/*task('scripts', (cb) => {
   src(scriptsConfig.ownJs)
     //.pipe($.newer('.tmp/scripts'))
     .pipe($.sourcemaps.init())
@@ -282,7 +335,7 @@ task('scripts:serve', (cb) => {
     .pipe($.sourcemaps.write('.'))
     .pipe(dest('.tmp/scripts'));
   cb();
-});
+});*/
 
 // Scan your HTML for assets & optimize them
 task('html', (cb) => {
@@ -378,13 +431,13 @@ task('generate-service-worker', series('copy-sw-scripts', 'write-service-worker'
 // Watch files for changes & reload
 const watchStyles = () => watch(['app/styles/**/*.{scss,css}'], series('styles:dev'));
 const watchTemplates = () => watch(['app/*.html'], series('templates', reload));
-const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:serve', 'jsLinter', reload));
+const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:dev', 'jsLinter', reload));
 const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copyImagesDev', reload));
 const watchIcons = () => watch(['app/images/icons/**/*'], series('svgstore', reload));
 const watchFonts = () => watch(['app/fonts/**/*'], series('copyFontsDev', reload));
 
 task('watch', parallel(serve, watchStyles, watchTemplates, watchScripts, watchImages, watchIcons, watchFonts));
-task('buildForDev', series('styles:dev', 'templates', 'scripts:vendor-copy', 'scripts:dev', 'copyFontsDev', 'copyImagesDev', 'svgstore'));
+task('buildForDev', series('styles:dev', 'templates', 'scripts:dev', /*'scripts:vendor-copy', 'scripts:dev',*/ 'copyFontsDev', 'copyImagesDev', 'svgstore'));
 task('serve', series('buildForDev', 'watch'));
 
 // Build production files, the default task
@@ -392,18 +445,19 @@ task('default', series(
   'clean', 
   series(
     'styles',
-    'html', 
-    'scripts:vendor',
+    'html',
+    'scripts:build',
+    /*'scripts:vendor',
     'scripts',
-    'scripts:vendor-copy',
+    'scripts:vendor-copy',*/
     'images',
     'svgstore',
     'copy',
-    'copy-fonts',
-    'templates-build',
+    'copy:fonts',
+    'templates:build',
   ),
   //'scripts-merge-with-barba',
-  'generate-service-worker'
+  //'generate-service-worker'
 ));
 
 // Build and serve the output from the dist build
