@@ -1,11 +1,11 @@
 <!doctype html>
 <html dir="ltr" lang="en-GB" prefix="og: http://ogp.me/ns#">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Starter Kit</title>
+    <title>Web Dev Insider - you might not need the frameworks - demo without Barba.js</title>
 
     <meta name="robots" content="noindex, nofollow">
 
@@ -33,10 +33,9 @@
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#2F3BA2">
 
-
     <meta property="og:locale" content="en_GB">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Traditional Boilerplate - Bigger Picture">
+    <meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
     <meta property="og:description" content="Description here...">
     <meta property="og:url" content="http://www.biggerpicture.agency">
     <meta property="og:site_name" content="Application name">
@@ -51,41 +50,27 @@
     -->
 
     <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=@Timestamp">
+    <link rel="stylesheet" href="styles/main.css?v=@Timestamp"> 
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
 
-    @HeadJS
-  </head>
-  <body itemscope itemtype="http://schema.org/WebPage">
-    <img src="images/bigger-picture-logo.svg" style="width: 250px; margin-top: 40px" alt="Bigger Picture">
-    <h1>Welcome in Boilerplate for traditional, multi page websites</h1>
-    <a href="#test">
-      <svg width="24px" height="24px"><use xlink:href="images/icons.svg#icon-hamburger"/></svg>
-    </a>
-    <br>
-    <a class="js-open-popup" href="https://google.com" title="Popup">Popup - click to open</a>
-    <br>
-    <a class="js-popup" href="https://www.youtube.com/watch?v=xBwktWioVlM" title="Play me">
-        Video popup - click to open
-    </a> 
+    <figure class="text-center">
+        <img class="mt-30em mb-30em" src="images/studio-sidekicks.png" width="400" alt="Studio Sidekicks">
+        <figcaption>
+            <h1 class="headline-1">Hi, how are you?</h1>
+            <p>Let's code something good.</p>
+        </figcaption>
+    </figure>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-<form class="form" method="post" onsubmit="return BP_BOILERPLATE.utils.form(this, '/ajax/testUrl');"> <input type="hidden" name="page_id" value="497"> <div class="form__row"> <label for="fname" class="form__label form__label--thin">First Name *</label> <input type="text" name="fname" id="fname" class="form__input" placeholder="First Name" required=""> </div> <div class="form__row"> <label for="lname" class="form__label form__label--thin">Surname *</label> <input type="text" name="lname" id="lname" class="form__input" placeholder="Surname" required=""> </div> <div class="form__row"> <label for="email" class="form__label form__label--thin">Email *</label> <input type="email" name="email" class="form__input" placeholder="Email" required=""> </div> <div class="form__row"> <label for="phone" class="form__label form__label--thin">Phone</label> <input type="tel" name="phone" id="phone" class="form__input" placeholder="Phone"> </div> <div class="form__row"> <label for="message" class="form__label form__label--thin">Message *</label> <textarea name="message" id="message" class="form__textarea" placeholder="Message" required=""></textarea> </div> <div class="form__row mt--20em"> <button type="submit" class="btn btn--border btn--solid-gold"> <span class="btn__text">Submit</span> </button> </div> <div class="loading"></div> </form>
+    <!-- build:js scripts/vendor.min.js?v=@Timestamp -->
+    <!-- <script src="scripts/vendor.min.js?v=@Timestamp"></script> -->
+    <!-- endbuild -->
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-    <section id="test" class="animation-fadeInUp">
-      Test section
-    </section>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <footer>
-      ...end of page
-    </footer>
-
-    <!-- build:js scripts/main.min.js -->
+    <!-- build:js scripts/main.min.js?v=@Timestamp -->
     <!-- <script src="scripts/main.min.js?v=@Timestamp"></script> -->
     <!-- endbuild -->
 
     @BodyJS
-  </body>
+</body>
 </html>

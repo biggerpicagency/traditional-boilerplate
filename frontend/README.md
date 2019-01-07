@@ -1,8 +1,23 @@
-# [![Web Starter Kit](https://cloud.githubusercontent.com/assets/110953/11445049/f05512ba-9520-11e5-8fdb-8c8eb5f690d0.jpg)](https://github.com/google/web-starter-kit/releases/latest)
+# What is it?
+It is a demo for the free whitepaper that you can download here (link very soon).
 
-## Overview
+Demo & Source Code:
+1. #### Without Barba.js:
+- source code: https://github.com/bartekmis/web-dev-insider-demo-barba.js/tree/master
+- demo: https://www.webdevinsider.pl/demo/barba.js/before/
 
-[Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) is an opinionated boilerplate for web development. Tools for building a great experience across many devices and [performance oriented](#web-performance). Helping you to stay productive following the best practices outlined in Google's [Web Fundamentals](https://developers.google.com/web/fundamentals/). A solid starting point for both professionals and newcomers to the industry.
+2. #### With Barba.js:
+- source code: https://github.com/bartekmis/web-dev-insider-demo-barba.js/tree/barba.js
+- demo: https://www.webdevinsider.pl/demo/barba.js/after/
+
+## A few words about the boilerplate / starter kit
+
+This demo is based on Bigger Picture / Studio Sidekicks boilerplate that has been created based on [Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) - an opinionated boilerplate for web development. Unfortunately Google is no longer supporting and developing that project so we have decided to start keeping that up-to-date by ourselves. We upgraded all the tools and now it uses new Gulp 4.0.0 and Babel 7.2 to transpile the ES7+ scripts.
+
+### How to use it?
+1. Installation: `npm install` or `yarn install`
+2. Development: `gulp serve` (it requires Gulp installation first)
+3. Building: `gulp`
 
 ### Features
 
@@ -12,12 +27,11 @@
 | Sass support                           | Compile [Sass](http://sass-lang.com/) into CSS with ease, bringing support for variables, mixins and more. (Run `gulp serve` or `gulp` for production)                                                                                                      |
 | Performance optimization               | Minify and concatenate JavaScript, CSS, HTML and images to help keep your pages lean. (Run `gulp` to create an optimised version of your project to `/dist`)                                                                                                |
 | Code Linting               | JavaScript code linting is done using [ESLint](http://eslint.org) - a pluggable linter tool for identifying and reporting on patterns in JavaScript. Web Starter Kit uses ESLint with [eslint-config-google](https://github.com/google/eslint-config-google), which tries to follow the Google JavaScript style guide.                                                                                                |
-| ES2015 via Babel 6.0                   | Optional ES2015 support using [Babel](https://babeljs.io/). To enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the [.babelrc](.babelrc) file. ES2015 source code will be automatically transpiled to ES5 for wide browser support.  |
+| ES7+ via Babel 7.2                   | Optional ES7+ support using [Babel](https://babeljs.io/). ES7+ source code will be automatically transpiled to ES5 for wide browser support.  |
 | Built-in HTTP Server                   | A built-in server for previewing your site locally while you develop and iterate                                                                                                                                                                            |
 | Live Browser Reloading                 | Reload the browser in real-time anytime an edit is made without the need for an extension. (Run `gulp serve` and edit your files)                                                                                                                           |
 | Cross-device Synchronization           | Synchronize clicks, scrolls, forms and live-reload across multiple devices as you edit your project. Powered by [BrowserSync](http://browsersync.io). (Run `gulp serve` and open up the IP provided on other devices on your network)                       |
 | Offline support                     | Thanks to our baked in [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) [pre-caching](https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js#L226), sites deploying `dist` to a HTTPS domain will enjoy offline support. This is made possible by [sw-precache](https://github.com/GoogleChrome/sw-precache/).                                                                                                                                              |
-| PageSpeed Insights                     | Web performance metrics showing how well your site performs on mobile and desktop (Run `gulp pagespeed`)                                                                                                                                                    |
 
 ## Quickstart
 
@@ -75,3 +89,4 @@ Contributions, questions and comments are all welcome and encouraged. For code c
 
 Apache 2.0  
 Copyright 2015 Google Inc
+This starter kit is being kept up-to-date by Bigger Picture / Studio Sidekicks.
