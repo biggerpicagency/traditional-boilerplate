@@ -54,6 +54,46 @@ const $ = gulpLoadPlugins();
 const server = browserSync.create();
 const stylish = require('jshint-stylish');
 
+const lazyLoadScript = String.raw`
+<script>
+  (function (w, d) {
+    w.addEventListener('LazyLoad::Initialized', function (e) {
+      w.lazyLoadInstance = e.detail.instance;
+    }, false);
+    var b = d.getElementsByTagName('head')[0];
+    var s = d.createElement("script"); s.async = true;
+    var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js";
+    s.src = "scripts/" + v;
+    w.lazyLoadOptions = {
+      elements_selector: ".lazy",
+      threshold: 0,
+      callback_enter: function(element) {
+        // for elements that have lazy loaded background image with media queries
+        var css = element.getAttribute('data-style');
+
+        if (css) {
+            css = css.replace(/(\r\n|\n|\r)/gm, "");
+
+            var style = document.createElement('style');
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(style);
+
+            style.setAttribute("type", "text/css");
+
+            if (style.styleSheet) {
+                style.styleSheet.cssText = css;
+            } else {
+                var styleText = document.createTextNode(css);
+                style.appendChild(styleText);
+            }
+            
+        }
+      }
+    };
+    b.appendChild(s);
+  }(window, document));
+</script>`;
+
 function serve(done) {
   server.init({
     open: false,
@@ -116,6 +156,7 @@ task('scripts:build', (cb) => {
 task('templates', (cb) => {
   src('app/*.html')
     .pipe(replace('@Timestamp', Date.now() ))
+    .pipe(replace('@LazyLoadScript', lazyLoadScript))
     .pipe(dest('.tmp/'));
   cb();
 });
@@ -124,6 +165,7 @@ task('templates', (cb) => {
 task('templates:build', (cb) => {
   src('dist/*.html')
     .pipe(replace('@Timestamp', Date.now() ))
+    .pipe(replace('@LazyLoadScript', lazyLoadScript))
     .pipe(dest('dist/'));
   cb();
 });
