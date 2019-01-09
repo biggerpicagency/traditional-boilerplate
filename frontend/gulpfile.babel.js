@@ -38,7 +38,6 @@ const svgmin = require('gulp-svgmin');
 const rename = require('gulp-rename');
 const jshint = require('gulp-jshint');
 const replace = require('gulp-replace');
-const vinylNamed = require('vinyl-named');
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 11',
