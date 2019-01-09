@@ -23,9 +23,7 @@
 // This gulpfile makes use of new JavaScript features.
 // Babel handles this without us having to do anything. It just works.
 // You can read more about the new JavaScript features here:
-// https://babeljs.io/docs/learn-es2015/
-
-import pkg from './package.json';
+// https://babeljs.io/docs/en/learn
 
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');
@@ -80,38 +78,12 @@ function reload(done) {
   server.reload();
   done();
 }
-/*
-// Build Scripts Task
-const buildScripts = (mode) => (done) => {
-  let streamMode;
-  if (mode === 'development') streamMode = require('./webpack/config.development.js');
-  else if (mode === 'production') streamMode = require('./webpack/config.production.js');
-  else streamMode = undefined;
 
-  ['development', 'production'].includes(mode) ? pump([
-    gulp.src(srcPath('js')),
-    vinylNamed(),
-    webpackStream(streamMode, webpack),
-    gulpSourcemaps.init({ loadMaps: true }),
-    through2.obj(function (file, enc, cb) {
-      const isSourceMap = /\.map$/.test(file.path);
-      if (!isSourceMap) this.push(file);
-      cb();
-    }),
-    gulpBabel({ presets: [['env', babelConfig]] }),
-    ...((mode === 'production') ? [gulpUglify()] : []),
-    gulpSourcemaps.write('./'),
-    gulp.dest(distPath('js')),
-    browserSync.stream(),
-  ], done) : undefined;
-};
-*/
-
+// scripts (using Webpack) - for developing
 task('scripts:dev', (cb) => {
   let streamMode = require('./webpack/config.development.js');
 
   src(['./app/scripts/**/*.js'])
-    .pipe(vinylNamed())
     .pipe(webpackStream(streamMode, webpack))
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -123,11 +95,11 @@ task('scripts:dev', (cb) => {
   cb();
 });
 
+// scripts (using Webpack) - build
 task('scripts:build', (cb) => {
   let streamMode = require('./webpack/config.production.js');
 
   src(['./app/scripts/**/*.js'])
-    .pipe(vinylNamed())
     .pipe(webpackStream(streamMode, webpack))
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -174,14 +146,14 @@ task('images', (cb) => {
 });
 
 // Copy images to .tmp folder while developing
-task('copyImagesDev', (cb) => {
+task('copy:images-dev', (cb) => {
   src('app/images/**/*')
     .pipe(dest('.tmp/images'));
   cb();
 });
 
 // Copy fonts to .tmp folder while developing
-task('copyFontsDev', (cb) => {
+task('copy:fonts-dev', (cb) => {
   src('app/fonts/**/*')
     .pipe(dest('.tmp/fonts'));
   cb();
@@ -251,92 +223,6 @@ task('styles:dev', (cb) => {
   cb();
 });
 
-// Concatenate and minify JavaScript. Optionally transpiles ES2015 code to ES5.
-// to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
-// `.babelrc` file.
-/*task('scripts', (cb) => {
-  src(scriptsConfig.ownJs)
-    //.pipe($.newer('.tmp/scripts'))
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe(dest('.tmp/scripts'))
-    .pipe($.concat('main.min.js'))
-    .pipe($.uglify({preserveComments: false}))
-    // Output files
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(dest('dist/scripts'))
-    .pipe(dest('.tmp/scripts'));
-  cb();
-});
-
-task('scripts:vendor', (cb) => {
-  src(scriptsConfig.vendor)
-    //.pipe($.newer('.tmp/scripts'))
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe(dest('.tmp/scripts'))
-    .pipe($.concat('vendor.min.js'))
-    .pipe($.uglify({preserveComments: false}))
-    // Output files
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(dest('dist/scripts'))
-    .pipe(dest('.tmp/scripts'));
-  cb();
-});
-
-// Copy Vendor Script from app/scripts that you want to load separately, not concatenated to main.min.js
-task('scripts:vendor-copy', (cb) => {
-    src([
-        'app/scripts/vendor/lazyload/lazyload.min.js', 
-        'app/scripts/vendor/lazyload/lazyload-intersection-observer.min.js'
-      ])
-      .pipe(dest('dist/scripts'))
-      .pipe(dest('.tmp/scripts'));
-    cb();
-});
-
-// Concatenate minified Barba.js with uglified and minified scripts from dist/main.min.js (created via `scripts` task)
-// to fix some of the IE11 issues (minified Barba.js cannot be uglified with the rest of the scripts).
-// If you use Barba.js in your project, please run this task in `gulp` build task after the lint, html and scripts tasks
-task('scripts-merge-with-barba', (cb) => {
-  src(['./node_modules/barba.js/dist/barba.min.js', './dist/scripts/vendor.min.js'])
-    .pipe($.concat('vendor.min.js'))
-    .pipe(dest('dist/scripts'))
-    .pipe(dest('.tmp/scripts'));
-  cb();
-});
-
-// transpilation only own JS files
-task('scripts:dev', (cb) => {
-  src(
-      scriptsConfig.vendor.concat(scriptsConfig.ownJs),
-    )
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(dest('.tmp/scripts'));
-  cb();
-});
-
-// scripts just for develop - without minification and concatenation
-task('scripts:serve', (cb) => {
-  src(scriptsConfig.ownJs)
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    // Output files
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(dest('.tmp/scripts'));
-  cb();
-});*/
-
 // Scan your HTML for assets & optimize them
 task('html', (cb) => {
   src('app/**/*.html')
@@ -401,7 +287,7 @@ task('write-service-worker', (cb) => {
 
   swPrecache.write(filepath, {
     // Used to avoid cache conflicts when serving on localhost.
-    cacheId: pkg.name || 'web-starter-kit',
+    cacheId: 'web-starter-kit',
     // sw-toolbox.js needs to be listed first. It sets up methods used in runtime-caching.js.
     importScripts: [
       'scripts/sw/sw-toolbox.js',
@@ -432,12 +318,12 @@ task('generate-service-worker', series('copy-sw-scripts', 'write-service-worker'
 const watchStyles = () => watch(['app/styles/**/*.{scss,css}'], series('styles:dev'));
 const watchTemplates = () => watch(['app/*.html'], series('templates', reload));
 const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:dev', 'jsLinter', reload));
-const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copyImagesDev', reload));
+const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copy:images-dev', reload));
 const watchIcons = () => watch(['app/images/icons/**/*'], series('svgstore', reload));
-const watchFonts = () => watch(['app/fonts/**/*'], series('copyFontsDev', reload));
+const watchFonts = () => watch(['app/fonts/**/*'], series('copy:fonts-dev', reload));
 
 task('watch', parallel(serve, watchStyles, watchTemplates, watchScripts, watchImages, watchIcons, watchFonts));
-task('buildForDev', series('styles:dev', 'templates', 'scripts:dev', /*'scripts:vendor-copy', 'scripts:dev',*/ 'copyFontsDev', 'copyImagesDev', 'svgstore'));
+task('buildForDev', series('styles:dev', 'templates', 'scripts:dev', 'copy:fonts-dev', 'copy:images-dev', 'svgstore'));
 task('serve', series('buildForDev', 'watch'));
 
 // Build production files, the default task
@@ -447,17 +333,13 @@ task('default', series(
     'styles',
     'html',
     'scripts:build',
-    /*'scripts:vendor',
-    'scripts',
-    'scripts:vendor-copy',*/
     'images',
     'svgstore',
     'copy',
     'copy:fonts',
     'templates:build',
   ),
-  //'scripts-merge-with-barba',
-  //'generate-service-worker'
+  'generate-service-worker'
 ));
 
 // Build and serve the output from the dist build

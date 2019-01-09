@@ -1,8 +1,11 @@
 'use strict';
 
 import $ from 'jquery';
-import screenSize from './utils/screenSize';
+import initServicerWorker from './sw/service-worker-registration';
 import magnificPopupInit from './utils/popup';
+
+// Register Service Worker
+initServicerWorker();
 
 class Person {
   constructor(name) {
@@ -18,8 +21,9 @@ class Person {
   }
 }
 
-console.log( screenSize().x, 12345 );
-console.log($('figure').html());
+
+
+$('h1').html('Hello from app.js!');
 
 const harry = new Person('Harman Manchanda');
 console.log(harry.hello());
