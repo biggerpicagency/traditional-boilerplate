@@ -63,12 +63,12 @@ const lazyLoadScript = String.raw`
     var b = d.getElementsByTagName('head')[0];
     var s = d.createElement("script"); s.async = true;
     var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js";
-    s.src = "scripts/" + v;
+    s.src = "/scripts/" + v;
     w.lazyLoadOptions = {
       elements_selector: ".lazy",
       threshold: 0,
       callback_enter: function(element) {
-        // for elements that have lazy loaded background image with media queries
+        /* for elements that have lazy loaded background image with media queries */
         var css = element.getAttribute('data-style');
 
         if (css) {
@@ -92,7 +92,7 @@ const lazyLoadScript = String.raw`
     };
     b.appendChild(s);
   }(window, document));
-</script>`;
+</script>`.replace(/\s+/g, ' ').trim(); // remove whitespaces, new lines etc. in the code above
 
 function serve(done) {
   server.init({
@@ -165,7 +165,6 @@ task('templates', (cb) => {
 task('templates:build', (cb) => {
   src('dist/*.html')
     .pipe(replace('@Timestamp', Date.now() ))
-    .pipe(replace('@LazyLoadScript', lazyLoadScript))
     .pipe(dest('dist/'));
   cb();
 });
@@ -271,7 +270,7 @@ task('html', (cb) => {
       searchPath: '{.tmp,app}',
       noAssets: true
     }))
-
+    .pipe(replace('@LazyLoadScript', lazyLoadScript))
     // Minify any HTML
     .pipe($.if('*.html', $.htmlmin({
       removeComments: true,
@@ -285,7 +284,6 @@ task('html', (cb) => {
       removeOptionalTags: true
     })))
     // Output files
-    .pipe(replace('@BodyJS', ''))
     .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
     .pipe(dest('dist'));
   cb();
