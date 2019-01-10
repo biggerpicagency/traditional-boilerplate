@@ -3,6 +3,7 @@
 import scrollToId from './scrollToId';
 
 const hashLinkScroll = () => {
+    console.log(13123445);
     const hashLinks = document.querySelectorAll('a[href^="#"]:not(.js-scroll-to)');
     
     hashLinks.forEach((link) => {
@@ -13,6 +14,8 @@ const hashLinkScroll = () => {
             if (hashValue.length) {
                 scrollToId(hashValue);
             }
+
+
     
             return false;
         });

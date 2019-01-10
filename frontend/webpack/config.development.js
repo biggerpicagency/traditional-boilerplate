@@ -1,5 +1,6 @@
 // You can add other webpack configuration (plugins, loaders, etc).
 const entry = require('./entry');
+const path = require('path');
 
 module.exports = {
   entry,
@@ -7,6 +8,15 @@ module.exports = {
   devtool: 'inline-cheap-source-map',
   output: {
     filename: '[name].js',
+  },
+  module: {
+    rules: [{
+        test: /\.js/,
+        exclude: /(node_modules)/,
+        use: [{
+            loader: 'babel-loader'
+        }]
+    }]
   },
   optimization: {
     splitChunks: {
@@ -21,3 +31,5 @@ module.exports = {
     }
   }
 };
+
+

@@ -124,13 +124,8 @@ task('scripts:dev', (cb) => {
 
   src(['./app/scripts/**/*.js'])
     .pipe(webpackStream(streamMode, webpack))
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
+    //.pipe($.babel())
     .pipe(dest('.tmp/scripts'));
-
   cb();
 });
 
@@ -140,13 +135,10 @@ task('scripts:build', (cb) => {
 
   src(['./app/scripts/**/*.js'])
     .pipe(webpackStream(streamMode, webpack))
-    .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.sourcemaps.write())
     .pipe(dest('.tmp/scripts'))
     .pipe($.uglify({preserveComments: false}))
     .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
     .pipe(dest('dist/scripts'))
     .pipe(dest('.tmp/scripts'));
   cb();
@@ -356,7 +348,7 @@ task('generate-service-worker', series('copy-sw-scripts', 'write-service-worker'
 // Watch files for changes & reload
 const watchStyles = () => watch(['app/styles/**/*.{scss,css}'], series('styles:dev'));
 const watchTemplates = () => watch(['app/*.html'], series('templates', reload));
-const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:dev', reload));
+const watchScripts = () => watch(['app/scripts/**/*.js'], series('scripts:dev', reload));
 const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copy:images-dev', reload));
 const watchIcons = () => watch(['app/images/icons/**/*'], series('svgstore', reload));
 const watchFonts = () => watch(['app/fonts/**/*'], series('copy:fonts-dev', reload));

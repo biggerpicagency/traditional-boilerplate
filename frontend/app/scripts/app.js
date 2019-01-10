@@ -12,4 +12,4 @@ initServicerWorker();
 hashLinkScroll();
 //magnificPopupInit();
 
-$('h1').html('Hello from app.js!'); 
+$('h1').html('Hello from app.js');
