@@ -3,9 +3,9 @@
 import 'magnific-popup';
 import $ from 'jquery';
 
-export default () => {
+const popup = () => {
     $('a.js-popup, a.popup, a.js-video').on('click', function() {
-        var href = $(this).attr('href'),
+        let href = $(this).attr('href'),
             type = href.substring(href.length-4, href.length),
             title = $(this).attr('title');
 
@@ -47,7 +47,6 @@ export default () => {
                         }
                     }
                 },
-                //closeMarkup: '<a class="mfp-close btn btn--gold">CLOSE</a>',
 
                 mainClass: 'mfp-fade',
                 titleSrc: title,
@@ -59,6 +58,6 @@ export default () => {
 
         return false;
     });
-
-    return;
 };
+
+export default popup;

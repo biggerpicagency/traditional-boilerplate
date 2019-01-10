@@ -1,6 +1,6 @@
 'use strict';
 
-export default () => {
+const screenSize = () => {
     const w = window,
         d = document,
         e = d.documentElement,
@@ -11,3 +11,5 @@ export default () => {
 
     return sizes;
 };
+
+export default screenSize;

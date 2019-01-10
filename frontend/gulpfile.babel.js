@@ -356,7 +356,7 @@ task('generate-service-worker', series('copy-sw-scripts', 'write-service-worker'
 // Watch files for changes & reload
 const watchStyles = () => watch(['app/styles/**/*.{scss,css}'], series('styles:dev'));
 const watchTemplates = () => watch(['app/*.html'], series('templates', reload));
-const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:dev', 'jsLinter', reload));
+const watchScripts = () => watch(['app/scripts/**/*.js', 'app/scripts/**/*.es6'], series('scripts:dev', reload));
 const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copy:images-dev', reload));
 const watchIcons = () => watch(['app/images/icons/**/*'], series('svgstore', reload));
 const watchFonts = () => watch(['app/fonts/**/*'], series('copy:fonts-dev', reload));
@@ -371,6 +371,7 @@ task('default', series(
   series(
     'styles',
     'html',
+    'jsLinter',
     'scripts:build',
     'images',
     'svgstore',
