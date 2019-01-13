@@ -25,6 +25,9 @@
 // You can read more about the new JavaScript features here:
 // https://babeljs.io/docs/en/learn
 
+// Build setting
+const FRONTEND_BUILD_MODE = 'minified'; // options: minified OR super-minified
+
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
@@ -257,27 +260,33 @@ task('styles:dev', (cb) => {
 
 // Scan your HTML for assets & optimize them
 task('html', (cb) => {
-  src('app/**/*.html')
+  let stream = src('app/**/*.html')
     .pipe($.useref({
       searchPath: '{.tmp,app}',
       noAssets: true
     }))
-    .pipe(replace('@LazyLoadScript', lazyLoadScript))
-    // Minify any HTML
-    .pipe($.if('*.html', $.htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      removeOptionalTags: true
-    })))
+    .pipe(replace('@LazyLoadScript', lazyLoadScript));
+
+    // Minify any HTML only if super-minified mode enabled
+    if (FRONTEND_BUILD_MODE === 'super-minified') {
+      stream = stream
+        .pipe($.if('*.html', $.htmlmin({
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeAttributeQuotes: true,
+          removeRedundantAttributes: true,
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          removeOptionalTags: true
+        })));
+    }
+
     // Output files
-    .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
-    .pipe(dest('dist'));
+    stream = stream
+      .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
+      .pipe(dest('dist'));
   cb();
 });
 
