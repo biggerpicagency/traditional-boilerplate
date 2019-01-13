@@ -1,12 +1,18 @@
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 
-
-    &--peach {
-        background-color: rgba(52, 34, 152, 0.8)
+    @each $colorName, $color in $colors {
+        &--#{$colorName} {
+            &:after {
+                background-color: rgba($color, 0.8);
+            }
+        }
     }
 }

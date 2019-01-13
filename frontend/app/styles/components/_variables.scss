@@ -5,36 +5,10 @@
 **/
 
 $columnsWidthSet: (10, 20, 25, 30, 33, 40, 50, 60, 67, 70, 75, 80, 90);
-$topNavbarHeight: 68px;
-$topNavbarHeightMobile: 60px;
-$sidebarWidth: 465px;
-$sidebarWidthNarrow: 260px;
 
 /* Colors */
 
-$colorMain: #090B09;
-$colorLightBlue: #4280ff;
-$colorLightBlueV2: #2551aa;
-
-$colorGold: rgb(255, 246, 226);
-$colorGoldV2: rgb(235, 200, 121);
-
-$colorDarkBlue: rgb(44, 75, 212);
-$colorDarkBlueV2: #2738AF;
-
-$colorPurple: rgb(86, 33, 172);
-$colorPurpleV2: rgb(56, 21, 112);
-
-$colorGreen: rgb(31, 150, 77);
-$colorGreenV2: rgb(5, 104, 61);
-
-$colorGrey: #B1B1B1;
-$colorDarkGrey: #707070;
-$colorLightGrey: #F3F2F2;
-$colorLightGrey2: #FAFAFA;
-
-$colorRed: #e1306c;
-
+$colorMain: #222;
 
 $socialMediaColors: (
     twitter: #4099ff, 
@@ -46,15 +20,10 @@ $socialMediaColors: (
 );
 
 $colors: (
-    ('light-blue', $colorLightBlue, $colorLightBlueV2),
-    ('gold', $colorGold, $colorGoldV2),
-    ('dark-blue', $colorDarkBlue, $colorDarkBlueV2),
-    ('green', $colorGreen, $colorGreenV2),
-    ('purple', $colorPurple, $colorPurpleV2),
-    ('white', #fff, #fff)
+    white: #fff,
+    red: #d70000
 );
 
 $bgColorsWhiteFont: (
-    red: $colorRed,
-    black: $colorMain
+    red: #d70000
 );

@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import screenSize from './screenSize';
+import screenSize from './screen-size';
 
 const scrollToID = (id, context = 'html, body', offSet = 80) => {
     let x = screenSize().x;

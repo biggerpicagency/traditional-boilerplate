@@ -19,25 +19,15 @@ button {
 }
 
 html {
-    //overflow-y: scroll;
-
-    @media (max-width: 1023px) {
-        font-size: 88%;
-    }
-
-    @media (min-width: 1024px) and (max-width: 1366px) {
-        font-size: 80%;
-    }
+    background: #fff;
 }
 
 body {
-    font-family: arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 100%;
     line-height: 1.5;
-    font-weight: 400;
+    font-weight: 300;
     color: $colorMain;
-    overflow-x: hidden;
-    height: auto !important;
 }
 
 ul, li {
@@ -49,18 +39,12 @@ a {
     text-decoration: none;
 
     &:not([class]) {
-        color: $colorRed;
-        transition: all 0.2s ease;
-
-        &:hover {
-            color: $colorMain;
-        }
+        color: inherit;
     }
-}
 
-b,
-strong {
-    font-weight: 600;
+    &:not(.btn) {
+        transition: all 0.2s ease;
+    }
 }
 
 audio,

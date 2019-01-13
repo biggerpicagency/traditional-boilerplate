@@ -1,6 +1,5 @@
 // You can add other webpack configuration (plugins, loaders, etc).
 const entry = require('./entry');
-const path = require('path');
 
 module.exports = {
   entry,
@@ -8,6 +7,7 @@ module.exports = {
   devtool: 'inline-cheap-source-map',
   output: {
     filename: '[name].js',
+    pathinfo: false,
   },
   module: {
     rules: [{

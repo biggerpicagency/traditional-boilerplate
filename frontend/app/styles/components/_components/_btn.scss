@@ -5,63 +5,29 @@
 **/
 
 .btn {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
     @include inline-block();
+    padding: .7em 1.5em;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
 
-    padding: 0.8rem 3rem;
+    font-weight: 600;
+}
 
-    font-size: rem(18px);
-    font-weight: 400;
-    text-align: center;
-    line-height: 1.3;
+// Size
+.btn--big {
+    font-size: 1.5em;
+}
 
-    transition: background-color 0.2s ease, color 0.3s ease;
+.btn--small {
+    font-size: 1em;
+}
 
-    &--full-width {
-        width: 100%;
-    }
+// Colour
+.btn--black {
+    background: #000;
+    color: #fff;
 
-    // size
-    &--large {
-        font-size: rem(22px);
-
-        //min-width: 330px;
-        padding: 1rem 3.5rem;
-    }
-
-    // bg colors
-    &--bg {
-        @each $colorName, $color, $colorSecondary in $colors {
-            &-#{$colorName} {
-                background-color: rgba($color, 1);
-                
-
-                @if $colorName = 'gold' {
-                    color: $colorMain;
-                }
-
-                @if $colorName = 'white' {
-                    color: #000;
-                }
-
-                @if $colorName != 'gold' and $colorName != 'white' {
-                    color: #fff;
-                }
-
-
-
-                &:hover {
-                    background: rgba($colorSecondary, 1);
-                }
-
-                &:not(.btn--bg-white):before {
-                    //background-color:#fff;
-                    background-color: #707070;
-                }
-            }
-        }
-
+    &:hover {
+        background: #666;
     }
 }
