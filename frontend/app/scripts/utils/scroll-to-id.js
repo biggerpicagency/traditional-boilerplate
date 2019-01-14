@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import screenSize from './screen-size';
 
-const scrollToID = (id, context = 'html, body', offSet = 80) => {
+const scrollToID = ({id, context = 'html, body', offSet = 80}) => {
     let x = screenSize().x;
     
     if (x < 768) {

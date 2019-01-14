@@ -11,7 +11,7 @@ const hashLinkScroll = () => {
             let hashValue = target.substr(target.indexOf("#"));
 
             if (hashValue.length) {
-                scrollToId(hashValue);
+                scrollToId({id: hashValue});
             }
             
             return false;

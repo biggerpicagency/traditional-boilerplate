@@ -1,6 +1,6 @@
 'use strict';
 
-import Waypoint from 'waypoints';
+import 'waypoints/lib/noframework.waypoints.min.js';
 
 const infiniteScroll = (callback) => {
     let infinite;

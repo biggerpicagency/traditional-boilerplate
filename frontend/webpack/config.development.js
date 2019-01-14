@@ -8,6 +8,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     pathinfo: false,
+    libraryTarget: 'var'
   },
   module: {
     rules: [{

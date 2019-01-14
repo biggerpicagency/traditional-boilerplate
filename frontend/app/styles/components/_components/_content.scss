@@ -47,6 +47,10 @@
         //margin-top: -.7em !important;
     }
 
+    a:not(.btn) {
+        color: $contentLinksDefaultColor;
+    }
+
     /* uls, ols */
     ul {
         @extend .list-ul;
