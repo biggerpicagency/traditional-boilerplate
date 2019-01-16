@@ -49,6 +49,7 @@
     "magnific-popup": "^1.1.0",
     "owl.carousel": "^2.3.4",
     "quicklink": "^1.0.0",
+    "svgxuse": "^1.2.6",
     "waypoints": "^4.0.1"
   }
 }

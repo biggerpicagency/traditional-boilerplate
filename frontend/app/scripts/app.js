@@ -1,6 +1,7 @@
 'use strict';
 
 //import quicklink from 'quicklink/dist/quicklink.mjs';
+import 'svgxuse';
 import initServicerWorker from './sw/service-worker-registration';
 import hashLinkScroll from './utils/hash-links-scroll';
 import fullHeightViewportCalculation from './utils/full-height';
