@@ -1,5 +1,6 @@
 'use strict';
 
+//import quicklink from 'quicklink/dist/quicklink.mjs';
 import initServicerWorker from './sw/service-worker-registration';
 import hashLinkScroll from './utils/hash-links-scroll';
 import fullHeightViewportCalculation from './utils/full-height';
@@ -8,6 +9,9 @@ import submitForm from './utils/form';
 //import animatedSections from './utils/animated-sections';
 //import infiniteScroll from './utils/infinite-scroll';
 //import magnificPopupInit from './utils/popup';
+
+/* Faster subsequent page-loads by prefetching in-viewport links during idle time */
+//quicklink();
 
 /* Register Service Worker */
 initServicerWorker();

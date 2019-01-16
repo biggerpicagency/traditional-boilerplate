@@ -48,6 +48,7 @@
     "jquery-match-height": "^0.7.2",
     "magnific-popup": "^1.1.0",
     "owl.carousel": "^2.3.4",
+    "quicklink": "^1.0.0",
     "waypoints": "^4.0.1"
   }
 }
