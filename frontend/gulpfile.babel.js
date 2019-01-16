@@ -1,8 +1,8 @@
 /**
  *
  *  Based on Google Web Starter Kit
- *  Improved by Bigger Picture Agency
- *  (c) 2019 https://www.biggerpicture.agency
+ *  Improved by Studio Sidekicks
+ *  (c) 2019 https://www.studiosidekicks.com
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.

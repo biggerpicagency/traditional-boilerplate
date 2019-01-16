@@ -1,5 +1,5 @@
 # Traditional Boilerplate: HTML5/Sass/Gulp/Webpack/Babel/PWA/Tests
-An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
+An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Studio Sidekicks](http://www.studiosidekicks.com).
 
 ## What is this Traditional Boilerplate for?
 This boilerplate is your first step in building a killer website. It contains necessary build processes, basic styles, and files that your website will need.

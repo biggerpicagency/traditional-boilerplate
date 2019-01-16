@@ -12,7 +12,7 @@ Demo & Source Code:
 
 ## A few words about the boilerplate / starter kit
 
-This demo is based on Bigger Picture / Studio Sidekicks boilerplate that has been created based on [Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) - an opinionated boilerplate for web development. Unfortunately Google is no longer supporting and developing that project so we have decided to start keeping that up-to-date by ourselves. We upgraded all the tools and now it uses new Gulp 4.0.0 and Babel 7.2 to transpile the ES6+ scripts.
+This demo is based on Studio Sidekicks boilerplate that has been created based on [Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) - an opinionated boilerplate for web development. Unfortunately Google is no longer supporting and developing that project so we have decided to start keeping that up-to-date by ourselves. We upgraded all the tools and now it uses new Gulp 4.0.0 and Babel 7.2 to transpile the ES6+ scripts.
 
 ### How to use it?
 1. Installation: `npm install` or `yarn install`
@@ -89,4 +89,4 @@ Contributions, questions and comments are all welcome and encouraged. For code c
 
 Apache 2.0  
 Copyright 2015 Google Inc
-This starter kit is being kept up-to-date by Bigger Picture / Studio Sidekicks.
+This starter kit is being kept up-to-date by Studio Sidekicks.
