@@ -26,7 +26,7 @@
 // https://babeljs.io/docs/en/learn
 
 // Build setting
-const FRONTEND_BUILD_MODE = 'minified'; // options: minified OR super-minified
+const HTML_BUILD = 'minified'; // options: default OR minified
 
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');
@@ -267,8 +267,8 @@ task('html', (cb) => {
     }))
     .pipe(replace('@LazyLoadScript', lazyLoadScript));
 
-    // Minify any HTML only if super-minified mode enabled
-    if (FRONTEND_BUILD_MODE === 'super-minified') {
+    // Minify any HTML only if minified mode enabled
+    if (HTML_BUILD === 'minified') {
       stream = stream
         .pipe($.if('*.html', $.htmlmin({
           removeComments: true,
