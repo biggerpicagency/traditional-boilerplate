@@ -335,7 +335,7 @@ task('write-service-worker', (cb) => {
     ],
     staticFileGlobs: [
       // Add/remove glob patterns to match your directory setup.
-      `${rootDir}/images/**/*`,
+      `${rootDir}/images/!(tmp)/**/*`,
       `${rootDir}/scripts/**/*.js`,
       `${rootDir}/styles/**/*.css`,
       `${rootDir}/*.html`
