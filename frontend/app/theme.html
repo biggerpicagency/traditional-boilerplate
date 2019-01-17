@@ -9,9 +9,6 @@
     <meta name="description" content="Description here...">
     <meta name="robots" content="noindex, nofollow">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css">
-
     <link rel="icon" sizes="192x192" href="/img/touch/chrome-touch-icon-192x192.png">
     <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-precomposed.png">
 
@@ -29,6 +26,14 @@
     <meta property="og:url" content="https://www.studiosidekicks.com">
     <meta property="og:site_name" content="Application name">
     <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Preloading -->
+    <link rel="preload" as="style" href="styles/main.css?v=@Timestamp">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=@Timestamp">
+    <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/main.css">
 
     <style>
     .theme-container {
