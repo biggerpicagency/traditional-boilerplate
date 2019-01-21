@@ -1,4 +1,67 @@
-<!doctype html><html dir=ltr lang=en-GB prefix="og: http://ogp.me/ns#"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=description content=""><meta name=viewport content="width=device-width,initial-scale=1"><title>Web Starter Kit</title><meta name=robots content="noindex, nofollow"><meta name=msapplication-tap-highlight content=no><link rel=manifest href=/manifest.json><meta name=application-name content="Web Starter Kit"><meta name=mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=icon sizes=192x192 href=/images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=apple-touch-icon href=/images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=images/touch/ms-touch-icon-144x144-precomposed.png><meta name=msapplication-TileColor content=#2F3BA2><meta property=og:locale content=en_GB><meta property=og:type content=website><meta property=og:title content="Traditional Boilerplate - Studio Sidekicks"><meta property=og:description content="Description here..."><meta property=og:url content=https://www.studiosidekicks.com><meta property=og:site_name content="Application name"><meta property=og:image content=/img/touch/chrome-touch-icon-192x192.png><meta name=theme-color content=#2F3BA2><link rel=preload as=style href="styles/main.css?v=1547759735103"><link rel=preload as=script href="scripts/vendor.js?v=1547759735103"><link rel=preload as=script href="scripts/app.js?v=1547759735103"><link rel=stylesheet href="styles/main.css?v=1547759735103"><script>(function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document));</script><style>img {
+<!doctype html>
+<html dir="ltr" lang="en-GB" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Starter Kit</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="application-name" content="Web Starter Kit">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
+
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
+    <meta property="og:description" content="Description here...">
+    <meta property="og:url" content="https://www.studiosidekicks.com">
+    <meta property="og:site_name" content="Application name">
+    <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#2F3BA2">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- Preloading -->
+    <link rel="preload" as="style" href="styles/main.css?v=1548082018566">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=1548082018566">
+    <link rel="preload" as="script" href="scripts/app.js?v=1548082018566">
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/main.css?v=1548082018566"> 
+
+    <script> (function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document)); </script>
+
+    <!-- only for this demo purpose -->
+    <style>
+        img {
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -21,7 +84,73 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-        }</style><body itemscope itemtype=http://schema.org/WebPage><div class="container pt-20em pb-20em text-center"><h1 class="headline-1 mb-10em">Lazy Load Demo</h1><hr><h2 class="headline-2 mt-30em mb-10em">Image</h2><ul class=demo-list><li><img class=lazy data-src=https://dummyimage.com/500x500/000/fff alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F1F1F1/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F2F2F2/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F3F3F3/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F4F4F4/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F5F5F5/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F6F6F6/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F7F7F7/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F8F8F8/000 alt=""><li><img class=lazy data-src=https://dummyimage.com/500x500/F9F9F9/000 alt=""></ul><hr><section><h2 class="headline-2 mt-30em mb-10em">Picture Set</h2><picture><source data-srcset=https://dummyimage.com/460x345/000/fff media="(max-width: 500px)"><source data-srcset=https://dummyimage.com/990x500/000/fff media="(min-width: 501px) and (max-width: 990px)"><source data-srcset=https://dummyimage.com/1024x600/000/fff media="(min-width: 991px)"><img class=lazy data-src=https://dummyimage.com/460x345/000/fff alt=""></picture></section><hr><section><h2 class="headline-2 mt-30em mb-10em">Background Image with Media Queries</h2><div class=lazy id=some-element data-style="
+        }
+    </style>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+
+    <div class="container pt-20em pb-20em text-center">
+        <h1 class="headline-1 mb-10em">Lazy Load Demo</h1>
+
+        <hr>
+        <h2 class="headline-2 mt-30em mb-10em">Image</h2>
+
+        <ul class="demo-list">
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/000/fff" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F1F1F1/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F2F2F2/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F3F3F3/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F4F4F4/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F5F5F5/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F6F6F6/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F7F7F7/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F8F8F8/000" alt="">
+            </li>
+            <li>
+                <img class="lazy" data-src="https://dummyimage.com/500x500/F9F9F9/000" alt="">
+            </li>
+        </ul>
+        
+        <hr>
+
+        <section>
+            <h2 class="headline-2 mt-30em mb-10em">Picture Set</h2>
+
+            <picture>
+                <source data-srcset="https://dummyimage.com/460x345/000/fff" media="(max-width: 500px)" >
+                <source data-srcset="https://dummyimage.com/990x500/000/fff" media="(min-width: 501px) and (max-width: 990px)">
+                <source data-srcset="https://dummyimage.com/1024x600/000/fff" media="(min-width: 991px)">
+
+                <img class="lazy" data-src="https://dummyimage.com/460x345/000/fff" alt="">
+            </picture>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2 class="headline-2 mt-30em mb-10em">Background Image with Media Queries</h2>
+
+            <div 
+                class="lazy"
+                id="some-element"
+                data-style='
                     @media all and (max-width: 400px) {
                         #some-element {
                             background-image: url(https://dummyimage.com/400x400/000/fff);
@@ -39,4 +168,26 @@
                             background-image: url(https://dummyimage.com/1024x400/000/fff);
                         }
                     }
-                "></div></section><hr><section class=content><div style="max-width: 500px"><p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna.<p><img class=lazy data-src=https://dummyimage.com/640x640/D70000/FFF alt=""></div></section></div><script defer src="scripts/vendor.js?v=1547759735103"></script><script defer src="scripts/app.js?v=1547759735103"></script>
+                '>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="content">
+            <div style="max-width: 500px">
+                <p>
+                    Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna.
+                </p>
+                <p>
+                    <img class="lazy" data-src="https://dummyimage.com/640x640/D70000/FFF" alt="">
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script defer src="scripts/vendor.js?v=1548082018566"></script>
+    <script defer src="scripts/app.js?v=1548082018566"></script>
+
+</body>
+</html>

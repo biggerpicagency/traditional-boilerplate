@@ -26,7 +26,7 @@
 // https://babeljs.io/docs/en/learn
 
 // Build setting
-const HTML_BUILD = 'minified'; // options: default OR minified
+const HTML_BUILD = 'default'; // options: default OR minified
 
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');
