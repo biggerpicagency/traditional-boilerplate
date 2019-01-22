@@ -63,4 +63,8 @@
     blockquote {
         @extend .blockquote;
     }
+
+    img:not([src*=".svg"]) {
+        height: auto;
+    }
 }
