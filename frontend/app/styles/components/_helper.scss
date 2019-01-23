@@ -109,3 +109,12 @@ $gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4,
  * Hide visually and from screen readers, but maintain layout
  */
 .invisible {visibility: hidden;}
+
+/*
+ * Stop scrolling (useful when the mobile menu is opened and you want to prevent scrolling on the scene behind it - in <body>)
+ */
+.stop-scrolling {
+    position: fixed; 
+    overflow-y: scroll;
+    width: 100%;
+}

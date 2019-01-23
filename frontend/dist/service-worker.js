@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["images/touch/apple-touch-icon.png","7326f54bfe6776293f08b34c3a5fde7b"],["images/touch/chrome-touch-icon-192x192.png","571f134f59f14a6d298ddd66c015b293"],["images/touch/icon-128x128.png","7c46d686765c49b813ac5eb34fabf712"],["images/touch/icon-512x512.png","37e1c9b30cf323d3f11de45ff2bc8c11"],["images/touch/ms-touch-icon-144x144-precomposed.png","452d90b250d6f41a0c8f9db729113ffd"],["index.html","b18daee303f7f71bafb030644076b985"],["lazy-load-demo.html","2bea48ac6f1401ff91b5c4a709de4a53"],["scripts/sw/runtime-caching.js","e3b4e14ed377b18b2f7c18077f1af61f"],["scripts/sw/sw-toolbox.js","2770efb889cc10c4de88d0b746c2a13c"],["styles/main.css","b1080eb66aff9b95b6767b58ff525b7e"],["theme.html","d41d8cd98f00b204e9800998ecf8427e"]];
+var precacheConfig = [["images/touch/apple-touch-icon.png","7326f54bfe6776293f08b34c3a5fde7b"],["images/touch/chrome-touch-icon-192x192.png","571f134f59f14a6d298ddd66c015b293"],["images/touch/icon-128x128.png","7c46d686765c49b813ac5eb34fabf712"],["images/touch/icon-512x512.png","37e1c9b30cf323d3f11de45ff2bc8c11"],["images/touch/ms-touch-icon-144x144-precomposed.png","452d90b250d6f41a0c8f9db729113ffd"],["index.html","fe0987682ac9e5ce3582a277f1e0c850"],["lazy-load-demo.html","a7596070808039fb7bbf5c86fbfe69c4"],["scripts/sw/runtime-caching.js","e3b4e14ed377b18b2f7c18077f1af61f"],["scripts/sw/sw-toolbox.js","2770efb889cc10c4de88d0b746c2a13c"],["styles/main.css","a470a21e0b153c8a2024d39da7191c89"],["theme.html","49b7ef35977b36fb53ff678c6370c442"]];
 var cacheName = 'sw-precache-v3-web-starter-kit-' + (self.registration ? self.registration.scope : '');
 
 

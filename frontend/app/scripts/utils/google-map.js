@@ -17,7 +17,7 @@ let mapOptions = {
 };
 let mapsScriptLoaded = false;
 
-const runMaps = () => {
+const executeMaps = () => {
     const maps = document.querySelectorAll('.js-map');
 
     if (!maps) {
@@ -74,4 +74,4 @@ const loadMaps = (maps = document.querySelectorAll('.js-map')) => {
 
 window.loadMaps = loadMaps;
 
-export default runMaps;
+export default executeMaps;
