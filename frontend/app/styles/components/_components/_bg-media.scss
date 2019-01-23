@@ -1,6 +1,6 @@
 .bg-media {
     &--video {
-        @include fullHeight();
+        @include fullscreenLayer();
         overflow: hidden;
 
         video {
@@ -12,7 +12,7 @@
     }
 
     &--image {
-        @include fullHeight();
+        @include fullscreenLayer();
         background-repeat: no-repeat;
     }
     
