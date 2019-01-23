@@ -19,12 +19,13 @@ let mapsScriptLoaded = false;
 
 const executeMaps = () => {
     const maps = document.querySelectorAll('.js-map');
+    let mapWaypoint;
 
     if (!maps) {
         return;
     }
 
-    const mapWaypoint = new Waypoint({
+    mapWaypoint = new Waypoint({
         element: maps[0],
         handler: function(direction) {
             if (direction === 'down') {
