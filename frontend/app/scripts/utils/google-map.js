@@ -21,7 +21,7 @@ const executeMaps = () => {
     const maps = document.querySelectorAll('.js-map');
     let mapWaypoint;
 
-    if (!maps) {
+    if (!maps.length) {
         return;
     }
 

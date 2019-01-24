@@ -61,11 +61,48 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
-    <div class="content text-center">
-        <img class="mt-30em mb-30em" src="/images/studio-sidekicks.png" width="400" alt="Studio Sidekicks">
-        <div>
-            <h1 class="headline-1">Hi, how are you?</h1>
-            <p>Let's code something good. <a href="theme.html">Go to theme.</a></p>
+    <div class="container mt-20em">
+        <h1 class="headline-1">The demo below will fully work with back-end integration only!</h1>
+        <p>Do not worry too much if something does not work as you expect. As soon as it is integrated with back-end and the correct response after refinement execution is done, it will be all fine, trust me!</p>
+        
+        <div id="js-refined-content">
+            <div class="row">
+                <div class="col-6">
+                    <select 
+                        name="category" 
+                        data-filter-type="category" 
+                        data-filter-category="/refinement-demo.html"
+                        onchange="javascript:App.refine({type: 'category', url: this.value});">
+                        <option value="/refinement-demo-category.html">Category</option>
+                        <option value="/refinement-demo-category.html">Category 1</option>
+                        <option value="/refinement-demo-category.html">Category 2</option>
+                        <option value="/refinement-demo-category.html">Category 3</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <select name="label" data-filter-type="label">
+                        <option value="/refinement-demo.html">Label</option>
+                        <option value="/refinement-demo.html">Label 1</option>
+                        <option value="/refinement-demo.html">Label 2</option>
+                        <option value="/refinement-demo.html">Label 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-20em">
+                <p>Sample content here. Please refine by the dropdown(s) above.</p>
+            </div>
+
+            <div class="loading"></div>
+
+            <script id="js-meta-tags">
+                window.App = window.App || {};
+                window.App.metaTags = {
+                    title: 'Some new title',
+                    description: 'Some description'
+                };
+            </script>
         </div>
     </div>
 

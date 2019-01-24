@@ -34,18 +34,18 @@ const submitForm = ({form, url}) => {
             } else {
                 loadingLayer.classList.remove('loading--active');
     
-                if (!form.querySelectorAll('.form__response--ok').length) {
+                if (!form.querySelectorAll('.response--success').length) {
                     displayReponse({
-                        elementHtml: `<div class="form__response form__response--ok"><p>${response.message}</p></div>`,
+                        elementHtml: `<div class="response response--success"><p>${response.message}</p></div>`,
                         parent: form
                     });
                 } else {
-                    form.querySelector('.form__response--ok p').textContent = response.message;
+                    form.querySelector('.response--success p').textContent = response.message;
                 }
             }
     
             // remove error response if exists and reset the form
-            let errorResponse = form.querySelector('.form__response--error');
+            let errorResponse = form.querySelector('.response--error');
     
             if (errorResponse) {
                 errorResponse.parentNode.removeChild(errorResponse);
@@ -74,18 +74,18 @@ const submitForm = ({form, url}) => {
             }
 
             if (errorMessage) {
-                if (!form.querySelectorAll('.form__response--error').length) {
+                if (!form.querySelectorAll('.response--error').length) {
                     displayReponse({
-                        elementHtml: `<div class="form__response form__response--error"><p>${errorMessage}</p></div>`,
+                        elementHtml: `<div class="response response--error"><p>${errorMessage}</p></div>`,
                         parent: form
                     });
                 } else {
-                    form.querySelector('.form__response--error p').textContent = errorMessage;
+                    form.querySelector('.response--error p').textContent = errorMessage;
                 }
             }
 
             // remove success response if exists
-            let responseOk = form.querySelector('.form__response--ok');
+            let responseOk = form.querySelector('.response--success');
 
             if (responseOk) {
                 responseOk.parentNode.removeChild(responseOk);

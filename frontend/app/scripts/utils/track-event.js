@@ -1,12 +1,16 @@
 'use strict';
 
+const TRACKING_TYPE = 'gtm'; // ga OR gtm
 const eventTracking = () => {
     const links = document.querySelectorAll('a[data-type="trackEvent"]');
     
     links.forEach((link) => {
         link.addEventListener('click', function(event) {
-            trackByGoogleAnalytics({link, event});
-            // trackByGoogleTagManager({link, event})
+            if (TRACKING_TYPE === 'ga') {
+                trackByGoogleAnalytics({link, event});
+            } else {
+                trackByGoogleTagManager({link, event: 'buttonClick'});
+            }
         }, false);
     });
 };
@@ -42,23 +46,33 @@ const trackByGoogleAnalytics = ({link, event}) => {
         ga('send', data);
     }
 
-    return data.hitCallback ? event.preventDefault() : true;
+    return data.hitCallback && event ? event.preventDefault() : true;
 };
 
 /* 
  * tracking events by Google Tag Manager (needs to be adjusted following your GTM settings)
  * 
 */
-/*
-const trackByGoogleTagManager = ({link, event}) => {
-    const gtmDataLayer = window.dataLayer || null;
-    let url = link.getAttribute('href');
+const trackByGoogleTagManager = ({link = null, url = null, event = 'page-visit'}) => {
+    const gtmDataLayer = window.dataLayer || [];
+
+    if (link) {
+        url = link.getAttribute('href');
+    }
         
-    window.dataLayer.push({
-        'event': 'button-click',
+    gtmDataLayer.push({
+        'event': event,
         'url': url
     });
 };
-*/
 
 export default eventTracking;
+export function trackVisit({url}) {
+    if (TRACKING_TYPE === 'ga') {
+        if (window.ga !== undefined) {
+            window.ga('send', 'pageview', url);
+        }
+    } else {
+        trackByGoogleTagManager({url});
+    }
+}

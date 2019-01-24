@@ -8,6 +8,7 @@ import fullHeightViewportCalculation from './utils/full-height';
 import eventTracking from './utils/track-event';
 import submitForm from './utils/form';
 import executeMaps from './utils/google-map';
+import refine from './utils/refinement';
 //import animatedSections from './utils/animated-sections';
 //import infiniteScroll from './utils/infinite-scroll';
 //import magnificPopupInit from './utils/popup';
@@ -42,5 +43,7 @@ runWebsiteScripts();
 
 // method exposed in the App object
 window.App = {
-    submitForm
+    metaTags: {},
+    submitForm,
+    refine
 };

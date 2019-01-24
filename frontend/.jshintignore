@@ -1,3 +1,4 @@
 ./app/scripts/vendor/**/*
 ./app/scripts/utils/animated-sections.js
 ./app/scripts/utils/google-map.js
+./app/scripts/utils/refinement.js
