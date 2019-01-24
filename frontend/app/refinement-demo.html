@@ -81,7 +81,10 @@
                 </div>
 
                 <div class="col-6">
-                    <select name="label" data-filter-type="label">
+                    <select 
+                        name="label" 
+                        data-filter-type="label"
+                        onchange="javascript:App.refine({type: 'label', url: this.value});">
                         <option value="/refinement-demo.html">Label</option>
                         <option value="/refinement-demo.html">Label 1</option>
                         <option value="/refinement-demo.html">Label 2</option>
