@@ -20,8 +20,7 @@ const eventTracking = () => {
  * 
 */
 const trackByGoogleAnalytics = ({link, event}) => {
-    const ga = window.ga || null;
-    if (!ga) {
+    if (window.ga === undefined) {
         return true;
     }
 
@@ -43,7 +42,7 @@ const trackByGoogleAnalytics = ({link, event}) => {
     }
 
     if (data.eventCategory || data.eventAction || data.eventLabel) {
-        ga('send', data);
+        window.ga('send', data);
     }
 
     return data.hitCallback && event ? event.preventDefault() : true;
