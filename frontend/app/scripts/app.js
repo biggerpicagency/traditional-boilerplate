@@ -8,7 +8,7 @@ import fullHeightViewportCalculation from './utils/full-height';
 import eventTracking from './utils/track-event';
 import submitForm from './utils/form';
 import executeMaps from './utils/google-map';
-import refine from './utils/refinement';
+import refine, { initRefinement } from './utils/refinement';
 //import animatedSections from './utils/animated-sections';
 //import infiniteScroll from './utils/infinite-scroll';
 //import magnificPopupInit from './utils/popup';
@@ -27,9 +27,10 @@ fullHeightViewportCalculation();
 hashLinkScroll();
 eventTracking();
 executeMaps();
+initRefinement();
 //animatedSections();
 //magnificPopupInit();
-//infiniteScroll();
+//infiniteScroll({callback: scriptsAsCallback});
 
 /*
  * Your code below
@@ -39,11 +40,21 @@ function runWebsiteScripts() {
     console.log('run your component scripts from runWebsiteScripts() method');
 }
 
+/*
+ *
+ * The scripts within scriptsAsCallback() will be executed dynamically as callback, 
+ * for example after infinite scroll load, after content refinement etc.
+*/
+function scriptsAsCallback() {
+    console.log('run scripts as callback');
+}
+
 runWebsiteScripts();
 
 // method exposed in the App object
 window.App = {
     metaTags: {},
     submitForm,
-    refine
+    refine,
+    scriptsAsCallback
 };

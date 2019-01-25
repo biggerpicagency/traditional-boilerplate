@@ -50,12 +50,12 @@
     -->
 
     <!-- Preloading -->
-    <link rel="preload" as="style" href="styles/main.css?v=1548339277813">
-    <link rel="preload" as="script" href="scripts/vendor.js?v=1548339277813">
-    <link rel="preload" as="script" href="scripts/app.js?v=1548339277813">
+    <link rel="preload" as="style" href="styles/main.css?v=1548434625683">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=1548434625683">
+    <link rel="preload" as="script" href="scripts/app.js?v=1548434625683">
 
     <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=1548339277813"> 
+    <link rel="stylesheet" href="styles/main.css?v=1548434625683"> 
 
     <script> (function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document)); </script>
 </head>
@@ -72,7 +72,7 @@
                         name="category" 
                         data-filter-type="category" 
                         data-filter-category="/refinement-demo.html"
-                        onchange="javascript:App.refine({type: 'category', url: this.value});">
+                        onchange="javascript:App.refine({type: 'category', url: this.value, callback: App.scriptsAsCallback});">
                         <option value="/refinement-demo-category.html">Category</option>
                         <option value="/refinement-demo-category.html">Category 1</option>
                         <option value="/refinement-demo-category.html">Category 2</option>
@@ -81,7 +81,10 @@
                 </div>
 
                 <div class="col-6">
-                    <select name="label" data-filter-type="label">
+                    <select 
+                        name="label" 
+                        data-filter-type="label"
+                        onchange="javascript:App.refine({type: 'label', url: this.value, callback: App.scriptsAsCallback});">
                         <option value="/refinement-demo.html">Label</option>
                         <option value="/refinement-demo.html">Label 1</option>
                         <option value="/refinement-demo.html">Label 2</option>
@@ -106,8 +109,8 @@
         </div>
     </div>
 
-    <script defer src="scripts/vendor.js?v=1548339277813"></script>
-    <script defer src="scripts/app.js?v=1548339277813"></script>
+    <script defer src="scripts/vendor.js?v=1548434625683"></script>
+    <script defer src="scripts/app.js?v=1548434625683"></script>
 
 </body>
 </html>

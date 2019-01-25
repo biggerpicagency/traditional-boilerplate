@@ -72,7 +72,7 @@
                         name="category" 
                         data-filter-type="category" 
                         data-filter-category="/refinement-demo.html"
-                        onchange="javascript:App.refine({type: 'category', url: this.value});">
+                        onchange="javascript:App.refine({type: 'category', url: this.value, callback: App.scriptsAsCallback});">
                         <option value="/refinement-demo-category.html">Category</option>
                         <option value="/refinement-demo-category.html">Category 1</option>
                         <option value="/refinement-demo-category.html">Category 2</option>
@@ -84,7 +84,7 @@
                     <select 
                         name="label" 
                         data-filter-type="label"
-                        onchange="javascript:App.refine({type: 'label', url: this.value});">
+                        onchange="javascript:App.refine({type: 'label', url: this.value, callback: App.scriptsAsCallback});">
                         <option value="/refinement-demo.html">Label</option>
                         <option value="/refinement-demo.html">Label 1</option>
                         <option value="/refinement-demo.html">Label 2</option>

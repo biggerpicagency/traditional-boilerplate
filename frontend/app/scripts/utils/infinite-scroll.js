@@ -2,7 +2,7 @@
 
 import 'waypoints/lib/noframework.waypoints.min.js';
 
-const infiniteScroll = (callback) => {
+const infiniteScroll = ({callback}) => {
     let infinite;
     const infiniteWrapper = document.querySelector('#js-infinity-wrapper');
 
@@ -10,6 +10,7 @@ const infiniteScroll = (callback) => {
         infinite = new Waypoint.Infinite({
             element: infiniteWrapper,
             onAfterPageLoad: function() {
+                // run scripts from callback if exists
                 if (callback) {
                     callback();
                 }

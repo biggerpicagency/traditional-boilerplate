@@ -2,6 +2,7 @@
 
 import { trackVisit } from './track-event';
 
+let pushStateCounter = 0;
 const getCurrentCategorySlug = () => {
     return document.querySelector('[data-filter-category]').getAttribute('data-filter-category');
 };
@@ -20,7 +21,7 @@ const adjustParamsInUrl = ({url}) => {
     return url + Math.random();
 };
 
-const loadContent = ({url}) => {
+const loadContent = ({url, callback}) => {
     let loadingLayer = document.querySelector('.loading');
     loadingLayer.classList.add('loading--active');
 
@@ -60,6 +61,11 @@ const loadContent = ({url}) => {
             } else {
                 console.error('No script specified means no dynamic title loading');
             }
+
+            // run scripts from callback if exists
+            if (callback) {
+                callback();
+            }
         } else {
             let errorMessage = document.createElement("div");
             errorMessage.classList.add('response');
@@ -75,7 +81,7 @@ const loadContent = ({url}) => {
     request.send();
 };
 
-const refine = ({type, url}) => {
+const refine = ({type, url, callback}) => {
     const categorySlug = getCurrentCategorySlug();
 
     if (type === 'label') {
@@ -84,7 +90,20 @@ const refine = ({type, url}) => {
 
     trackVisit({url});
     history.pushState({url}, null, url);
-    loadContent({url});
+    pushStateCounter++;
+    loadContent({url, callback});
 };
+
+export function initRefinement() {
+    window.addEventListener('popstate', function(e) {
+        let character = e.state;
+
+        if (character && character.url) {
+            loadContent({url: character.url, callback: App.scriptsAsCallback});
+        } else if (character === null) {
+            location.reload();
+        }
+    });
+}
 
 export default refine;
