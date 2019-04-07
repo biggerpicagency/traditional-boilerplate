@@ -65,12 +65,13 @@
     
     &--btns-on-bottom {
         [class*="col-"] {
-            padding-bottom: 100px;
-        }
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
-        .btn {
-            position: absolute;
-            bottom: 30px;
+            p:last-of-type {
+                justify-content: flex-end;
+            }
         }
     }
 }
