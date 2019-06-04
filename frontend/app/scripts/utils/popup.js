@@ -58,6 +58,21 @@ const popup = () => {
 
         return false;
     });
+
+    $('.js-ajax-popup').on('click', function (e) {
+        var self = this;
+
+        $.magnificPopup.open({
+            type: 'ajax',
+            items: {
+                src: self.getAttribute('data-href')
+            },
+            mainClass: 'mfp-fade',
+            removalDelay: 1000
+        }, 0);
+
+        return false;
+    });
 };
 
 export default popup;

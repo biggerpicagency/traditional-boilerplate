@@ -1,6 +1,6 @@
 'use strict';
 
-//import quicklink from 'quicklink/dist/quicklink.mjs';
+// import quicklink from 'quicklink/dist/quicklink.mjs';
 import 'svgxuse';
 import initServicerWorker from './sw/service-worker-registration';
 import hashLinkScroll from './utils/hash-links-scroll';
@@ -9,12 +9,16 @@ import eventTracking from './utils/track-event';
 import submitForm from './utils/form';
 import executeMaps from './utils/google-map';
 import refine, { initRefinement } from './utils/refinement';
-//import animatedSections from './utils/animated-sections';
-//import infiniteScroll from './utils/infinite-scroll';
-//import magnificPopupInit from './utils/popup';
+// import animatedSections from './utils/animated-sections';
+// import infiniteScroll from './utils/infinite-scroll';
+// import magnificPopupInit from './utils/popup';
+// import inputLabels from './utils/input-polyfill';
 
 /* Faster subsequent page-loads by prefetching in-viewport links during idle time */
-//quicklink();
+// quicklink();
+
+// import {menuScroll, menuBurger} from './components/menu';
+// import {refreshLazyLoading, isConfirmPassword} from './components/helpers';
 
 /* Register Service Worker */
 initServicerWorker();
@@ -28,9 +32,9 @@ hashLinkScroll();
 eventTracking();
 executeMaps();
 initRefinement();
-//animatedSections();
-//magnificPopupInit();
-//infiniteScroll({callback: scriptsAsCallback});
+// animatedSections();
+// magnificPopupInit();
+// infiniteScroll({callback: scriptsAsCallback});
 
 /*
  * Your code below

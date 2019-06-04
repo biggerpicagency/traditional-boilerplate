@@ -140,7 +140,11 @@ task('scripts:build', (cb) => {
     .pipe(webpackStream(streamMode, webpack))
     .pipe($.babel())
     .pipe(dest('.tmp/scripts'))
-    .pipe($.uglify({preserveComments: false}))
+    .pipe(replace(/('|")use strict\1/g, ';'))
+    .pipe($.uglify({
+      mangle: false
+    }))
+    .pipe(replace(/('|")use strict\1/g, ';'))
     .pipe($.size({title: 'scripts'}))
     .pipe(dest('dist/scripts'))
     .pipe(dest('.tmp/scripts'));
@@ -172,11 +176,10 @@ task('jsLinter', (cb) => {
   cb();
 });
 
-// Optimize images
+// Copy images to dist directory
 task('images', (cb) => {
   src('app/images/**/*')
     .pipe(dest('dist/images'))
-    .pipe($.size({title: 'images'}));
   cb();
 });
 

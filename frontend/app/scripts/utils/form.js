@@ -7,6 +7,7 @@ const submitForm = ({form, url}) => {
 
     const loadingLayer = form.querySelector('.loading');
     const submitButton = form.querySelector('button[type="submit"]');
+    const buttonTextOriginal = submitButton.textContent || submitButton.innerText;
     const displayReponse = ({elementHtml, parent}) => {
         const div = document.createElement('div');
         div.innerHTML = elementHtml;
@@ -26,7 +27,7 @@ const submitForm = ({form, url}) => {
         if (request.status >= 200 && request.status < 400) {
             let response = JSON.parse(request.response);
 
-            submitButton.textContent = 'Submit';
+            submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
     
             if (response.url) {
@@ -91,7 +92,7 @@ const submitForm = ({form, url}) => {
                 responseOk.parentNode.removeChild(responseOk);
             }
 
-            submitButton.textContent = 'Submit';
+            submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
         }
     };
