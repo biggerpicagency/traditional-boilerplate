@@ -1,5 +1,5 @@
-# Traditional Boilerplate: HTML5/Sass/Gulp/Yarn/PWA/Tests
-An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Bigger Picture](http://www.biggerpicture.agency).
+# Traditional Boilerplate: HTML5/Sass/Gulp/Webpack/Babel/PWA/Tests
+An opinionated starting point for awesome Multi-Page Applications/Websites. Created and used by the folks at [Studio Sidekicks](http://www.studiosidekicks.com).
 
 ## What is this Traditional Boilerplate for?
 This boilerplate is your first step in building a killer website. It contains necessary build processes, basic styles, and files that your website will need.
@@ -39,12 +39,6 @@ Next, install the local dependencies:
 * ```npm install```
 
 Note: if you have the [Yarn](https://yarnpkg.com/) package manager installed, you can just run `yarn`.
-Web Starter Kit includes a yarn.lock file that will be used here.
-
-* ```bower install```
-
-
-
 
 ## Watch For Changes & Automatically Refresh Across Devices
 
@@ -72,43 +66,10 @@ workers, the site will be loaded directly from the service worker cache, bypassi
 This means that this version of the site will work when the server isn't running or when there is
 no network connectivity.
 
-## Tests
-
-```sh
-$ gulp test
-```
-
-Testing javascript.
-
-
-## Performance Insights
-
-```sh
-$ gulp pagespeed
-```
-
-Runs the deployed (public) version of your site against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to help you stay on top of where you can improve.
-
-### This boilerplate and Alfred
-If frontend code of website is ready and backend development is ready to start implementing HTML layouts into Alfred, an important file that should be placed in ./resources/cmsassets is a file called [Gruntfile.alfred.js](https://bitbucket.org/snippets/snowflakers/78kk5). It allows frontend developers to edit source frontend files of Alfred in resources/cmassets/ directory.
-
 ### Directory Structure: the most important elements
-
-```
-boilerplate-traditional/
-  |- app/ (all application sources such as images, JS, Sass files & HTML)
-  |  |- images/
-  |  |- scripts/
-  |  |- styles/
-  |   - index.html
-  |- test/ (javascript tests)
-  |- vendor/ (Third-party libraries, installed by Bower)
-  |- javascripts.config.json (contains a JSON object with a list of all JS files used in app (needs to be edited manually))
-```
 
 ## The Bigger Picture Traditional Boilerplate Rules!
 * Sass support - sorry is you are a Less fan, but we think Sass is the way right now
-* you can easily inject JS files by **javascripts.config.json**
 * after successfull developing just go with ```gulp``` and deploy!
 
 By default we've added necessary files like robots.txt, basic icons (thanks to Google's Web Starter Kit), and Web Server Config in .htaccess to reach the highest performance (gzip, caching etc.).

@@ -2,7 +2,6 @@
     "curly": true,
     "debug": true,
     "eqeqeq": true,
-    "es5": true,
     "forin": true,
     "immed": true,
     "latedef": false,
@@ -36,6 +35,8 @@
         "exports":false,
         "angular":false,
         "module": true,
-        "JSON": true
+        "JSON": true,
+        "Waypoint": true,
+        "google": true
     }
 }

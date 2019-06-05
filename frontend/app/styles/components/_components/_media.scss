@@ -4,6 +4,10 @@
 *
 **/
 
+iframe {
+	border: 0;
+}
+
 img,
 video,
 object {
@@ -12,4 +16,25 @@ object {
 
 img:not([src$=".svg"]) {
     height: auto;
+}
+
+// for lazy loading
+img:not([src]) {
+    visibility: hidden;
+}
+
+// fix for IE Edge (Intersection Observer + Lazy Load reason)
+// According to what reported in #152, for Microsoft Edge to fire the IntersectionObserver for an img element, it must have a size. 
+img[data-src],
+img[data-srcset] {
+  min-height: 1px;
+}
+
+img.lazy:not(.lazy--no-fade-in) {
+    opacity: 0;
+    transition: opacity 0.4s 0.3s ease;
+}
+
+img.lazy.loaded:not(.lazy--no-fade-in) {
+    opacity: 1;
 }

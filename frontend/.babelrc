@@ -1,12 +1,8 @@
 {
-  "presets": ["es2015"],
+  "presets": ["@babel/preset-env"],
   "retainLines": true,
-  "plugins": [
-    ["transform-es2015-modules-commonjs", {
-      "allowTopLevelThis": true
-    }]
-  ],
   "ignore": [
-    "./app/scripts/vendor/svgxuse.js"
+    "./app/scripts/vendor/svgxuse.js",
+    "./node_modules/barba.js/dist/barba.min.js"
   ]
 }

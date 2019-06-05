@@ -1,8 +1,5 @@
 //==========  VARIABLES  ==========
 
-// Colors
-.color-main {color: $colorMain;}
-
 // Breakpoints
 $breakpointMobile: 768px;
 $breakpointTablet: 1024px;
@@ -117,7 +114,6 @@ $base-font-size: 16px;
 // example of use:
 // @include dynamicFontSize(16, 28, 480, 1600);
 //
-
 @mixin dynamicFontSize($minFontSize, $maxFontSize, $minWidth, $maxWidth) {
     // font-size: calc(ZZ + ((1vw - XX) * YY));
     $font_Size_Difference: $maxFontSize - $minFontSize;
@@ -151,19 +147,20 @@ $base-font-size: 16px;
 }
 
 // Inline block with vertical middle alignment
-%verticalMiddleInlineBlock {
+@mixin verticalMiddleAlignment {
     display: inline-block;
     vertical-align: middle;
 }
 
-%verticalAlignment {
+// vertical alignment using absolute positioning
+@mixin verticalAlignment {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 
 // fullscreen absolute layer
-%fullscreenLayer {
+@mixin fullscreenLayer {
     position: absolute;
     top: 0;
     left: 0;
@@ -171,4 +168,13 @@ $base-font-size: 16px;
 
     width: 100%;
     height: 100%;
+}
+
+// full height - it is dependant on CSS variables that are done in the JS (works perfectly on iOS)
+@mixin fullHeight {
+    height: 100vh;
+
+    @supports (-webkit-overflow-scrolling: touch) {
+        height: calc(var(--vh, 1vh) * 100);
+    }
 }

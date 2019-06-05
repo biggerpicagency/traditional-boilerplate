@@ -1,0 +1,17 @@
+.response {
+    border-radius: 5px;
+
+    &--success {
+        background: green;
+    }
+
+    &--error {
+        background: red;
+    }
+
+    p {
+        padding: 1em;
+        font-size: 1em;
+        color: #fff;
+    }
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html dir="ltr" lang="en-GB" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Starter Kit</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="application-name" content="Web Starter Kit">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
+
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
+    <meta property="og:description" content="Description here...">
+    <meta property="og:url" content="https://www.studiosidekicks.com">
+    <meta property="og:site_name" content="Application name">
+    <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#2F3BA2">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- Preloading -->
+    <link rel="preload" as="style" href="styles/main.css?v=1548622501930">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=1548622501930">
+    <link rel="preload" as="script" href="scripts/app.js?v=1548622501930">
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/main.css?v=1548622501930"> 
+
+    <script> (function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document)); </script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+
+    <div class="container mt-20em">
+        <h1 class="headline-1">The demo below will fully work with back-end integration only!</h1>
+        <p>Do not worry too much if something does not work as you expect. As soon as it is integrated with back-end and the correct response after refinement execution is done, it will be all fine, trust me!</p>
+        
+        <div id="js-refined-content">
+            <div class="row">
+                <div class="col-6">
+                    <select 
+                        name="category" 
+                        data-filter-type="category" 
+                        data-filter-category="/refinement-demo.html"
+                        onchange="javascript:App.refine({type: 'category', url: this.value, callback: App.scriptsAsCallback});">
+                        <option value="/refinement-demo-category.html">Category</option>
+                        <option value="/refinement-demo-category.html">Category 1</option>
+                        <option value="/refinement-demo-category.html">Category 2</option>
+                        <option value="/refinement-demo-category.html">Category 3</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <select 
+                        name="label" 
+                        data-filter-type="label"
+                        onchange="javascript:App.refine({type: 'label', url: this.value, callback: App.scriptsAsCallback});">
+                        <option value="/refinement-demo.html">Label</option>
+                        <option value="/refinement-demo.html">Label 1</option>
+                        <option value="/refinement-demo.html">Label 2</option>
+                        <option value="/refinement-demo.html">Label 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-20em">
+                <p>Sample content here. Please refine by the dropdown(s) above.</p>
+            </div>
+
+            <div class="loading"></div>
+
+            <script id="js-meta-tags">
+                window.App = window.App || {};
+                window.App.metaTags = {
+                    title: 'Some new title',
+                    description: 'Some description'
+                };
+            </script>
+        </div>
+    </div>
+
+    <script defer src="scripts/vendor.js?v=1548622501930"></script>
+    <script defer src="scripts/app.js?v=1548622501930"></script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<div id="js-refined-content">
+    <div class="row">
+        <div class="col-6">
+            <select 
+                name="category" 
+                data-filter-type="category" 
+                data-filter-category="/refinement-demo-category.html"
+                onchange="javascript:App.refine({type: 'category', url: this.value});">
+                <option value="/refinement-demo-category.html">Category</option>
+                <option value="/refinement-demo-category.html">Category 1</option>
+                <option value="/refinement-demo-category.html">Category 2</option>
+                <option value="/refinement-demo-category.html">Category 3</option>
+            </select>
+        </div>
+
+        <div class="col-6">
+            <select name="label" data-filter-type="label">
+                <option value="/refinement-demo-category.html">Label</option>
+                <option value="/refinement-demo-category.html">Label 1</option>
+                <option value="/refinement-demo-category.html">Label 2</option>
+                <option value="/refinement-demo-category.html">Label 3</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mt-20em">
+        <p>Refined content is now loaded here.</p>
+    </div>
+
+    <div class="loading"></div>
+
+    <script id="js-meta-tags">
+        window.App = window.App || {};
+        window.App.metaTags = {
+            title: 'Refined title!',
+            description: 'Some description'
+        };
+    </script>
+</div>

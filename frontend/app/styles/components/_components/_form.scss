@@ -31,7 +31,7 @@ select,
     
 .form__select, 
 select {
-    background: white url(../images/formelements-select.png) no-repeat center right;
+    //background: white url(../images/formelements-select.png) no-repeat center right;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -146,28 +146,6 @@ select {
     }
 }
 
-
-
-.form__response {
-    border-radius: 5px;
-
-
-    &--ok {
-        background: green;
-    }
-
-    &--error {
-        background: red;
-    }
-
-    p {
-        padding: 10px;
-
-        font-size: 1em !important;
-        color: #fff;
-        text-shadow: none;
-    }
-}
 
 #contact-mail {
     display: none;

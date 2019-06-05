@@ -1,5 +1,7 @@
 /*==========  COLORS  ==========*/
 // Color helper classes are next to color definitions in _utils.scss
+.color-main {color: $colorMain;}
+
 @each $colorName, $color in $colors {
     .color-#{$colorName} {
         color: $color;
@@ -18,7 +20,7 @@
 .single-word {word-spacing: 9999px; }
 .underline {text-decoration: underline; }
 
-$gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4);
+$gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4, 50: 5, 60: 6);
 
 @each $var, $size in $gapSizes {
     $value: #{$size}em;
@@ -107,3 +109,12 @@ $gapSizes: (0: 0, 5: 0.5, 10: 1, 15: 1.5, 20: 2, 25: 2.5, 30: 3, 35: 3.5, 40: 4)
  * Hide visually and from screen readers, but maintain layout
  */
 .invisible {visibility: hidden;}
+
+/*
+ * Stop scrolling (useful when the mobile menu is opened and you want to prevent scrolling on the scene behind it - in <body>)
+ */
+.stop-scrolling {
+    position: fixed; 
+    overflow-y: scroll;
+    width: 100%;
+}

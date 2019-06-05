@@ -2,33 +2,42 @@
 <html dir="ltr" lang="en" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
-    <title>Traditional Boilerplate - Bigger Picture</title>
+    <title>Traditional Boilerplate - Studio Sidekicks</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="Description here...">
     <meta name="robots" content="noindex, nofollow">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css">
-
     <link rel="icon" sizes="192x192" href="/img/touch/chrome-touch-icon-192x192.png">
     <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-precomposed.png">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico">
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="green">
-    <meta name="apple-mobile-web-app-title" content="Traditional Boilerplate - Bigger Picture">
+    <meta name="apple-mobile-web-app-title" content="Traditional Boilerplate - Studio Sidekicks">
     <meta name="msapplication-TileImage" content="/img/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#078490">
 
     <meta property="og:locale" content="en_GB">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Traditional Boilerplate - Bigger Picture">
+    <meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
     <meta property="og:description" content="Description here...">
-    <meta property="og:url" content="http://www.biggerpicture.agency">
+    <meta property="og:url" content="https://www.studiosidekicks.com">
     <meta property="og:site_name" content="Application name">
     <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Preloading -->
+    <link rel="preload" as="style" href="styles/main.css?v=@Timestamp">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=@Timestamp">
+    <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/main.css">
 
     <style>
     .theme-container {
@@ -215,176 +224,182 @@
         </ol>
         <!-- // -->
 
-           <span class="theme-headline">5. Form items</span>
-               <div class="theme-forms-section">
-                   <p>
-                       <!-- checkbox -->
-                       <input type="checkbox" id="male" class="form__checkbox"><label for="male" class="form__checkbox-label">Checkbox</label>
-                       <!-- // --> 
-                   </p>
-                   <p>
-                       <!-- checkboxes in one line -->
-                       <input type="checkbox" id="option1" class="form__checkbox"><label for="option1" class="form__checkbox-label">Inline Checkbox 1</label> 
-                       <input type="checkbox" id="option2" class="form__checkbox"><label for="option2" class="form__checkbox-label">Inline Checkbox 2</label>
-                       <!-- // -->
-                   </p>
+        <span class="theme-headline">5. Form items</span>
+        <div class="theme-forms-section">
+            <p>
+                <!-- checkbox -->
+                <input type="checkbox" id="male" class="form__checkbox"><label for="male" class="form__checkbox-label">Checkbox</label>
+                <!-- // --> 
+            </p>
+            <p>
+                <!-- checkboxes in one line -->
+                <input type="checkbox" id="option1" class="form__checkbox"><label for="option1" class="form__checkbox-label">Inline Checkbox 1</label> 
+                <input type="checkbox" id="option2" class="form__checkbox"><label for="option2" class="form__checkbox-label">Inline Checkbox 2</label>
+                <!-- // -->
+            </p>
 
-                   <hr>
+            <hr>
 
-                   <p>
-                       <!-- radio -->
-                       <input type="radio" id="female" class="form__radio"><label for="female" class="form__radio-label">Radio</label>
-                       <!-- // -->
-                   </p>
-                   <p>
-                       <!-- radios in one line -->
-                       <input type="radio" id="option3" name="radio-group" class="form__radio"><label for="option3" class="form__radio-label">Inline Radio 1</label> 
-                       <input type="radio" id="option4" name="radio-group" class="form__radio"><label for="option4" class="form__radio-label">Inline Radio 2</label>
-                       <!-- // -->
-                   </p>
+            <p>
+                <!-- radio -->
+                <input type="radio" id="female" class="form__radio"><label for="female" class="form__radio-label">Radio</label>
+                <!-- // -->
+            </p>
+            <p>
+                <!-- radios in one line -->
+                <input type="radio" id="option3" name="radio-group" class="form__radio"><label for="option3" class="form__radio-label">Inline Radio 1</label> 
+                <input type="radio" id="option4" name="radio-group" class="form__radio"><label for="option4" class="form__radio-label">Inline Radio 2</label>
+                <!-- // -->
+            </p>
 
-                   <hr>
+            <hr>
 
-                   <!-- select -->
-                   <div class="form__select">
-                       <select name="select" id="select">
-                           <option value="1">Option 1</option>
-                           <option value="2">Option 2</option>
-                           <option value="3">Option 3</option>
-                           <option value="4">Option 4</option>
-                           <option value="5">Option 5</option>
-                       </select>
-                   </div>
-                   <!-- // -->
+            <!-- select -->
+            <div class="form__select">
+                <select name="select" id="select">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                </select>
+            </div>
+            <!-- // -->
 
-                   <hr>
+            <hr>
 
-                   <p>
-                       <!-- normal input -->
-                       <input type="text" name="input-text" class="form__input" placeholder="Text input">
-                       <!-- // -->
-                   </p>
+            <p>
+                <!-- normal input -->
+                <input type="text" name="input-text" class="form__input" placeholder="Text input">
+                <!-- // -->
+            </p>
 
-                   <hr>
+            <hr>
 
-                   <p>
-                       <!-- textarea -->
-                       <textarea name="textarea" class="form__textarea" placeholder="Textarea"></textarea>
-                       <!-- // -->
-                   </p>
+            <p>
+                <!-- textarea -->
+                <textarea name="textarea" class="form__textarea" placeholder="Textarea"></textarea>
+                <!-- // -->
+            </p>
 
-                   <hr>
-                   <p>
-                       <!-- label + input -->
-                       <label for="input-text2" class="form__label">Label</label>
-                       <input type="text" name="input-text2" id="input-text2" class="form__input" placeholder="Text input and the label above">
-                       <!-- // -->
-                   </p>
-                   <p>
-                       <!-- label + radios in one line below -->
-                       <label class="form__label">Your gender (label)</label>
-                       <input type="radio" id="option5" name="radio-group" class="form__radio" checked><label for="option5" class="form__radio-label">Male</label> 
-                       <input type="radio" id="option6" name="radio-group" class="form__radio"><label for="option6" class="form__radio-label">Female</label>
-                   </p>
+            <hr>
+            <p>
+                <!-- label + input -->
+                <label for="input-text2" class="form__label">Label</label>
+                <input type="text" name="input-text2" id="input-text2" class="form__input" placeholder="Text input and the label above">
+                <!-- // -->
+            </p>
+            <p>
+                <!-- label + radios in one line below -->
+                <label class="form__label">Your gender (label)</label>
+                <input type="radio" id="option5" name="radio-group" class="form__radio" checked><label for="option5" class="form__radio-label">Male</label> 
+                <input type="radio" id="option6" name="radio-group" class="form__radio"><label for="option6" class="form__radio-label">Female</label>
+            </p>
 
-                   <hr>
+            <hr>
 
-                   <!-- response with OK status -->
-                   <div class="form__response form__response--ok">
-                       <p>
-                           The message has been sent successfully.
-                       </p>
-                   </div>
-                   <!-- // -->
+            <!-- response with OK status -->
+            <div class="response response--success">
+                <p>
+                    The message has been sent successfully.
+                </p>
+            </div>
+            <!-- // -->
 
-                   <!-- response with ERROR status -->
-                   <div class="form__response form__response--error">
-                       <p>
-                           Fill all the required fields below.
-                       </p>
-                   </div>
-                   <!-- // -->
+            <!-- response with ERROR status -->
+            <div class="response response--error">
+                <p>
+                    Fill all the required fields below.
+                </p>
+            </div>
+            <!-- // -->
 
-                   <!-- form row -->
-                   <div class="form__row">
-                       <!-- left column in the form row -->
-                       <div class="form__row__left">
-                           <label class="form__label" for="example-1">Label 1:</label>
-                       </div>
-                       <!-- // -->
+            <h3>Form (XHR request)</h3>
 
-                       <!-- right column in the form row -->
-                       <div class="form__row__right">
-                           <input type="text" class="form__input" id="example-1">
-                       </div>
-                       <!-- // -->
-                   </div>
-                   <!-- // -->
+            <form id="form-id" class="form" onsubmit="return App.submitForm({form: this, url: '/some-url-to-api'});">
+                <!-- form row -->
+                <div class="form__row">
+                    <!-- left column in the form row -->
+                    <div class="form__row__left">
+                        <label class="form__label" for="example-form-1">Label 1:</label>
+                    </div>
+                    <!-- // -->
 
-                   <!-- form row -->
-                   <div class="form__row">
-                       <!-- left column in the form row -->
-                       <div class="form__row__left">
-                           <label class="form__label" for="example-2">Label 2:</label>
-                       </div>
-                       <!-- // -->
+                    <!-- right column in the form row -->
+                    <div class="form__row__right">
+                        <input type="text" class="form__input" id="example-form-1">
+                    </div>
+                    <!-- // -->
+                </div>
+                <!-- // -->
 
-                       <!-- right column in the form row -->
-                       <div class="form__row__right">
-                           <div class="form__select">
-                               <select name="select" id="example-2">
-                                   <option value="1">Option 1</option>
-                                   <option value="2">Option 2</option>
-                                   <option value="3">Option 3</option>
-                                   <option value="4">Option 4</option>
-                                   <option value="5">Option 5</option>
-                               </select>
-                           </div>
-                       </div>
-                       <!-- // -->
-                   </div>
-                   <!-- // -->
+                <!-- form row -->
+                <div class="form__row">
+                    <!-- left column in the form row -->
+                    <div class="form__row__left">
+                        <label class="form__label" for="example-form-2">Label 2:</label>
+                    </div>
+                <!-- // -->
 
-                   <!-- form row -->
-                   <div class="form__row">
-                       <!-- left column in the form row -->
-                       <div class="form__row__left">
-                           <label class="form__label">Label 3:</label>
-                       </div>
-                       <!-- // -->
+                <!-- right column in the form row -->
+                    <div class="form__row__right">
+                        <div class="form__select">
+                            <select name="select" id="example-form-2">
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                                <option value="5">Option 5</option>
+                            </select>
+                        </div>
+                    </div>
+                <!-- // -->
+                </div>
+                <!-- // -->
 
-                       <!-- right column in the form row -->
-                       <div class="form__row__right">
-                           <input type="checkbox" id="option8" class="form__checkbox"><label for="option8" class="form__checkbox-label">Inline Checkbox 1</label> 
-                           <input type="checkbox" id="option9" class="form__checkbox"><label for="option9" class="form__checkbox-label">Inline Checkbox 2</label> 
-                       </div>
-                       <!-- // -->
-                   </div>
-                   <!-- // -->
+                <!-- form row -->
+                <div class="form__row">
+                <!-- left column in the form row -->
+                    <div class="form__row__left">
+                        <label class="form__label">Label 3:</label>
+                    </div>
+                <!-- // -->
 
-                   <!-- form row -->
-                   <div class="form__row">
-                       <!-- left column in the form row -->
-                       <div class="form__row__left">
-                           <label class="form__label" for="example-4">Label 4:</label>
-                       </div>
-                       <!-- // -->
+                <!-- right column in the form row -->
+                    <div class="form__row__right">
+                        <input type="checkbox" id="option8" name="example-form-3" class="form__checkbox"><label for="option8" class="form__checkbox-label">Inline Checkbox 1</label> 
+                        <input type="checkbox" id="option9" name="example-form-4" class="form__checkbox"><label for="option9" class="form__checkbox-label">Inline Checkbox 2</label> 
+                    </div>
+                <!-- // -->
+                </div>
+                <!-- // -->
 
-                       <!-- right column in the form row -->
-                       <div class="form__row__right">
-                           <textarea name="textarea" id="example-4" class="form__textarea" placeholder="Textarea" required></textarea>
-                       </div>
-                       <!-- // -->
-                   </div>
-                   <!-- // -->
+                <!-- form row -->
+                <div class="form__row">
+                <!-- left column in the form row -->
+                    <div class="form__row__left">
+                        <label class="form__label" for="example-4">Label 4:</label>
+                    </div>
+                <!-- // -->
 
-                   <!-- form row -->
-                   <div class="form__row text-align-right">
-                       <button class="btn btn--red">Send</button>
-                   </div>
-               </div>
+                <!-- right column in the form row -->
+                    <div class="form__row__right">
+                        <textarea name="textarea" id="example-form-5" name="example-form-5" class="form__textarea" placeholder="Textarea" required></textarea>
+                    </div>
+                <!-- // -->
+                </div>
+                <!-- // -->
 
-           <span class="theme-headline">6. Grid (default)</span>
+                <!-- form row -->
+                <div class="form__row text-align-right">
+                    <button class="btn btn--black" type="submit">Send</button>
+                </div>
+
+                <div class="loading"></div>
+            </form>
+        </div>
+
+        <span class="theme-headline">6. Grid (default)</span>
         <p><strong>Basic Example (Bootstrap 4.0):</strong></p>
         <pre>
         &lt;div class="row"&gt;
@@ -562,7 +577,12 @@
         <ul class="social-media">
             <li class="social-media__item">
                 <a class="social-media__link" href="">
-                    <!-- ICON HERE <svg class="social-media__icon"...> -->
+                    <svg width="50px" height="50px">
+                        <use 
+                            xmlns:xlink="http://www.w3.org/1999/xlink" 
+                            href="/images/icons.svg#icon-social-twitter">
+                        </use>
+                    </svg>
                 </a>
             </li>
         </ul>
@@ -573,7 +593,7 @@
             after "section" class, you can add padding options - for example section--p-small-top, section--p-none-bottom etc.;
             you can add bg classes too (solid color) - if you want an image/video background, please use bg-media component below;
         -->
-        <section class="section">
+        <section class="section color-white">
 
             <div 
                 class="bg-media bg-media--image bg-media--cover overlay overlay--red" 
@@ -590,14 +610,14 @@
             -->
 
             <!-- "container-narrow" class can be changed to other container size classes -->
-            <div class="section__header container-narrow content content--small-text color-white text-center">
+            <div class="section__header container-narrow content content--small-text text-center">
                 <h2 class="headline-1">Section 100%</h2>
                 <p>
                     <b>This is section header.</b> Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
                 </p>
             </div>
 
-            <div class="section__content container content color-white">
+            <div class="section__content container content">
                 <p>
                     Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. 
                 </p>
@@ -930,13 +950,13 @@
                 </p>
             </div>
         </section>
-  </div>
 
-    <!-- build:js scripts/main.min.js -->
-    <!-- <script src="scripts/main.min.js"></script> -->
-    <!-- endbuild -->
+        <span class="theme-headline">13. Maps</span>
+        <div class="js-map" data-latitude="52.229676" data-longitude="21.012229" style="width: 800px; height: 600px;"></div>
+    </div>
 
-    @BodyJS
+    <script defer src="scripts/vendor.js?v=@Timestamp"></script>
+    <script defer src="scripts/app.js?v=@Timestamp"></script>
 
 </body>
 </html>
