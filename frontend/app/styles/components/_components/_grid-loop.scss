@@ -1,0 +1,243 @@
+/**
+*
+* Grid (Bootstrap 4.0 grid)
+*
+**/
+
+$gutters: (20, 30, 40, 50);
+
+//grid breakpoints
+$breakpoints_names: ('default': 0px, 'sm': 576px, 'md': 768px, 'lg': 992px, 'xl': 1200px);
+
+//how many colummn do you want in your grid
+$grid-column-count: 12;
+
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    @each $gutter in $gutters {
+        &--g-#{$gutter} {
+            margin: {
+                left: -$gutter * 1px;
+                right: -$gutter * 1px;
+            }
+
+            > [class*="col-"] {
+                padding: {
+                left: $gutter * 1px;
+                right: $gutter * 1px;
+                bottom: $gutter * 1px;
+                }
+            }
+        }
+    }
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+@for $number from 1 through $grid-column-count {
+    $calculatedWidth: percentage($number/$grid-column-count);
+
+    .col-#{$number} {
+        position: relative;
+        min-height: 1px;
+        max-width: #{$calculatedWidth};
+        flex: 0 0 #{$calculatedWidth};
+    }
+
+    .order-#{$number} {
+        order: #{$number};
+    }
+
+    .offset-#{$number} {
+        margin-left: #{$calculatedWidth};
+    }
+
+}
+
+
+
+
+
+@each $name, $bp_size in $breakpoints_names {
+    @media screen and (min-width:  $bp_size) {
+        @for $number from 1 through $grid-column-count {
+            $calculatedWidth: percentage($number/$grid-column-count);
+
+            @if $name == 'default' {
+                .col-#{$number} {
+                    position: relative;
+                    min-height: 1px;
+                    max-width: #{$calculatedWidth};
+                    flex: 0 0 #{$calculatedWidth};
+                }
+
+                .order-#{$number} {
+                    order: #{$number};
+                }
+
+                .offset-#{$number} {
+                    margin-left: #{$calculatedWidth};
+                }
+
+            } @else {
+                .col-#{$name}-#{$number} {
+                    position: relative;
+                    min-height: 1px;
+                    max-width: #{$calculatedWidth};
+                    flex: 0 0 #{$calculatedWidth};
+                }
+
+                .order-#{$name}-#{$number} {
+                    order: #{$number};
+                }
+
+                .offset-#{$name}-#{$number} {
+                    margin-left: #{$calculatedWidth};
+                }
+            }
+
+            @if $name != 'default' {
+                .col-#{$name}-#{$number} {
+                    position: relative;
+                    min-height: 1px;
+                    max-width: #{$calculatedWidth};
+                    flex: 0 0 #{$calculatedWidth};
+                }
+
+                .order-#{$name}-#{$number} {
+                    order: #{$number};
+                }
+
+                .offset-#{$name}-#{$number} {
+                    margin-left: #{$calculatedWidth};
+                }
+
+            }
+
+        }
+
+        .col-#{$name} {
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-#{$name}-auto {
+            flex: 0 0 auto;
+            width: auto;
+            max-width: none;
+        }
+
+        .col-#{$name}-five {
+            flex: 0 0 20%;
+            max-width: 20%;
+        }
+        
+        .order-#{$name}-first {
+            order: -1;
+        }
+
+        .order-#{$name}-last {
+            order: #{$grid-column-count + 1};
+        }
+        .order-#{$name}-0 {
+            order: 0;
+        }
+
+        .offset-#{$name}-0 {
+            margin-left: 0;
+        }
+
+        .offset-#{$name}-five {
+            margin-left: 20%;
+        }
+
+
+
+
+        .d-#{$name}-none {
+            display: none !important;
+        }
+        .d-#{$name}-inline {
+            display: inline !important;
+        }
+        .d-#{$name}-inline-block {
+            display: inline-block !important;
+        }
+        .d-#{$name}-block {
+            display: block !important;
+        }
+        .d-#{$name}-table {
+            display: table !important;
+        }
+        .d-#{$name}-table-row {
+            display: table-row !important;
+        }
+        .d-#{$name}-table-cell {
+            display: table-cell !important;
+        }
+        .d-#{$name}-flex {
+            display: flex !important;
+        }
+        .d-#{$name}-inline-flex {
+            display: inline-flex !important;
+        }
+    }
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-inline {
+    display: inline !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-table {
+    display: table !important;
+}
+
+.d-table-row {
+    display: table-row !important;
+}
+
+.d-table-cell {
+    display: table-cell !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-inline-flex {
+    display: inline-flex !important;
+}
+
+
+
