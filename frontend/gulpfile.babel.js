@@ -340,8 +340,7 @@ task('write-service-worker', (cb) => {
       // Add/remove glob patterns to match your directory setup.
       `${rootDir}/images/!(tmp)/**/*`,
       `${rootDir}/scripts/**/*.js`,
-      `${rootDir}/styles/**/*.css`,
-      `${rootDir}/*.html`
+      `${rootDir}/styles/**/*.css`
     ],
     // Translates a static file path to the relative URL that it's served from.
     // This is '/' rather than path.sep because the paths returned from
