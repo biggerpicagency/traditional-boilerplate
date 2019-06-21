@@ -23,6 +23,7 @@ const submitForm = ({form, url}) => {
 
     request.open('POST', url, true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
             let response = JSON.parse(request.response);
