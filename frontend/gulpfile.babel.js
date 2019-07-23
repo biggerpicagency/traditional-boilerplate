@@ -235,7 +235,8 @@ task('styles', (cb) => {
     // Concatenate and minify styles
     .pipe($.if('*.css', $.cssnano({
       autoprefixer: {browsers: AUTOPREFIXER_BROWSERS, add: true},
-      reduceIdents: false
+      reduceIdents: false,
+      zindex: false
     })))
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
