@@ -53,7 +53,7 @@ const submitForm = ({form, url}) => {
                 errorResponse.parentNode.removeChild(errorResponse);
             }
 
-            form.reset();
+            resetForm(form);
 
         } else {
             let errorMessage = '';
@@ -102,6 +102,15 @@ const submitForm = ({form, url}) => {
     request.send(data);
 
     return false;
+};
+
+const resetForm = (form) => {
+    form.reset();
+
+    let allFormInputs = form.querySelectorAll('.filled');
+    [].forEach.call(allFormInputs, function (singleFormInput) {
+        singleFormInput.classList.remove('filled');
+    });
 };
 
 export default submitForm;
