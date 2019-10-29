@@ -64,9 +64,11 @@ const submitForm = ({form, url}) => {
             }
 
             if (request.status === 422) {
-                for (var field in response) {
-                    if (response.hasOwnProperty(field)) {
-                        errorMessage += response[ field ].join('<br>') + '<br>';
+                let errors = response.errors;
+                
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field) && errors[ field ].length) {
+                        errorMessage += errors[ field ].join('<br>') + '<br>';
                     }
                 }
             } else if (request.status === 404) {
