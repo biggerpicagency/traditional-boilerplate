@@ -20,7 +20,7 @@ const getValidationFormsList = () => {
 };
 
 const trackFormSubmission = ({status, eventName, eventCategoryName, conversionId, conversionLabel}) => {
-    if (window['dataLayer'] === undefined) {
+    if (window.dataLayer === undefined) {
         return;
     }
 
@@ -62,7 +62,7 @@ const initValidation = () => {
     });
 };
 
-const submitForm = ({form, url}) => {
+const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conversionLabel}) => {
     const isFormData = form.formData ? true : false;
     let data = isFormData ? form.formData : new FormData(form);
 
@@ -109,7 +109,7 @@ const submitForm = ({form, url}) => {
             submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
 
-            // trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
+            trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
     
             if (response.url) {
                 window.location.href = response.url;
@@ -144,9 +144,11 @@ const submitForm = ({form, url}) => {
             }
 
             if (request.status === 422) {
-                for (var field in response) {
-                    if (response.hasOwnProperty(field)) {
-                        errorMessage += response[ field ].join('<br>') + '<br>';
+                let errors = response.errors;
+                
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field) && errors[ field ].length) {
+                        errorMessage += errors[ field ].join('<br>') + '<br>';
                     }
                 }
             } else if (request.status === 404) {
@@ -176,7 +178,7 @@ const submitForm = ({form, url}) => {
             submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
 
-            // trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
+            trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
         }
     };
 

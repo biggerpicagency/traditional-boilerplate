@@ -7,8 +7,7 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
             callback.call(thisArg, this[i], i, this);
         }
     };
-};
-
+}
 
 if (!Array.from) {
     Array.from = (function () {
@@ -41,7 +40,7 @@ if (!Array.from) {
             var items = Object(arrayLike);
 
             // 3. ReturnIfAbrupt(items).
-            if (arrayLike == null) {
+            if (arrayLike === null) {
                 throw new TypeError("Array.from requires an array-like object - not null or undefined");
             }
 
@@ -89,4 +88,4 @@ if (!Array.from) {
             return A;
         };
     }());
-};
+}

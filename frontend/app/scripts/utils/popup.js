@@ -1,12 +1,10 @@
 'use strict';
 
-import GLightbox from 'glightbox'
+import GLightbox from 'glightbox';
 
-const popup = () => {
-    const elements = GLightbox({
-        selector: 'js-popup',
-        autoplayVideos: true
-    });
-};
+const popup = () => new GLightbox({
+    selector: 'js-popup',
+    autoplayVideos: true
+});
 
 export default popup;

@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["images/icons/social-twitter.svg","8d07a0931dc72289c39bfaec7d306bf9"],["images/touch/apple-touch-icon.png","7326f54bfe6776293f08b34c3a5fde7b"],["images/touch/chrome-touch-icon-192x192.png","571f134f59f14a6d298ddd66c015b293"],["images/touch/icon-128x128.png","7c46d686765c49b813ac5eb34fabf712"],["images/touch/icon-512x512.png","37e1c9b30cf323d3f11de45ff2bc8c11"],["scripts/app.js","23eed734c151a3b75dae69b1ca1dbaaf"],["scripts/lazyloadIntersectionObserver.js","fe27c33d751b2850252e9f8af80922b9"],["scripts/lazyloadPolyfill.js","902b036f247e097a07bc19845b6ae4e8"],["scripts/sw/runtime-caching.js","e3b4e14ed377b18b2f7c18077f1af61f"],["scripts/sw/sw-toolbox.js","2770efb889cc10c4de88d0b746c2a13c"],["styles/low-priority-styles.css","f7f736a5124ab3fc89905dacb0392d2b"],["styles/main.css","6ab1e2acd9d38435d4f3121e1d8a9200"]];
+var precacheConfig = [["images/icons/social-twitter.svg","8d07a0931dc72289c39bfaec7d306bf9"],["images/touch/apple-touch-icon.png","7326f54bfe6776293f08b34c3a5fde7b"],["images/touch/chrome-touch-icon-192x192.png","571f134f59f14a6d298ddd66c015b293"],["images/touch/icon-128x128.png","7c46d686765c49b813ac5eb34fabf712"],["images/touch/icon-512x512.png","37e1c9b30cf323d3f11de45ff2bc8c11"],["scripts/sw/runtime-caching.js","e3b4e14ed377b18b2f7c18077f1af61f"],["scripts/sw/sw-toolbox.js","2770efb889cc10c4de88d0b746c2a13c"],["styles/low-priority-styles.css","f7f736a5124ab3fc89905dacb0392d2b"],["styles/main.css","6ab1e2acd9d38435d4f3121e1d8a9200"]];
 var cacheName = 'sw-precache-v3-web-starter-kit-' + (self.registration ? self.registration.scope : '');
 
 
