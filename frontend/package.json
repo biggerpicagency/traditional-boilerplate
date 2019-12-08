@@ -44,10 +44,9 @@
   },
   "private": true,
   "dependencies": {
-    "jquery": "^3.3.1",
-    "jquery-match-height": "^0.7.2",
-    "magnific-popup": "^1.1.0",
-    "owl.carousel": "^2.3.4",
+    "animated-scroll-to": "^2.0.5",
+    "glightbox": "^2.0.5",
+    "pristinejs": "^0.1.6",
     "quicklink": "^1.0.0",
     "svgxuse": "^1.2.6",
     "waypoints": "^4.0.1"

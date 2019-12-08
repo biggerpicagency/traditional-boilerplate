@@ -10,6 +10,11 @@
     fieldset {
         @include clearfix();
     }
+
+    &__error {
+        font-size: rem(12px);
+        color: $colorRed;
+    }
 }
 
 
@@ -38,7 +43,6 @@ select {
 select {
     line-height: 1;
 }
-
 
 // Inputs & textareas
 .form__input, 
@@ -116,7 +120,6 @@ select {
     }
 }
 
-
 // Label above the field
 .form__label {
     display: block;
@@ -124,29 +127,25 @@ select {
     line-height: 2;
 }
 
-
 .form__row {
-    display: table;
     width: 100%;
-    clear:both;
+    clear: both;
     padding: 6px 0;
 
-    &__left,
-    &__right {
-        display: table-cell;
-        vertical-align: top;
+    @media (min-width: 568px) {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        > * {
+            flex-basis: 0;
+            flex-grow: 1;
+            margin-right: 20px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
     }
-
-    &__left {
-        width: 200px;
-    }
-
-    &__right {
-        width: 70%;
-    }
-}
-
-
-#contact-mail {
-    display: none;
 }

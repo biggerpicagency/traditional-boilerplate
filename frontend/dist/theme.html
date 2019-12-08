@@ -12,6 +12,10 @@
     <link rel="icon" sizes="192x192" href="/img/touch/chrome-touch-icon-192x192.png">
     <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-precomposed.png">
 
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico">
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="green">
@@ -28,12 +32,12 @@
     <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
 
     <!-- Preloading -->
-    <link rel="preload" as="style" href="styles/main.css?v=1548622501930">
-    <link rel="preload" as="script" href="scripts/vendor.js?v=1548622501930">
-    <link rel="preload" as="script" href="scripts/app.js?v=1548622501930">
+    <link rel="preload" as="style" href="styles/main.css?v=1575832330401">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=1575832330401">
+    <link rel="preload" as="script" href="scripts/app.js?v=1575832330401">
 
     <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=1575832330401">
 
     <style>
     .theme-container {
@@ -98,7 +102,7 @@
 
         <span class="theme-headline">2. Buttons</span>
         <p>
-            <a class="btn btn--big btn--black" href="#">Big button, black</a>
+            <a class="btn btn--big btn--black js-popup" href="https://biati-digital.github.io/glightbox/">Big button, black</a>
         </p>
 
         <p>
@@ -316,13 +320,13 @@
                 <!-- form row -->
                 <div class="form__row">
                     <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-form-1">Label 1:</label>
                     </div>
                     <!-- // -->
 
                     <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <input type="text" class="form__input" id="example-form-1">
                     </div>
                     <!-- // -->
@@ -332,13 +336,13 @@
                 <!-- form row -->
                 <div class="form__row">
                     <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-form-2">Label 2:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <div class="form__select">
                             <select name="select" id="example-form-2">
                                 <option value="1">Option 1</option>
@@ -356,13 +360,13 @@
                 <!-- form row -->
                 <div class="form__row">
                 <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label">Label 3:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <input type="checkbox" id="option8" name="example-form-3" class="form__checkbox"><label for="option8" class="form__checkbox-label">Inline Checkbox 1</label> 
                         <input type="checkbox" id="option9" name="example-form-4" class="form__checkbox"><label for="option9" class="form__checkbox-label">Inline Checkbox 2</label> 
                     </div>
@@ -373,13 +377,13 @@
                 <!-- form row -->
                 <div class="form__row">
                 <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-4">Label 4:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <textarea name="textarea" id="example-form-5" name="example-form-5" class="form__textarea" placeholder="Textarea" required></textarea>
                     </div>
                 <!-- // -->
@@ -387,7 +391,7 @@
                 <!-- // -->
 
                 <!-- form row -->
-                <div class="form__row text-align-right">
+                <div class="form__row text-right">
                     <button class="btn btn--black" type="submit">Send</button>
                 </div>
 
@@ -951,8 +955,9 @@
         <div class="js-map" data-latitude="52.229676" data-longitude="21.012229" style="width: 800px; height: 600px;"></div>
     </div>
 
-    <script defer src="scripts/vendor.js?v=1548622501930"></script>
-    <script defer src="scripts/app.js?v=1548622501930"></script>
+    <script src="scripts/vendor.js?v=1575832330401"></script>
+    <script src="scripts/app.js?v=1575832330401"></script>
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=1575832330401" media="none" onload="if(media!='all')media='all'">
 
 </body>
 </html>

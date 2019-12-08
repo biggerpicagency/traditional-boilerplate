@@ -1,10 +1,88 @@
 'use strict';
 
-import $ from 'jquery';
+import Pristine from 'pristinejs';
+
+let validationFormsList = [];
+
+const addToValidationFormsList = (form) => {
+    validationFormsList.push(form);
+    return validationFormsList;
+};
+
+const resetValidationFormsList = () => {
+    validationFormsList.forEach(formValidator => formValidator.destroy());
+    validationFormsList = [];
+    return validationFormsList;
+};
+
+const getValidationFormsList = () => {
+    return validationFormsList;
+};
+
+const trackFormSubmission = ({status, eventName, eventCategoryName, conversionId, conversionLabel}) => {
+    if (window['dataLayer'] === undefined) {
+        return;
+    }
+
+    window.dataLayer.push({
+        'event': eventName,
+        'event-category': eventCategoryName,
+        'form-submission-status': status
+    });
+
+    if (conversionId && conversionLabel) {
+        window.dataLayer.push({
+            'event': 'google-ads-tracking',
+            'conversion-id': conversionId,
+            'conversion-label': conversionLabel
+        });
+    }
+};
+
+const initValidation = () => {
+    
+    let forms = document.querySelectorAll('form');
+
+    let defaultConfig = {
+        // class of the parent element where the error/success class is added
+        classTo: 'form__group',
+        errorClass: 'has-danger',
+        successClass: 'has-success',
+        // class of the parent element where error text element is appended
+        errorTextParent: 'form__group',
+        // type of element to create for the error text
+        errorTextTag: 'div',
+        // class of the error text element
+        errorTextClass: 'form__error' 
+    };
+
+    [].forEach.call(forms, function(form) {
+        let pristine = new Pristine(form, defaultConfig, true);
+        addToValidationFormsList(pristine);
+    });
+};
 
 const submitForm = ({form, url}) => {
-    let data = $(form).serialize();
+    const isFormData = form.formData ? true : false;
+    let data = isFormData ? form.formData : new FormData(form);
 
+    form = form.formData ? form.formElement : form;
+    let formWithValidation = getValidationFormsList().find(validForm => validForm.form === form);
+
+    // check if the form is valid
+    let isValid = formWithValidation.validate(); // returns true or false
+
+    // let submitType = submitType || form.getAttribute('data-submit-type');
+    let submitType = form.hasAttribute('data-submit-type') ? form.getAttribute('data-submit-type') : 'NORMAL';
+    
+    if (submitType === 'FILE') {
+        return false;
+    }
+
+    if (!isValid) {
+        return false;
+    }
+    
     const loadingLayer = form.querySelector('.loading');
     const submitButton = form.querySelector('button[type="submit"]');
     const buttonTextOriginal = submitButton.textContent || submitButton.innerText;
@@ -30,6 +108,8 @@ const submitForm = ({form, url}) => {
 
             submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
+
+            // trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
     
             if (response.url) {
                 window.location.href = response.url;
@@ -64,11 +144,9 @@ const submitForm = ({form, url}) => {
             }
 
             if (request.status === 422) {
-                let errors = response.errors;
-                
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field) && errors[ field ].length) {
-                        errorMessage += errors[ field ].join('<br>') + '<br>';
+                for (var field in response) {
+                    if (response.hasOwnProperty(field)) {
+                        errorMessage += response[ field ].join('<br>') + '<br>';
                     }
                 }
             } else if (request.status === 404) {
@@ -97,13 +175,13 @@ const submitForm = ({form, url}) => {
 
             submitButton.textContent = buttonTextOriginal;
             loadingLayer.classList.remove('loading--active');
+
+            // trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
         }
     };
 
     // send the request
     request.send(data);
-
-    return false;
 };
 
 const resetForm = (form) => {
@@ -115,4 +193,4 @@ const resetForm = (form) => {
     });
 };
 
-export default submitForm;
+export {submitForm, initValidation, resetValidationFormsList};
