@@ -37,7 +37,7 @@
     <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
 
     <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=@Timestamp">
 
     <style>
     .theme-container {
@@ -320,13 +320,13 @@
                 <!-- form row -->
                 <div class="form__row">
                     <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-form-1">Label 1:</label>
                     </div>
                     <!-- // -->
 
                     <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <input type="text" class="form__input" id="example-form-1">
                     </div>
                     <!-- // -->
@@ -336,13 +336,13 @@
                 <!-- form row -->
                 <div class="form__row">
                     <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-form-2">Label 2:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <div class="form__select">
                             <select name="select" id="example-form-2">
                                 <option value="1">Option 1</option>
@@ -360,13 +360,13 @@
                 <!-- form row -->
                 <div class="form__row">
                 <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label">Label 3:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <input type="checkbox" id="option8" name="example-form-3" class="form__checkbox"><label for="option8" class="form__checkbox-label">Inline Checkbox 1</label> 
                         <input type="checkbox" id="option9" name="example-form-4" class="form__checkbox"><label for="option9" class="form__checkbox-label">Inline Checkbox 2</label> 
                     </div>
@@ -377,13 +377,13 @@
                 <!-- form row -->
                 <div class="form__row">
                 <!-- left column in the form row -->
-                    <div class="form__row__left">
+                    <div class="form__group">
                         <label class="form__label" for="example-4">Label 4:</label>
                     </div>
                 <!-- // -->
 
                 <!-- right column in the form row -->
-                    <div class="form__row__right">
+                    <div class="form__group">
                         <textarea name="textarea" id="example-form-5" name="example-form-5" class="form__textarea" placeholder="Textarea" required></textarea>
                     </div>
                 <!-- // -->
@@ -391,7 +391,7 @@
                 <!-- // -->
 
                 <!-- form row -->
-                <div class="form__row text-align-right">
+                <div class="form__row text-right">
                     <button class="btn btn--black" type="submit">Send</button>
                 </div>
 
@@ -955,8 +955,9 @@
         <div class="js-map" data-latitude="52.229676" data-longitude="21.012229" style="width: 800px; height: 600px;"></div>
     </div>
 
-    <script defer src="scripts/vendor.js?v=@Timestamp"></script>
-    <script defer src="scripts/app.js?v=@Timestamp"></script>
+    <script src="scripts/vendor.js?v=@Timestamp"></script>
+    <script src="scripts/app.js?v=@Timestamp"></script>
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=@Timestamp" media="none" onload="if(media!='all')media='all'">
 
 </body>
 </html>
