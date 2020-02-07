@@ -65,8 +65,7 @@ const trackByGoogleTagManager = ({link = null, url = null, event = 'page-visit'}
     });
 };
 
-export default eventTracking;
-export function trackVisit({url}) {
+const trackVisit = ({url}) => {
     if (TRACKING_TYPE === 'ga') {
         if (window.ga !== undefined) {
             window.ga('send', 'pageview', url);
@@ -75,3 +74,5 @@ export function trackVisit({url}) {
         trackByGoogleTagManager({url});
     }
 }
+
+export { eventTracking, trackVisit };

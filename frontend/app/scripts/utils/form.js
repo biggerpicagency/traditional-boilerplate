@@ -79,111 +79,112 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
         return false;
     }
 
-    if (!isValid) {
-        return false;
-    }
-    
-    const loadingLayer = form.querySelector('.loading');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const buttonTextOriginal = submitButton.textContent || submitButton.innerText;
-    const displayReponse = ({elementHtml, parent}) => {
-        const div = document.createElement('div');
-        div.innerHTML = elementHtml;
-        parent.insertBefore(div, parent.firstChild);
-    };
+    if (isValid) {
 
-    // show to user that something happens
-    loadingLayer.classList.add('loading--active');
-    submitButton.textContent = 'Sending...';
+        
+        const loadingLayer = form.querySelector('.loading');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const buttonTextOriginal = submitButton.textContent || submitButton.innerText;
+        const displayReponse = ({elementHtml, parent}) => {
+            const div = document.createElement('div');
+            div.innerHTML = elementHtml;
+            parent.insertBefore(div, parent.firstChild);
+        };
 
-    // init the request
-    let request = new XMLHttpRequest();
+        // show to user that something happens
+        loadingLayer.classList.add('loading--active');
+        submitButton.textContent = 'Sending...';
 
-    request.open('POST', url, true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            let response = JSON.parse(request.response);
+        // init the request
+        let request = new XMLHttpRequest();
 
-            submitButton.textContent = buttonTextOriginal;
-            loadingLayer.classList.remove('loading--active');
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                let response = JSON.parse(request.response);
 
-            trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
-    
-            if (response.url) {
-                window.location.href = response.url;
-            } else {
+                submitButton.textContent = buttonTextOriginal;
                 loadingLayer.classList.remove('loading--active');
-    
-                if (!form.querySelectorAll('.response--success').length) {
-                    displayReponse({
-                        elementHtml: `<div class="response response--success"><p>${response.message}</p></div>`,
-                        parent: form
-                    });
+
+                trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
+        
+                if (response.url) {
+                    window.location.href = response.url;
                 } else {
-                    form.querySelector('.response--success p').textContent = response.message;
-                }
-            }
-    
-            // remove error response if exists and reset the form
-            let errorResponse = form.querySelector('.response--error');
-    
-            if (errorResponse) {
-                errorResponse.parentNode.removeChild(errorResponse);
-            }
-
-            resetForm(form);
-
-        } else {
-            let errorMessage = '';
-            let response = request.response;
-
-            if (request.status !== 404) {
-                response = JSON.parse(request.response);
-            }
-
-            if (request.status === 422) {
-                let errors = response.errors;
-                
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field) && errors[ field ].length) {
-                        errorMessage += errors[ field ].join('<br>') + '<br>';
+                    loadingLayer.classList.remove('loading--active');
+        
+                    if (!form.querySelectorAll('.response--success').length) {
+                        displayReponse({
+                            elementHtml: `<div class="response response--success"><p>${response.message}</p></div>`,
+                            parent: form
+                        });
+                    } else {
+                        form.querySelector('.response--success p').textContent = response.message;
                     }
                 }
-            } else if (request.status === 404) {
-                errorMessage = 'Page not found - incorrect url.';
-            } else if (response.message) {
-                errorMessage = response.message;
-            }
-
-            if (errorMessage) {
-                if (!form.querySelectorAll('.response--error').length) {
-                    displayReponse({
-                        elementHtml: `<div class="response response--error"><p>${errorMessage}</p></div>`,
-                        parent: form
-                    });
-                } else {
-                    form.querySelector('.response--error p').textContent = errorMessage;
+        
+                // remove error response if exists and reset the form
+                let errorResponse = form.querySelector('.response--error');
+        
+                if (errorResponse) {
+                    errorResponse.parentNode.removeChild(errorResponse);
                 }
+
+                resetForm(form);
+
+            } else {
+                let errorMessage = '';
+                let response = request.response;
+
+                if (request.status !== 404) {
+                    response = JSON.parse(request.response);
+                }
+
+                if (request.status === 422) {
+                    let errors = response.errors;
+                    
+                    for (var field in errors) {
+                        if (errors.hasOwnProperty(field) && errors[ field ].length) {
+                            errorMessage += errors[ field ].join('<br>') + '<br>';
+                        }
+                    }
+                } else if (request.status === 404) {
+                    errorMessage = 'Page not found - incorrect url.';
+                } else if (response.message) {
+                    errorMessage = response.message;
+                }
+
+                if (errorMessage) {
+                    if (!form.querySelectorAll('.response--error').length) {
+                        displayReponse({
+                            elementHtml: `<div class="response response--error"><p>${errorMessage}</p></div>`,
+                            parent: form
+                        });
+                    } else {
+                        form.querySelector('.response--error p').textContent = errorMessage;
+                    }
+                }
+
+                // remove success response if exists
+                let responseOk = form.querySelector('.response--success');
+
+                if (responseOk) {
+                    responseOk.parentNode.removeChild(responseOk);
+                }
+
+                submitButton.textContent = buttonTextOriginal;
+                loadingLayer.classList.remove('loading--active');
+
+                trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
             }
+        };
 
-            // remove success response if exists
-            let responseOk = form.querySelector('.response--success');
-
-            if (responseOk) {
-                responseOk.parentNode.removeChild(responseOk);
-            }
-
-            submitButton.textContent = buttonTextOriginal;
-            loadingLayer.classList.remove('loading--active');
-
-            trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
-        }
-    };
-
-    // send the request
-    request.send(data);
+        // send the request
+        request.send(data);
+    }
+    return false;
 };
 
 const resetForm = (form) => {
