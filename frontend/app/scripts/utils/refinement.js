@@ -36,6 +36,7 @@ const loadContent = ({url, callback}) => {
 
     request.open('GET', newUrl, true);
     request.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     request.onload = function() {
         loadingLayer.classList.remove('loading--active');
         let refinedContent = document.querySelector('#js-refined-content');
