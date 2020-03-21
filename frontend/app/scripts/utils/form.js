@@ -258,9 +258,6 @@ const submitForm = ({form, url}) => {
         return false;
     }
 
-    // const loadingLayer = form.querySelector('.loading');
-    // $(form).find('.loading').fadeIn();
-
     let grecaptchaExist = false;
     let googleRecaptchaClientIdExist = false;
 
