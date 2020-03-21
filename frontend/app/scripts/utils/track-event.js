@@ -54,18 +54,27 @@ const trackByGoogleAnalytics = ({link, event}) => {
 */
 const trackByGoogleTagManager = ({link = null, url = null, event = 'page-visit'}) => {
     const gtmDataLayer = window.dataLayer || [];
+    let data = {
+        event,
+        url
+    }
+
+    if (event === 'buttonClick') {
+        data['event-tracking-category'] = link.getAttribute('data-category') ? link.getAttribute('data-category') : '';
+        data['event-tracking-action'] = link.getAttribute('data-action') ? link.getAttribute('data-action') : '';
+        data['event-tracking-label'] = link.getAttribute('data-label') ? link.getAttribute('data-label') : '';
+        data['event-tracking-value'] = link.getAttribute('data-value') ? link.getAttribute('data-value') : '';
+    }
 
     if (link) {
-        url = link.getAttribute('href');
+        data.url = link.getAttribute('href');
     }
         
-    gtmDataLayer.push({
-        'event': event,
-        'url': url
-    });
+    gtmDataLayer.push(data);
 };
 
-const trackVisit = ({url}) => {
+export default eventTracking;
+export function trackVisit({url}) {
     if (TRACKING_TYPE === 'ga') {
         if (window.ga !== undefined) {
             window.ga('send', 'pageview', url);
@@ -74,5 +83,3 @@ const trackVisit = ({url}) => {
         trackByGoogleTagManager({url});
     }
 }
-
-export { eventTracking, trackVisit };

@@ -19,15 +19,25 @@ const getValidationFormsList = () => {
     return validationFormsList;
 };
 
-const trackFormSubmission = ({status, eventName, eventCategoryName, conversionId, conversionLabel}) => {
+const trackFormSubmission = ({
+    eventName, 
+    eventCategory, 
+    eventAction, 
+    eventLabel, 
+    eventValue, 
+    conversionId, 
+    conversionLabel
+}) => {
     if (window.dataLayer === undefined) {
         return;
     }
 
     window.dataLayer.push({
         'event': eventName,
-        'event-category': eventCategoryName,
-        'form-submission-status': status
+        'event-tracking-category': eventCategory,
+        'event-tracking-action': eventAction,
+        'event-tracking-label': eventLabel,
+        'event-tracking-value': eventValue
     });
 
     if (conversionId && conversionLabel) {
@@ -39,10 +49,30 @@ const trackFormSubmission = ({status, eventName, eventCategoryName, conversionId
     }
 };
 
-const initValidation = () => {
-    
-    let forms = document.querySelectorAll('form');
+const setGoogleRecaptchaTokenInForm = (form, callback) => {
+    if (!form) {
+        return;
+    }
 
+    const recaptchaFieldElement = form.querySelector('input[name="recaptcha"]');
+
+    if (!recaptchaFieldElement) {
+        return;
+    }
+
+    grecaptcha
+        .execute(googleRecaptchaClientId, {action: 'ajax/sendForm'})
+        .then(token => {
+            recaptchaFieldElement.value = token;
+ 
+            if (callback) {
+                callback();
+            }
+        });
+};
+
+const initValidation = () => {
+    let forms = document.querySelectorAll('form');
     let defaultConfig = {
         // class of the parent element where the error/success class is added
         classTo: 'form__group',
@@ -62,7 +92,26 @@ const initValidation = () => {
     });
 };
 
-const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conversionLabel}) => {
+const sendEventTrackingFromForm = (form) => {
+    const eventCategory = form.getAttribute('data-ga-event-category');
+    const eventAction = form.getAttribute('data-ga-event-action');
+    const eventLabel = form.getAttribute('data-ga-event-label');
+    const eventValue = form.getAttribute('data-ga-event-value');
+
+    if (!eventCategory && !eventAction && !eventLabel) {
+        return;
+    }
+
+    trackFormSubmission({
+        eventName: 'contact-form-submission',
+        eventCategory, 
+        eventAction, 
+        eventLabel, 
+        eventValue
+    });
+};
+
+const sendForm = ({form, url}) => {
     const isFormData = form.formData ? true : false;
     let data = isFormData ? form.formData : new FormData(form);
 
@@ -80,7 +129,6 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
     }
 
     if (isValid) {
-
         
         const loadingLayer = form.querySelector('.loading');
         const submitButton = form.querySelector('button[type="submit"]');
@@ -99,7 +147,6 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
         let request = new XMLHttpRequest();
 
         request.open('POST', url, true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         request.onload = function() {
             if (request.status >= 200 && request.status < 400) {
@@ -108,7 +155,7 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
                 submitButton.textContent = buttonTextOriginal;
                 loadingLayer.classList.remove('loading--active');
 
-                trackFormSubmission({status: 'Successful', eventName, eventCategoryName, conversionId, conversionLabel});
+                sendEventTrackingFromForm(form);
         
                 if (response.url) {
                     window.location.href = response.url;
@@ -133,6 +180,8 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
                 }
 
                 resetForm(form);
+
+                return false;
 
             } else {
                 let errorMessage = '';
@@ -177,7 +226,7 @@ const submitForm = ({form, url, eventName, eventCategoryName, conversionId, conv
                 submitButton.textContent = buttonTextOriginal;
                 loadingLayer.classList.remove('loading--active');
 
-                trackFormSubmission({status: 'Unsuccessful - user did not fill out all fields.', eventName, eventCategoryName});
+                return false;
             }
         };
 
@@ -194,6 +243,48 @@ const resetForm = (form) => {
     [].forEach.call(allFormInputs, function (singleFormInput) {
         singleFormInput.classList.remove('filled');
     });
+};
+
+const submitForm = ({form, url}) => {
+    if (!form && !url) {
+        console.error('Form or/and form URI not specified.');
+        return false;
+    }
+
+    let formWithValidation = getValidationFormsList().find(validForm => validForm.form === form);
+    let isValid = formWithValidation.validate(); // returns true or false
+
+    if (!isValid) {
+        return false;
+    }
+
+    // const loadingLayer = form.querySelector('.loading');
+    // $(form).find('.loading').fadeIn();
+
+    let grecaptchaExist = false;
+    let googleRecaptchaClientIdExist = false;
+
+    if (typeof grecaptcha === 'undefined' || grecaptcha === null) {
+        grecaptchaExist = false;
+    } else {
+        grecaptchaExist = true;
+    }
+
+    if (typeof googleRecaptchaClientId === 'undefined' || googleRecaptchaClientId === null) {
+        googleRecaptchaClientIdExist = false;
+    } else {
+        googleRecaptchaClientIdExist = true;
+    }
+
+    if (grecaptchaExist && googleRecaptchaClientIdExist) {
+        setGoogleRecaptchaTokenInForm(form, () => {
+            sendForm({form, url});
+        });
+    } else {
+        sendForm({form, url});
+    }
+
+    return false;
 };
 
 export {submitForm, initValidation, resetValidationFormsList};
