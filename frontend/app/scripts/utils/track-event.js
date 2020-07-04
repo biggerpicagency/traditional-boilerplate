@@ -74,12 +74,28 @@ const trackByGoogleTagManager = ({link = null, url = null, event = 'page-visit'}
 };
 
 export default eventTracking;
-export function trackVisit({url}) {
+export function trackVisit({url, isFirstVisit = false}) {
     if (TRACKING_TYPE === 'ga') {
-        if (window.ga !== undefined) {
-            window.ga('send', 'pageview', url);
+        if (!window.ga) {
+            return;
         }
+
+        window.ga('send', 'pageview', url);
+
     } else {
+        if (!window.dataLayer) {
+            return;
+        }
+
+        if (isFirstVisit) {
+            window.dataLayer.push({
+                originalLocation: document.location.protocol + '//' +
+                                  document.location.hostname +
+                                  document.location.pathname +
+                                  document.location.search
+              });
+        }
+
         trackByGoogleTagManager({url});
     }
 }
