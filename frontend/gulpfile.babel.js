@@ -154,7 +154,7 @@ task('scripts:build', (cb) => {
 
 // templates - variables replacement
 task('templates', (cb) => {
-  src(['app/*.html', 'app/blocks/**/*.html'])
+  src(['app/*.html', 'app/partials/**/*.html'])
     .pipe(include({
         prefix: "@@",
         basepath: "@file"
