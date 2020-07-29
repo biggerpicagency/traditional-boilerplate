@@ -41,6 +41,7 @@ const svgmin = require('gulp-svgmin');
 const rename = require('gulp-rename');
 const jshint = require('gulp-jshint');
 const replace = require('gulp-replace');
+const include = require('gulp-file-include');
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 11',
@@ -89,7 +90,7 @@ const lazyLoadScript = String.raw`
                 var styleText = document.createTextNode(css);
                 style.appendChild(styleText);
             }
-            
+
         }
       }
     };
@@ -153,7 +154,11 @@ task('scripts:build', (cb) => {
 
 // templates - variables replacement
 task('templates', (cb) => {
-  src('app/*.html')
+  src(['app/*.html', 'app/partials/**/*.html'])
+    .pipe(include({
+        prefix: "@@",
+        basepath: "@file"
+    }))
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(replace('@LazyLoadScript', lazyLoadScript))
     .pipe(dest('.tmp/'));
@@ -198,7 +203,7 @@ task('copy:fonts-dev', (cb) => {
 });
 
 // Copy all files at the root level (app)
-task('copy', (cb) => 
+task('copy', (cb) =>
   src([
     'app/*',
     '!app/*.html'
@@ -320,7 +325,7 @@ task('svgstore', function (cb) {
 task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Copy over the scripts that are used in importScripts as part of the generate-service-worker task.
-task('copy-sw-scripts', () => 
+task('copy-sw-scripts', () =>
   src(['node_modules/sw-toolbox/sw-toolbox.js', 'app/scripts/sw/runtime-caching.js'])
     .pipe(dest('dist/scripts/sw'))
 );
@@ -371,7 +376,7 @@ task('serve', series('buildForDev', 'watch'));
 
 // Build production files, the default task
 task('default', series(
-  'clean', 
+  'clean',
   series(
     'styles',
     'html',
