@@ -28,6 +28,8 @@
 // Build setting
 const HTML_BUILD = 'default'; // options: default OR minified
 
+const templateVariables = {};
+
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
@@ -174,65 +176,59 @@ task('templates', (cb) => {
     .pipe(include({
         prefix: "@@",
         basepath: "@file",
-        context: {
-            containerList: '',
-            headlineSVGwidth: '',
-            assetType: '',
-            colContent: [],
-            columnCount: '',
-            arr: [],
-            fullHeight: '',
-            linkHover: '',
-            size: '',
-            reverse: '',
-            bottomBg: '',
-            teamMembers: [],
-            awards: [],
-            breadcrumbs: false,
-            searchForm: false,
-            accreditations: [],
-            nextIcon: false,
-            bottomPadding : true
-        }
+        context: templateVariables
     }))
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(replace('@LazyLoadScript', lazyLoadScript))
     .pipe(dest('.tmp/'));
+
   cb();
 });
 
 // templates build
 task('templates:build', (cb) => {
-  src(['dist/*.html'])
-    .pipe(replace('@Timestamp', Date.now() ))
-    .pipe(dest('dist/'));
-  cb();
-});
+  src(['app/*.html'])
+    .pipe(plumber({ errorHandler: function(err) {
+      notify.onError({
+          title: "Gulp error in " + err.plugin,
+          message:  err.toString()
+      })(err);
 
-task('copy:partials', (cb) =>
-  src([
-    'app/partials/**/*.html'
-  ], {
-    dot: true
-  })
-    .pipe(dest('dist/partials'))
-    .pipe($.size({title: 'copy:partials'}))
-);
-
-task('partials:build', (cb) => {
-    src(['dist/*'])
-      .pipe(include({
+    }}))
+    .pipe(include({
         prefix: "@@",
         basepath: "@file",
-        context: {
-            containerList: '',
-            headline: false,
-        }
-      }))
-      .pipe(replace('@Timestamp', Date.now() ))
-      .pipe(dest('dist/'));
-    cb();
-  });
+        context: templateVariables
+    }))
+    .pipe(replace('@Timestamp', Date.now() ))
+    .pipe(replace('@LazyLoadScript', lazyLoadScript))
+    .pipe(dest('dist/'));
+
+    // Minify any HTML only if minified mode enabled
+    if (HTML_BUILD === 'minified') {
+      let stream = src('app/*.html')
+        .pipe($.useref({
+          searchPath: '{.tmp,app}',
+          noAssets: true
+        }))
+        .pipe(replace('@LazyLoadScript', lazyLoadScript))
+        .pipe($.if('*.html', $.htmlmin({
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeAttributeQuotes: true,
+          removeRedundantAttributes: true,
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          removeOptionalTags: true
+        })))
+        .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
+        .pipe(dest('dist'));
+    }
+
+  cb();
+});
 
 // Lint JavaScript
 task('jsLinter', (cb) => {
@@ -339,8 +335,7 @@ task('styles:dev', (cb) => {
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
     .pipe(dest('.tmp/styles'))
-    .pipe(server.reload({stream: true}))
-    ;
+    .pipe(server.reload({stream: true}));
   cb();
 });
 
@@ -459,7 +454,7 @@ task('default', series(
   'clean',
   series(
     'styles',
-    'html',
+    //'html',
     'jsLinter',
     'scripts:build',
     'images',
@@ -467,19 +462,10 @@ task('default', series(
     'svgstore',
     'copy',
     'copy:fonts',
-    'copy:partials',
     'templates:build'
   ),
-//   series(
-//     'partials:build',
-//   ),
   'generate-service-worker'
 ));
-
-// Build production files, the default task
-task('partials', series(
-    'partials:build',
-  ));
 
 // Build and serve the output from the dist build
 task('serve:dist', parallel('default', (cb) => {
