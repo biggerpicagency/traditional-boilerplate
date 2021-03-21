@@ -3,7 +3,6 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
-    "@splidejs/splide": "^2.4.21",
     "acorn": "^6.0.4",
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.7",
