@@ -1,6 +1,6 @@
 /**
  *
- *  Based on Google Ans Global
+ *  Based on Google Web Starter Kit
  *  Improved by Studio Sidekicks
  *  (c) 2019 https://www.studiosidekicks.com
  *

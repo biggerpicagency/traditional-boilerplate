@@ -1,4 +1,4 @@
-.loading {
+div.loading:not(.lazy) {
     visibility: hidden;
     position: absolute;
     top: 0;

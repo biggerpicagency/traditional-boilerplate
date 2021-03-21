@@ -46,9 +46,9 @@
     <meta name="theme-color" content="#2F3BA2">
 
     <!-- Preloading -->
-    <link rel="preload" as="style" href="styles/main.css?v=1616333967733">
-    <link rel="preload" as="script" href="scripts/vendor.js?v=1616333967733">
-    <link rel="preload" as="script" href="scripts/app.js?v=1616333967733">
+    <link rel="preload" as="style" href="styles/main.css?v=1616336864965">
+    <link rel="preload" as="script" href="scripts/vendor.js?v=1616336864965">
+    <link rel="preload" as="script" href="scripts/app.js?v=1616336864965">
 
     <!-- Styles -->
     <!-- 
@@ -56,11 +56,11 @@
         * Belows fonts.scss contents should be embedded as <style> here, in <head> section for better web performance.
         * Remember about it when you copy this code to CMS template!
     -->
-    <link rel="stylesheet" href="styles/fonts.css?v=1616333967733">
+    <link rel="stylesheet" href="styles/fonts.css?v=1616336864965">
     <!-- // -->
 
-    <link rel="stylesheet" href="styles/main.css?v=1616333967733" />
-    <link rel="stylesheet" href="styles/low-priority-styles.css?v=1616333967733" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="styles/main.css?v=1616336864965" />
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=1616336864965" media="none" onload="if(media!='all')media='all'">
 
     <script> (function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document)); </script>
 </head>
@@ -83,8 +83,8 @@
 </footer>
 
 
-    <script src="scripts/vendor.js?v=1616333967733"></script>
-    <script src="scripts/app.js?v=1616333967733"></script>
+    <script src="scripts/vendor.js?v=1616336864965"></script>
+    <script src="scripts/app.js?v=1616336864965"></script>
 
 </body>
 </html>
