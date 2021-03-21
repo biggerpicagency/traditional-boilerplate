@@ -1,27 +1,38 @@
 <!doctype html>
-<html dir="ltr" lang="en" prefix="og: http://ogp.me/ns#">
+<html dir="ltr" lang="en-GB" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
-    <title>Traditional Boilerplate - Studio Sidekicks</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="Description here...">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Starter Kit</title>
+
     <meta name="robots" content="noindex, nofollow">
 
-    <link rel="icon" sizes="192x192" href="/img/touch/chrome-touch-icon-192x192.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-precomposed.png">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
 
     <!-- Web Application Manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="favicon.ico">
 
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="application-name" content="Web Starter Kit">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="green">
-    <meta name="apple-mobile-web-app-title" content="Traditional Boilerplate - Studio Sidekicks">
-    <meta name="msapplication-TileImage" content="/img/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#078490">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
 
     <meta property="og:locale" content="en_GB">
     <meta property="og:type" content="website">
@@ -31,13 +42,27 @@
     <meta property="og:site_name" content="Application name">
     <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
 
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#2F3BA2">
+
     <!-- Preloading -->
     <link rel="preload" as="style" href="styles/main.css?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/vendor.js?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=@Timestamp">
+    <!-- Styles -->
+    <!-- 
+        * PLEASE READ THIS COMMENT!
+        * Belows fonts.scss contents should be embedded as <style> here, in <head> section for better web performance.
+        * Remember about it when you copy this code to CMS template!
+    -->
+    <link rel="stylesheet" href="styles/fonts.css?v=@Timestamp">
+    <!-- // -->
+
+    <link rel="stylesheet" href="styles/main.css?v=@Timestamp" />
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=@Timestamp" media="none" onload="if(media!='all')media='all'">
+
+    @LazyLoadScript
 
     <style>
     .theme-container {

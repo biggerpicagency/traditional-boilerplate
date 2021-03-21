@@ -1,6 +1,6 @@
 /**
  *
- *  Based on Google Web Starter Kit
+ *  Based on Google Ans Global
  *  Improved by Studio Sidekicks
  *  (c) 2019 https://www.studiosidekicks.com
  *
@@ -42,6 +42,8 @@ const rename = require('gulp-rename');
 const jshint = require('gulp-jshint');
 const replace = require('gulp-replace');
 const include = require('gulp-file-include');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 11',
@@ -127,6 +129,13 @@ task('scripts:dev', (cb) => {
   let streamMode = require('./webpack/config.development.js');
 
   src(['./app/scripts/**/*.js'])
+    .pipe(plumber({ errorHandler: function(err) {
+      notify.onError({
+          title: "Gulp error in " + err.plugin,
+          message:  err.toString()
+      })(err);
+
+    }}))
     .pipe(webpackStream(streamMode, webpack))
     //.pipe($.babel())
     .pipe(dest('.tmp/scripts'));
@@ -155,9 +164,36 @@ task('scripts:build', (cb) => {
 // templates - variables replacement
 task('templates', (cb) => {
   src(['app/*.html', 'app/partials/**/*.html'])
+    .pipe(plumber({ errorHandler: function(err) {
+      notify.onError({
+          title: "Gulp error in " + err.plugin,
+          message:  err.toString()
+      })(err);
+
+    }}))
     .pipe(include({
         prefix: "@@",
-        basepath: "@file"
+        basepath: "@file",
+        context: {
+            containerList: '',
+            headlineSVGwidth: '',
+            assetType: '',
+            colContent: [],
+            columnCount: '',
+            arr: [],
+            fullHeight: '',
+            linkHover: '',
+            size: '',
+            reverse: '',
+            bottomBg: '',
+            teamMembers: [],
+            awards: [],
+            breadcrumbs: false,
+            searchForm: false,
+            accreditations: [],
+            nextIcon: false,
+            bottomPadding : true
+        }
     }))
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(replace('@LazyLoadScript', lazyLoadScript))
@@ -167,11 +203,36 @@ task('templates', (cb) => {
 
 // templates build
 task('templates:build', (cb) => {
-  src('dist/*.html')
+  src(['dist/*.html'])
     .pipe(replace('@Timestamp', Date.now() ))
     .pipe(dest('dist/'));
   cb();
 });
+
+task('copy:partials', (cb) =>
+  src([
+    'app/partials/**/*.html'
+  ], {
+    dot: true
+  })
+    .pipe(dest('dist/partials'))
+    .pipe($.size({title: 'copy:partials'}))
+);
+
+task('partials:build', (cb) => {
+    src(['dist/*'])
+      .pipe(include({
+        prefix: "@@",
+        basepath: "@file",
+        context: {
+            containerList: '',
+            headline: false,
+        }
+      }))
+      .pipe(replace('@Timestamp', Date.now() ))
+      .pipe(dest('dist/'));
+    cb();
+  });
 
 // Lint JavaScript
 task('jsLinter', (cb) => {
@@ -194,6 +255,20 @@ task('copy:images-dev', (cb) => {
     .pipe(dest('.tmp/images'));
   cb();
 });
+
+// Copy videos to dist directory
+task('videos', (cb) => {
+    src('app/videos/**/*')
+      .pipe(dest('dist/videos'))
+    cb();
+  });
+
+  // Copy images to .tmp folder while developing
+  task('copy:videos-dev', (cb) => {
+    src('app/videos/**/*')
+      .pipe(dest('.tmp/videos'));
+    cb();
+  });
 
 // Copy fonts to .tmp folder while developing
 task('copy:fonts-dev', (cb) => {
@@ -246,7 +321,8 @@ task('styles', (cb) => {
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
     .pipe(dest('dist/styles'))
-    .pipe(dest('.tmp/styles'));
+    .pipe(dest('.tmp/styles'))
+    ;
 
   cb();
 });
@@ -263,13 +339,14 @@ task('styles:dev', (cb) => {
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
     .pipe(dest('.tmp/styles'))
-    .pipe(server.reload({stream: true}));
+    .pipe(server.reload({stream: true}))
+    ;
   cb();
 });
 
 // Scan your HTML for assets & optimize them
 task('html', (cb) => {
-  let stream = src('app/**/*.html')
+  let stream = src('app/*.html')
     .pipe($.useref({
       searchPath: '{.tmp,app}',
       noAssets: true
@@ -346,7 +423,9 @@ task('write-service-worker', (cb) => {
       // Add/remove glob patterns to match your directory setup.
       `${rootDir}/images/!(tmp)/**/*`,
       `${rootDir}/scripts/**/*.js`,
-      `${rootDir}/styles/**/*.css`
+      `${rootDir}/styles/**/*.css`,
+      `${rootDir}/fonts/**/*.woff`,
+      `${rootDir}/fonts/**/*.woff2`
     ],
     // Translates a static file path to the relative URL that it's served from.
     // This is '/' rather than path.sep because the paths returned from
@@ -364,14 +443,15 @@ task('generate-service-worker', series('copy-sw-scripts', 'write-service-worker'
 
 // Watch files for changes & reload
 const watchStyles = () => watch(['app/styles/**/*.{scss,css}'], series('styles:dev'));
-const watchTemplates = () => watch(['app/*.html'], series('templates', reload));
+const watchTemplates = () => watch(['app/*.html', 'app/partials/**/*.html'], series('templates', reload));
 const watchScripts = () => watch(['app/scripts/**/*.js'], series('scripts:dev', reload));
 const watchImages = () => watch(['app/images/**/*', '!app/images/**/*.svg'], series('copy:images-dev', reload));
+const watchVideos = () => watch(['app/videos/**/*'], series('copy:videos-dev', reload));
 const watchIcons = () => watch(['app/images/icons/**/*'], series('svgstore', reload));
 const watchFonts = () => watch(['app/fonts/**/*'], series('copy:fonts-dev', reload));
 
-task('watch', parallel(serve, watchStyles, watchTemplates, watchScripts, watchImages, watchIcons, watchFonts));
-task('buildForDev', series('styles:dev', 'templates', 'scripts:dev', 'copy:fonts-dev', 'copy:images-dev', 'svgstore'));
+task('watch', parallel(serve, watchStyles, watchTemplates, watchScripts, watchImages, watchVideos, watchIcons, watchFonts));
+task('buildForDev', series('styles:dev', 'templates', 'scripts:dev', 'copy:fonts-dev', 'copy:images-dev', 'copy:videos-dev', 'svgstore'));
 task('serve', series('buildForDev', 'watch'));
 
 // Build production files, the default task
@@ -383,13 +463,23 @@ task('default', series(
     'jsLinter',
     'scripts:build',
     'images',
+    'videos',
     'svgstore',
     'copy',
     'copy:fonts',
-    'templates:build',
+    'copy:partials',
+    'templates:build'
   ),
+//   series(
+//     'partials:build',
+//   ),
   'generate-service-worker'
 ));
+
+// Build production files, the default task
+task('partials', series(
+    'partials:build',
+  ));
 
 // Build and serve the output from the dist build
 task('serve:dist', parallel('default', (cb) => {

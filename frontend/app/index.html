@@ -45,18 +45,22 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <!-- Preloading -->
     <link rel="preload" as="style" href="styles/main.css?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/vendor.js?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=@Timestamp">
+    <!-- Styles -->
+    <!-- 
+        * PLEASE READ THIS COMMENT!
+        * Belows fonts.scss contents should be embedded as <style> here, in <head> section for better web performance.
+        * Remember about it when you copy this code to CMS template!
+    -->
+    <link rel="stylesheet" href="styles/fonts.css?v=@Timestamp">
+    <!-- // -->
+
+    <link rel="stylesheet" href="styles/main.css?v=@Timestamp" />
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=@Timestamp" media="none" onload="if(media!='all')media='all'">
 
     @LazyLoadScript
 </head>
@@ -75,7 +79,6 @@
 
     <script src="scripts/vendor.js?v=@Timestamp"></script>
     <script src="scripts/app.js?v=@Timestamp"></script>
-    <link rel="stylesheet" href="styles/low-priority-styles.css?v=@Timestamp" media="none" onload="if(media!='all')media='all'">
 
 </body>
 </html>

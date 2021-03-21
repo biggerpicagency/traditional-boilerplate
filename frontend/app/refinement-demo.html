@@ -13,7 +13,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <!-- Web Application Manifest -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico">
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="application-name" content="Web Starter Kit">
@@ -44,18 +45,22 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <!-- Preloading -->
     <link rel="preload" as="style" href="styles/main.css?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/vendor.js?v=@Timestamp">
     <link rel="preload" as="script" href="scripts/app.js?v=@Timestamp">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=@Timestamp"> 
+    <!-- Styles -->
+    <!-- 
+        * PLEASE READ THIS COMMENT!
+        * Belows fonts.scss contents should be embedded as <style> here, in <head> section for better web performance.
+        * Remember about it when you copy this code to CMS template!
+    -->
+    <link rel="stylesheet" href="styles/fonts.css?v=@Timestamp">
+    <!-- // -->
+
+    <link rel="stylesheet" href="styles/main.css?v=@Timestamp" />
+    <link rel="stylesheet" href="styles/low-priority-styles.css?v=@Timestamp" media="none" onload="if(media!='all')media='all'">
 
     @LazyLoadScript
 </head>
