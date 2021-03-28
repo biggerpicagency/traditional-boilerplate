@@ -9,7 +9,8 @@ import eventTracking, {trackVisit} from './utils/track-event';
 import {
     submitForm,
     initValidation,
-    resetValidationFormsList
+    resetValidationFormsList,
+    initGoogleRecaptcha
 } from './utils/form';
 import executeMaps from './utils/google-map';
 import refine, { initRefinement } from './utils/refinement';
@@ -45,6 +46,7 @@ function runWebsiteScripts() {
     popup();
     // animatedSections();
 
+    initGoogleRecaptcha();
     trackVisit({
         url: window.location.pathname + window.location.search
     });
