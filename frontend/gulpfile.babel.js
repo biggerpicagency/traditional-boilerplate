@@ -28,7 +28,9 @@
 // Build setting
 const HTML_BUILD = 'default'; // options: default OR minified
 
-const templateVariables = {};
+const templateVariables = {
+  title: ''
+};
 
 const { watch, series, parallel, task, src, dest } = require('gulp');
 const webpack = require('webpack');

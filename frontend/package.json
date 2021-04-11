@@ -46,8 +46,9 @@
   },
   "private": true,
   "dependencies": {
+    "@barba/core": "^2.9.7",
+    "@barba/css": "^2.1.15",
     "animated-scroll-to": "^2.0.12",
-    "barba.js": "^1.0.0",
     "glightbox": "2.0.5",
     "pristinejs": "^0.1.6",
     "quicklink": "^1.0.0",

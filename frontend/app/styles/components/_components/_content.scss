@@ -13,12 +13,16 @@
     }
     
     .content__small-text,
+    &__small-text p,
+    &__small-text li,
     &--small-text p,
     &--small-text li {
         font-size: .852em;
     }
 
     .content__large-text,
+    &__large-text p,
+    &__large-text li,
     &--large-text p,
     &--large-text li {
         font-size: 1.4em;
@@ -44,7 +48,7 @@
 
     p + ul,
     p + ol {
-        //margin-top: -.7em !important;
+        margin-top: -.7em;
     }
 
     a:not(.btn) {

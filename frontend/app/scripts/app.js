@@ -2,6 +2,10 @@
 
 // import quicklink from 'quicklink/dist/quicklink.mjs';
 import 'svgxuse';
+
+import barba from "@barba/core";
+import barbaCss from "@barba/css";
+
 import initServicerWorker from './sw/service-worker-registration';
 import hashLinkScroll from './utils/hash-links-scroll';
 import fullHeightViewportCalculation from './utils/full-height';
@@ -28,14 +32,11 @@ import popup from './utils/popup';
 /* Register Service Worker */
 initServicerWorker();
 
-/* IE Polyfills */
-require('./utils/polyfills');
-
 /*
  * Your code below
  * 
 */
-function runWebsiteScripts() {
+function runWebsiteScripts(settings = {}) {
     resetValidationFormsList();
     initValidation();
     fullHeightViewportCalculation();
@@ -52,6 +53,29 @@ function runWebsiteScripts() {
     });
 }
 
+function runBarba() {
+    let container = document.querySelector('[data-barba="container"]');
+
+    if (!container) {
+        return;
+    }
+    
+    barba.use(barbaCss);
+    barba.init();
+    
+    barba.hooks.before(() => {
+        // good place to execute a method responsible for closing mobile menu
+    });
+    
+    barba.hooks.enter(() => {
+        window.scrollTo(0, 0);
+    });
+    
+    barba.hooks.after(() => {
+        runWebsiteScripts();
+    });
+}
+
 /*
  *
  * The scripts within scriptsAsCallback() will be executed dynamically as callback, 
@@ -61,7 +85,8 @@ function scriptsAsCallback() {
     console.log('run scripts as callback');
 }
 
-runWebsiteScripts();
+runBarba();
+runWebsiteScripts({firstTime: true});
 
 // method exposed in the App object
 window.App = {

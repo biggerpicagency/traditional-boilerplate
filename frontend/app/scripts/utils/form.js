@@ -64,7 +64,7 @@ const setGoogleRecaptchaTokenInForm = (form, callback) => {
     }
 
     grecaptcha
-        .execute(googleRecaptchaClientId, {action: 'ajax/sendForm'})
+        .execute(googleRecaptchaClientId, {action: '/ajax/sendForm'})
         .then(token => {
             recaptchaFieldElement.value = token;
 

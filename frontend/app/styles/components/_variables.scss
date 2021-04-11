@@ -6,26 +6,19 @@
 
 $columnsWidthSet: (10, 20, 25, 30, 33, 40, 50, 60, 67, 70, 75, 80, 90);
 
-/* Colors */
-
+/* Colors - feel free to add more, related to project, colours */
 $colorMain: #222;
+$colorWhite: #fff;
 $colorRed: #d70000;
-$contentLinksDefaultColor: #d70000;
 
-$socialMediaColors: (
-    twitter: #4099ff, 
-    linkedin: #007bb6, 
-    facebook: #3b5998, 
-    googleplus: #dd4b39, 
-    email: #3bb55e, 
-    instagram: #e1306c
-);
-
+/* Colors array - useful for other components */
 $colors: (
-    white: #fff,
-    red: #d70000
+    'main': $colorMain,
+    'white': $colorWhite,
+    'red': $colorRed
 );
 
-$bgColorsWhiteFont: (
-    red: #d70000
-);
+/* Colors that should get white text color - specify the names here that should reflect the colour name variable */
+$bgColorsWhiteFont: ('red');
+
+$contentLinksDefaultColor: $colorRed;
