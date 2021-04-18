@@ -1,43 +1,63 @@
 <!doctype html>
-<html dir="ltr" lang="en" prefix="og: http://ogp.me/ns#">
+<html dir="ltr" lang="en-GB" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
-    <title>Traditional Boilerplate - Studio Sidekicks</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="Description here...">
-    <meta name="robots" content="noindex, nofollow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Starter Kit - theme</title>
 
-    <link rel="icon" sizes="192x192" href="/img/touch/chrome-touch-icon-192x192.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-precomposed.png">
+<meta name="robots" content="noindex, nofollow">
 
-    <!-- Web Application Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico">
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
 
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="green">
-    <meta name="apple-mobile-web-app-title" content="Traditional Boilerplate - Studio Sidekicks">
-    <meta name="msapplication-TileImage" content="/img/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#078490">
+<!-- Web Application Manifest -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
 
-    <meta property="og:locale" content="en_GB">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
-    <meta property="og:description" content="Description here...">
-    <meta property="og:url" content="https://www.studiosidekicks.com">
-    <meta property="og:site_name" content="Application name">
-    <meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="application-name" content="Web Starter Kit">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+<link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
 
-    <!-- Preloading -->
-    <link rel="preload" as="style" href="styles/main.css?v=1594102064723">
-    <link rel="preload" as="script" href="scripts/vendor.js?v=1594102064723">
-    <link rel="preload" as="script" href="scripts/app.js?v=1594102064723">
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+<link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="styles/main.css?v=1594102064723">
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+<meta name="msapplication-TileColor" content="#2F3BA2">
+
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Traditional Boilerplate - Studio Sidekicks">
+<meta property="og:description" content="Description here...">
+<meta property="og:url" content="https://www.studiosidekicks.com">
+<meta property="og:site_name" content="Application name">
+<meta property="og:image" content="/img/touch/chrome-touch-icon-192x192.png">
+
+<!-- Color the status bar on mobile devices -->
+<meta name="theme-color" content="#2F3BA2">
+
+<!-- Styles -->
+<!-- 
+    * PLEASE READ THIS COMMENT!
+    * Belows fonts.scss contents should be embedded as <style> here, in <head> section for better web performance.
+    * Remember about it when you copy this code to CMS template!
+-->
+<link rel="stylesheet" href="/styles/fonts.css?v=1618169463835">
+<!-- // -->
+
+<link rel="stylesheet" href="/styles/main.css?v=1618169463835" />
+<link rel="stylesheet" href="/styles/low-priority-styles.css?v=1618169463835" media="none" onload="if(media!='all')media='all'">
+
+<script> (function (w, d) { w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false); var b = d.getElementsByTagName('head')[0]; var s = d.createElement("script"); s.async = true; var v = !("IntersectionObserver" in w) ? "lazyloadPolyfill.js" : "lazyloadIntersectionObserver.js"; s.src = "/scripts/" + v; w.lazyLoadOptions = { elements_selector: ".lazy", threshold: 0, callback_enter: function(element) { /* for elements that have lazy loaded background image with media queries */ var css = element.getAttribute('data-style'); if (css) { css = css.replace(/(\r\n|\n|\r)/gm, ""); var style = document.createElement('style'); var head = document.getElementsByTagName('head')[0]; head.appendChild(style); style.setAttribute("type", "text/css"); if (style.styleSheet) { style.styleSheet.cssText = css; } else { var styleText = document.createTextNode(css); style.appendChild(styleText); } } } }; b.appendChild(s); }(window, document)); </script>
 
     <style>
     .theme-container {
@@ -75,6 +95,17 @@
         color: #111;
     }
 
+    .theme-color-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+        width: 150px;
+        height: 150px;
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,0.25);
+    }
+
     .theme-form {
         max-width: 700px;
     }
@@ -89,10 +120,15 @@
         color: #dedede;
     }
     </style>
-
 </head>
 <body>
+
     <div class="theme-container">
+        <span class="theme-headline">0. Colours</span>
+        <div style="display: flex; flex-flow: row wrap;">
+            <div class="theme-color-box bg-red">red</div>
+        </div>
+
         <span class="theme-headline">1. Headlines</span>
 
         <h1 class="headline-1">Headline 1</h1>
@@ -596,8 +632,8 @@
         <section class="section color-white">
 
             <div 
-                class="bg-media bg-media--image bg-media--cover overlay overlay--red" 
-                style="background-image: url('https://www.biggerpicture.agency/storage/uploads/blog/2018-trends/current-and-future-trends-in-web-design_lead.jpg')">
+                class="bg-media bg-media--image bg-media--cover overlay overlay--red lazy" 
+                data-bg="url('https://www.biggerpicture.agency/storage/uploads/blog/2018-trends/current-and-future-trends-in-web-design_lead.jpg')">
             </div>
 
             <!-- example of video background
@@ -955,9 +991,8 @@
         <div class="js-map" data-latitude="52.229676" data-longitude="21.012229" style="width: 800px; height: 600px;"></div>
     </div>
 
-    <script src="scripts/vendor.js?v=1594102064723"></script>
-    <script src="scripts/app.js?v=1594102064723"></script>
-    <link rel="stylesheet" href="styles/low-priority-styles.css?v=1594102064723" media="none" onload="if(media!='all')media='all'">
+    <script src="/scripts/vendor.js?v=1618169463835"></script>
+<script src="/scripts/app.js?v=1618169463835"></script>
 
 </body>
 </html>

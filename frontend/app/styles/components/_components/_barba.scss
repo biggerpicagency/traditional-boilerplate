@@ -1,0 +1,27 @@
+[data-barba="wrapper"] {
+    overflow: hidden;
+}
+
+.barba-leave {
+    opacity: 1;
+}
+
+.barba-leave-active {
+    transition: opacity 0.1s linear;
+}
+
+.barba-leave-to {
+    opacity: 0;
+}
+
+.barba-enter {
+    opacity: 0;
+}
+
+.barba-enter-active {
+    transition: opacity 0.1s linear;
+}
+
+.barba-enter-to {
+    opacity: 1;
+}

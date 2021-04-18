@@ -3,10 +3,12 @@
         &-#{$colorName} {
             background-color: $color;
 
-            @if map-has-key($bgColorsWhiteFont, $colorName) {
+            @if index($bgColorsWhiteFont, $colorName) {
+                color: $colorWhite;
+                
                 .content ul li:before,
                 &.content ul li:before {
-                    background-image: url(../images/list-white-arrow.svg);
+                    //background-image: url(../images/list-white-arrow.svg);
                 }
             }
         }
@@ -14,5 +16,9 @@
         &-transparent-#{$colorName} {
             background-color: rgba($color, 0.8);
         }
+    }
+
+    &-white {
+        color: $colorMain;
     }
 }

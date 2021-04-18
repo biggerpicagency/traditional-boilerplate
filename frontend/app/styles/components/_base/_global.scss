@@ -27,7 +27,7 @@ body {
     font-size: 100%;
     line-height: 1.5;
     font-weight: 300;
-    color: $colorMain;
+    color: $colorMain; // keep in mind that main colour on body should be dark/black (never white/light one!)
 }
 
 ul, li {

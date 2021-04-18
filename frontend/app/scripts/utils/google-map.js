@@ -3,7 +3,8 @@
 import 'waypoints/lib/noframework.waypoints.min.js';
 import isMobile from './is-mobile';
 
-const apiKey = 'AIzaSyAanzKjF6LiHz-vILwxR2Tp_X4IFjeuVmo'; // please change to project API generated on Google Console
+const apiKey = ''; // please change to project API generated on Google Console
+
 const styles = [];
 const iconUrl = '';
 const draggable = isMobile() ? false : true;

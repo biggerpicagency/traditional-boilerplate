@@ -1,6 +1,9 @@
 'use strict';
 
+import 'waypoints/lib/noframework.waypoints.min.js';
+
 import Pristine from 'pristinejs';
+import loadScript from './load-script-async';
 
 let validationFormsList = [];
 
@@ -20,12 +23,12 @@ const getValidationFormsList = () => {
 };
 
 const trackFormSubmission = ({
-    eventName, 
-    eventCategory, 
-    eventAction, 
-    eventLabel, 
-    eventValue, 
-    conversionId, 
+    eventName,
+    eventCategory,
+    eventAction,
+    eventLabel,
+    eventValue,
+    conversionId,
     conversionLabel
 }) => {
     if (window.dataLayer === undefined) {
@@ -61,10 +64,10 @@ const setGoogleRecaptchaTokenInForm = (form, callback) => {
     }
 
     grecaptcha
-        .execute(googleRecaptchaClientId, {action: 'ajax/sendForm'})
+        .execute(googleRecaptchaClientId, {action: '/ajax/sendForm'})
         .then(token => {
             recaptchaFieldElement.value = token;
- 
+
             if (callback) {
                 callback();
             }
@@ -83,7 +86,7 @@ const initValidation = () => {
         // type of element to create for the error text
         errorTextTag: 'div',
         // class of the error text element
-        errorTextClass: 'form__error' 
+        errorTextClass: 'form__error'
     };
 
     [].forEach.call(forms, function(form) {
@@ -104,9 +107,9 @@ const sendEventTrackingFromForm = (form) => {
 
     trackFormSubmission({
         eventName: 'contact-form-submission',
-        eventCategory, 
-        eventAction, 
-        eventLabel, 
+        eventCategory,
+        eventAction,
+        eventLabel,
         eventValue
     });
 };
@@ -123,13 +126,13 @@ const sendForm = ({form, url}) => {
 
     // let submitType = submitType || form.getAttribute('data-submit-type');
     let submitType = form.hasAttribute('data-submit-type') ? form.getAttribute('data-submit-type') : 'NORMAL';
-    
+
     if (submitType === 'FILE') {
         return false;
     }
 
     if (isValid) {
-        
+
         const loadingLayer = form.querySelector('.loading');
         const submitButton = form.querySelector('button[type="submit"]');
         const buttonTextOriginal = submitButton.textContent || submitButton.innerText;
@@ -156,12 +159,13 @@ const sendForm = ({form, url}) => {
                 loadingLayer.classList.remove('loading--active');
 
                 sendEventTrackingFromForm(form);
-        
+
+
                 if (response.url) {
                     window.location.href = response.url;
                 } else {
                     loadingLayer.classList.remove('loading--active');
-        
+
                     if (!form.querySelectorAll('.response--success').length) {
                         displayReponse({
                             elementHtml: `<div class="response response--success"><p>${response.message}</p></div>`,
@@ -171,10 +175,10 @@ const sendForm = ({form, url}) => {
                         form.querySelector('.response--success p').textContent = response.message;
                     }
                 }
-        
+
                 // remove error response if exists and reset the form
                 let errorResponse = form.querySelector('.response--error');
-        
+
                 if (errorResponse) {
                     errorResponse.parentNode.removeChild(errorResponse);
                 }
@@ -193,7 +197,7 @@ const sendForm = ({form, url}) => {
 
                 if (request.status === 422) {
                     let errors = response.errors;
-                    
+
                     for (var field in errors) {
                         if (errors.hasOwnProperty(field) && errors[ field ].length) {
                             errorMessage += errors[ field ].join('<br>') + '<br>';
@@ -201,6 +205,7 @@ const sendForm = ({form, url}) => {
                     }
                 } else if (request.status === 404) {
                     errorMessage = 'Page not found - incorrect url.';
+
                 } else if (response.message) {
                     errorMessage = response.message;
                 }
@@ -245,6 +250,14 @@ const resetForm = (form) => {
     });
 };
 
+const isRecaptchaLoaded = () => {
+    return (typeof grecaptcha === 'undefined' || grecaptcha === null) ? false : true;
+};
+
+const doesRecaptchaClientIdExist = () => {
+    return (typeof googleRecaptchaClientId === 'undefined' || googleRecaptchaClientId === null) ? false : true;
+};
+
 const submitForm = ({form, url}) => {
     if (!form && !url) {
         console.error('Form or/and form URI not specified.');
@@ -258,22 +271,7 @@ const submitForm = ({form, url}) => {
         return false;
     }
 
-    let grecaptchaExist = false;
-    let googleRecaptchaClientIdExist = false;
-
-    if (typeof grecaptcha === 'undefined' || grecaptcha === null) {
-        grecaptchaExist = false;
-    } else {
-        grecaptchaExist = true;
-    }
-
-    if (typeof googleRecaptchaClientId === 'undefined' || googleRecaptchaClientId === null) {
-        googleRecaptchaClientIdExist = false;
-    } else {
-        googleRecaptchaClientIdExist = true;
-    }
-
-    if (grecaptchaExist && googleRecaptchaClientIdExist) {
+    if (doesRecaptchaClientIdExist()) {
         setGoogleRecaptchaTokenInForm(form, () => {
             sendForm({form, url});
         });
@@ -284,4 +282,18 @@ const submitForm = ({form, url}) => {
     return false;
 };
 
-export {submitForm, initValidation, resetValidationFormsList};
+const initGoogleRecaptcha = () => {
+    const forms = document.querySelectorAll('form');
+    
+    if (isRecaptchaLoaded() || !doesRecaptchaClientIdExist()) {
+        return;
+    }
+
+    forms.forEach(form => {
+        form.addEventListener('click', function(event) {
+            loadScript(`https://www.google.com/recaptcha/api.js?render=${googleRecaptchaClientId}`);
+        });
+    });
+};
+
+export {submitForm, initValidation, resetValidationFormsList, initGoogleRecaptcha};
